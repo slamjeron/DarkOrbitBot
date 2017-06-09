@@ -1,0 +1,244 @@
+package screenSearch;
+
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class Petinfo extends map {
+	public Robot rob;
+	private Timer timer = new Timer();;
+	public boolean petfound = false;
+	
+
+	
+	private Point[] petControlPoints = new Point[5];
+	protected Point[] petStatsP = new Point[5];
+	public BufferedImage image;
+	public boolean petisShot;
+	private boolean autocolpetfound = false;
+	private boolean repPetFound = false;
+	private Point dropdown;
+	private Point stpt;
+
+	public void findePet() {
+		stpt=new Point(0,160);
+BufferedImage image = img.screanImage(stpt,rect.width-190,rect.height-166);
+		
+			
+		if (!petfound) {
+			theloop:for (int y = 0; y < image.getHeight()-383 ; y++) {
+				for (int x = 0; x < image.getWidth()-196; x++) {
+		
+			if (new Color(image.getRGB(x, y)).equals(new Color(232, 225, 191))) {
+
+				if (new Color(image.getRGB(x, y+185)).equals( new Color(40, 116, 144))) {
+					// cursor.moveCursor(p);
+					getPetPoints(new Point(x+stpt.x,y+stpt.y));
+					petfound = true;
+					break theloop;
+					// colorPrint( new Color (image.getRGB(x, 1)));
+
+				}
+
+			}
+				}
+			}
+		}
+
+		// TODO Auto-generated method stub
+
+	}
+
+	private void getPetPoints(Point p) {
+		petControlPoints[0] = new Point(p.x, p.y + 110);
+
+		petControlPoints[1] = new Point(p.x + 150, p.y + 110);
+		// pet hp start
+		petStatsP[0] = new Point(p.x + 55, p.y + 55);
+		// pet is down
+		petStatsP[4] = new Point(p.x + 211, p.y + 108);
+		System.out.println(img.screenColor(petStatsP[4]));
+		// System.out.println(con.screenColor(new Point(p.x,p.y+185)));
+
+		if (img.compScPxtoCol(petStatsP[0], new Color(0, 0, 0))) {
+			con.rightClk(petControlPoints[0]);
+		}
+		con.sleepc(1);
+		if (img.compScPxtoCol(petStatsP[0], new Color(0, 255, 0))) {
+			con.rightClk(petControlPoints[1]);
+		}
+
+		// pet hp end
+		petStatsP[1] = new Point(p.x + 117, p.y + 55);
+		// pet sh end
+		petStatsP[2] = new Point(p.x + 115, p.y + 55 + 19);
+
+		con.sleepm(1000);
+		if (img.compScPxtoCol(new Point(p.x + 96, p.y + 180), new Color(34, 34, 34))) {
+			autocolpetfound = false;
+			findAutoResource(p);
+
+		}
+		// cursor.moveCursor(petStatsP[0]);
+		// puts out the pet
+		// Determines if pet is being shot
+
+		// petControlOff();
+		//timer.schedule(new searchpet(), 0, 100);
+	}
+
+	private void findAutoResource(Point p) {
+		// image of the drop down menu
+		dropdown = new Point(p.x + 96, p.y + 183);
+		image = img.screanImage(dropdown, 100, 200);
+
+		// searches drop down to find auto recourse collector
+		for (int y = 0; y < image.getHeight() - 2; y++) {
+			for (int x = 0; x < image.getWidth() - 20; x++) {
+
+				// con.colorPrint(new Color (image.getRGB(x, y)));
+				if (!repPetFound) {
+					if (new Color(image.getRGB(x, y)).equals(new Color(225, 159, 4))) {
+						petControlPoints[3] = (new Point(dropdown.x + x, dropdown.y + y + 5));
+						if (new Color(image.getRGB(x + 19, y + 2)).equals(new Color(255, 255, 255))
+								&& new Color(image.getRGB(x + 6, y + 11)).equals(new Color(255, 179, 0))) {
+							petControlPoints[3] = (new Point(dropdown.x + x, dropdown.y + y + 5));
+							// System.out.println(petControlPoints[3]);
+
+							// cursor.moveCursor(petControlPoints[3]);
+							repPetFound = true;
+						}
+					}
+				}
+				if (!autocolpetfound) {
+
+					if (new Color(image.getRGB(x, y)).equals(new Color(255, 179, 0))
+							&& new Color(image.getRGB(x + 20, y + 2)).equals(new Color(255, 255, 255))
+							&& new Color(image.getRGB(x + 86, y + 5)).equals(new Color(255, 255, 255))) {
+						// con.colorPrint(new Color (image.getRGB(x+20,
+						// y+2)));
+
+						petControlPoints[2] = (new Point(p.x + x + 96, p.y + y + 190));
+
+						autocolpetfound = true;
+
+					}
+
+					// colorPrint( new Color (image.getRGB(x, 1)));
+				}
+			}
+		}
+		con.rightClk(petControlPoints[2]);
+	}
+
+	public void startPet() {
+		petMentDown=false;
+		con.sleepm(1000);
+		if (img.compScPxtoCol(petStatsP[0], new Color(0, 0, 0))) {
+			con.rightClk(petControlPoints[0]);
+		
+		con.sleepm(500);
+		con.rightClk(petControlPoints[1]);
+		con.sleepm(500);
+		con.rightClk(petControlPoints[2]);
+		con.sleepm(1000);
+		}
+
+	}
+	public void stopPet() {
+		con.sleepc(1);
+	 petMentDown=true;
+		if (img.compScPxtoCol(petStatsP[0], new Color(0, 255, 0))) {
+			con.rightClk(petControlPoints[0]);
+		}
+		
+
+	}
+	public void reppet() {
+		if (img.compScPxtoCol(petStatsP[1], new Color(0, 0, 0))) {
+
+			con.sleepm(500);
+			if (img.compScPxtoCol(petStatsP[0], new Color(0, 0, 0))) {
+				con.rightClk(petControlPoints[0]);
+			}
+			con.sleepm(500);
+			con.rightClk(petControlPoints[1]);
+			con.sleepm(500);
+			con.rightClk(petControlPoints[3]);
+			con.sleepm(1000);
+		}
+	}
+
+	
+	private boolean petMentDown=false;
+	/*class searchpet extends TimerTask {
+
+		private int i = 0;
+		private boolean petBringout = false;
+		private boolean presd = true;
+		private boolean petNotDown = true;
+		
+
+		private void whatIfPetShot() {
+			// when pet is shot
+			// when pet is up put pet down
+			if (petNotDown) {
+				// when pet gets shot
+				if (presd) {
+
+					con.type("g");
+					presd = false;
+				}
+
+				if (img.compScPxtoCol(petStatsP[0], new Color(0, 255, 0))) {
+					con.sleepm(1000);
+					con.rightClk(petControlPoints[0]);
+					con.sleepm(1000);
+					if (img.compScPxtoCol(petStatsP[0], new Color(0, 0, 0))) {
+						petNotDown = false;
+
+					}
+
+				}
+			}
+			// when pet is shot
+			// when pet shields are up again
+			if (img.compScPxtoCol(petStatsP[2], new Color(0, 0, 255))) {
+				System.out.println("pet is healed");
+				petisShot = false;
+				petNotDown = false;
+			}
+		}
+
+		@Override
+		public void run() {
+			// when the pet is down bring it up
+			if (!petMentDown) {
+				if (img.compScPxtoCol(petStatsP[0], new Color(0, 0, 0))) {
+					petBringout = true;
+				} else {
+
+					if (!petisShot) {
+
+						if (img.compScPxtoCol(petStatsP[2], new Color(0, 0, 0))) {
+							petisShot = true;
+							System.out.println("pet is shot");
+							petNotDown = true;
+							presd = true;
+						}
+					}
+				}
+				if (petisShot) {
+					whatIfPetShot();
+
+				}
+				// System.out.println(wateSafty);
+			}
+		}
+
+	}
+	*/
+}

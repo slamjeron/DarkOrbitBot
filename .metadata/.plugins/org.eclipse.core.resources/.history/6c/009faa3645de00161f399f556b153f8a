@@ -1,0 +1,112 @@
+package colors;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+
+public class InfoViewer extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JLabel lblLeftcolorviewerlbl;
+	private JLabel lblRightcolorviewerlbl;
+	private JLabel lblPalliecolectviewerlbl;
+	private JLabel lblColorToSearch;
+	private JLabel lblColorToSearch_1;
+	private JButton btnRightColorView;
+	private JButton btnLeftColorView;
+	private JButton btnColorPaliLocation;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					InfoViewer frame = new InfoViewer();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public InfoViewer() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 605, 176);
+		setAlwaysOnTop( true );
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblLeftcolorviewerlbl = new JLabel("leftColorViewerLbl");
+		lblLeftcolorviewerlbl.setBounds(10, 36, 605, 14);
+		contentPane.add(lblLeftcolorviewerlbl);
+		
+		lblRightcolorviewerlbl = new JLabel("rightColorViewerLbl");
+		lblRightcolorviewerlbl.setBounds(10, 90, 605, 14);
+		contentPane.add(lblRightcolorviewerlbl);
+		
+		lblPalliecolectviewerlbl = new JLabel("palliecolectViewerlbl");
+		lblPalliecolectviewerlbl.setBounds(10, 11, 605, 14);
+		contentPane.add(lblPalliecolectviewerlbl);
+		
+		lblColorToSearch = new JLabel("color to search for on right side of map");
+		lblColorToSearch.setBounds(10, 112, 605, 14);
+		contentPane.add(lblColorToSearch);
+		
+		lblColorToSearch_1 = new JLabel("color to search for on left side of the map");
+		lblColorToSearch_1.setBounds(10, 61, 605, 14);
+		contentPane.add(lblColorToSearch_1);
+		
+		btnColorPaliLocation = new JButton("color pali location viewer");
+		btnColorPaliLocation.setBounds(351, 7, 180, 23);
+		contentPane.add(btnColorPaliLocation);
+		
+		btnLeftColorView = new JButton("left color view");
+		btnLeftColorView.setBounds(351, 61, 180, 23);
+		contentPane.add(btnLeftColorView);
+		
+		btnRightColorView = new JButton("right color view");
+		
+		btnRightColorView.setBounds(351, 108, 180, 23);
+		contentPane.add(btnRightColorView);
+	}
+
+	public JLabel getLblLeftcolorviewerlbl() {
+		return lblLeftcolorviewerlbl;
+	}
+	public JLabel getLblRightcolorviewerlbl() {
+		return lblRightcolorviewerlbl;
+	}
+	public JLabel getLblPalliecolectviewerlbl() {
+		return lblPalliecolectviewerlbl;
+	}
+	public JLabel getLblColorToSearch() {
+		return lblColorToSearch;
+	}
+	public JLabel getLblColorToSearch_1() {
+		return lblColorToSearch_1;
+	}
+	public JButton getBtnRightColorView() {
+		return btnRightColorView;
+	}
+	public JButton getBtnLeftColorView() {
+		return btnLeftColorView;
+	}
+	public JButton getBtnColorPaliLocation() {
+		return btnColorPaliLocation;
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;peece_bot5/src/Ulcode&apos; to &apos;controlsCode&apos;" description="Rename resource &apos;Ulcode&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/Ulcode" name="controlsCode" stamp="1485995842024" updateReferences="true"/>
+</session>

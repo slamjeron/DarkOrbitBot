@@ -1,0 +1,107 @@
+package findPaladumOnMap;
+
+import java.awt.AWTException;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import allUseMethods.Shard_methods;
+
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+
+public class SearchPalie2 extends JFrame {
+	private BufferedImage image1;
+	private JPanel contentPane;
+	private boolean paliedumfound=true;
+	private Point pallieLocation;
+	private Robot robot ;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					SearchPalie frame = new SearchPalie();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	private JLabel lblDun = new JLabel("dun");
+	private Shard_methods cursor= new Shard_methods();
+	public SearchPalie2() {
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnStartSearch = new JButton("start search");
+		btnStartSearch.addActionListener(new ActionListener() {
+			private int times;
+
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				 try {
+					searchImage();
+				} catch (AWTException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 times++;
+				 lblDun.setText("i did it"+times); 
+			}
+		});
+		btnStartSearch.setBounds(129, 141, 153, 23);
+		contentPane.add(btnStartSearch);
+		
+		
+		lblDun.setBounds(44, 49, 46, 14);
+		contentPane.add(lblDun);
+	}
+	public void searchImage() throws AWTException{
+		robot = new Robot();
+		 image1= robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+		
+		 for (int y = 150; y < (image1.getHeight()/2)-100; y++) {
+           for (int x = (image1.getWidth()/2)-400; x < (image1.getWidth()/2)+400; x++) {
+            
+        	   int c = image1.getRGB(x,y);
+             Color col = new Color(c);
+             
+              if (col.equals(new Color(167,202,220)) ) {
+            	 pallieLocation= new Point(x,y);
+           	paliedumfound= false;
+           	cursor.moveCursor(pallieLocation);
+            	 
+                  //System.out.println(petlocation);
+               }
+            
+              //Color colo = rob.getPixelColor(20, 20);
+           }
+		 }
+	}
+	
+}

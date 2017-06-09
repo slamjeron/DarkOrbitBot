@@ -1,0 +1,321 @@
+package all_Functions_In_one;
+
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import allUseMethods.Shard_methods;
+
+public class ulbot {
+	private Point petlocation;
+	private Point shieldLoctation;
+	private Point petSelect2;
+	private boolean petfound;
+	private Point petSelect4;
+	private boolean paliTxtFound;
+	private boolean startPetColect;
+	private boolean paliedumFound;
+	private Point petSelect3;
+	private Point petSelect;
+	private Point petStart;
+	private Shard_methods cursor= new Shard_methods();
+	Robot rob;
+	private boolean Statsfound;
+	private Point endHPBar;
+	private Point endSHBar;
+	private Point endCargoBar;
+	public void colectinfo()throws AWTException{
+		rob = new Robot();
+		Statsfound=false;
+		mapfound=false;
+		petfound=false;
+		searchImage(rob.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize())));
+	}
+	public void searchImage(BufferedImage image1) throws AWTException{
+		 for (int y = 0; y < image1.getHeight(); y++) {
+           for (int x = 0; x < image1.getWidth(); x++) {
+        	   if (mapfound){
+              	   if(ms1==5){
+              		   cursor.moveCursor(mapLocate);
+              	   ms1=10;
+              	   }
+                 }else{
+                  
+				if (new Color(image1.getRGB(x,y)).equals(new Color(153 ,204 , 255))) {
+                  	mapLocate= new Point(x,y);
+                  	mapfound = true;
+                  	setmapPoints();
+                  	System.out.println("map found");
+                  	ms1=5;
+                  	
+                   }
+                 }
+            
+             int c = image1.getRGB(x,y);
+             Color col = new Color(c);
+             if(!Statsfound){
+                 if(col.equals(new Color(148,223,142))) {
+               			  for(int i=1;i<7;i++){
+               			if(new Color(image1.getRGB(x+i,y)).getGreen()>100){
+               				System.out.println(i);
+               				break;
+               			}
+               			if(i==6){
+               			  getShipStats(new Point(x,y));
+                       	  Statsfound=true;
+               			}
+               		  }
+               			  
+                 
+                 }
+                  //Color colo = rob.getPixelColor(20, 20);
+               }
+             if(!petfound){
+              if (col.equals(new Color(0,255,0))&&new Color( image1.getRGB(x+1,y)).getGreen()<100) {             
+           	   setpetpoints(x,y);
+           	   cursor.moveCursor(shieldLoctation);
+                  //System.out.println(petlocation);
+               }
+             }
+             
+           }
+		 }
+	}
+	public void getShipStats(Point healthBarp) throws AWTException{
+		int x = healthBarp.x;
+		int y = healthBarp.y;
+		
+		endHPBar=new Point(x,y);
+		endSHBar=new Point(x,y+20);
+		endCargoBar=new Point(x+97,y);
+		cursor.moveCursor(endSHBar);
+		
+	}
+	private void setpetpoints(int x,int y){
+      	petlocation=new Point(x,y);
+      	shieldLoctation=new Point(x,y+20);
+      	petStart=new Point(x-100,y+56);
+      	petSelect=new Point(x+87,y+60);
+      	petSelect2=new Point(x+87,y+56+23);
+      	petSelect3=new Point(x+87,y+130);
+      	petSelect4=new Point(x+87,y+56+23+12+13);
+      	petfound=true;
+	}
+	private Timer timer= new Timer();
+	public void startBot() throws AWTException{
+		colectinfo();
+		 timer.schedule(new timer1(), 0, 300);
+		paliTxtFound=false;
+		startPetColect=false;
+		paliedumFound=false;
+	}
+	private boolean begin;
+	private boolean shipHit;
+	private Point leftColorLocation;
+	private Point rightColorLocation;
+	private Point moveleft;
+	private Point moveRight;
+	Point[] runSequence = new Point[7];
+	Point[] colorSearchRunSequence = new Point[5];
+	class timer1 extends TimerTask {
+		private int timeTillLookForMore;
+		private int runMove;
+		private boolean direction;
+		
+
+		public void run() {
+		try {
+			rob=new Robot();
+			if(rob.getPixelColor(endCargoBar.x,endCargoBar.y).equals(new Color(110,207,213))){
+				shipHit=true;
+			}
+			if(shipHit){
+				
+					
+					if(begin){
+						cursor.rightButtonClk(runSequence[0]);
+						begin  =false;
+					}
+					System.out.println(rob.getPixelColor(colorSearchRunSequence[runMove].x,colorSearchRunSequence[runMove].y));				
+				if(rob.getPixelColor(colorSearchRunSequence[runMove].x,colorSearchRunSequence[runMove].y).equals(new Color(70,70,70))){
+					
+						runMove++;
+						cursor.rightButtonClk(runSequence[runMove]);
+					
+				}
+				
+				
+			}
+		
+			if(rob.getPixelColor(pallietLocation.x,pallietLocation.y).equals(new Color(254,254,254))){
+				timeTillLookForMore=0;
+			}else{
+				timeTillLookForMore++;
+			}
+			if(timeTillLookForMore==20){
+				cursor.rightButtonClk(petStart);
+				paliedumFound=false;
+			}
+			if(timeTillLookForMore==25){
+				if(direction){
+					cursor.rightButtonClk(moveRight);
+				}else{
+					cursor.rightButtonClk(moveleft);
+				}
+			}
+			if(!paliedumFound){
+				if(rob.getPixelColor(leftColorLocation.x,leftColorLocation.y).equals(new Color(70,70,70))){
+					cursor.rightButtonClk(moveRight);
+					direction=true;
+				}
+if(rob.getPixelColor(rightColorLocation.x,rightColorLocation.y).equals(new Color(70,70,70))){
+	cursor.rightButtonClk(moveleft);
+	direction=false;
+				}
+			}
+			//to start this function paliTxtFound must == false
+			searchPaliText();
+			//to start this function startPetColect must == false
+			startPet();
+			//to start this function paliedumFound must == false
+			searchImageForPalliedum();
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+	}
+	
+	private int petmovenum=0;
+	
+	
+	private BufferedImage image1;
+	private Point pallieLocation;
+	private Point pallietLocation;
+	private boolean mapfound;
+	private int ms1;
+	private Point mapLocate;
+	public void startPet() throws AWTException{
+		if(startPetColect){
+		if(petmovenum==1){
+			cursor.rightButtonClk(petStart);
+			}
+			if(petmovenum==5){
+				cursor.rightButtonClk(petSelect);
+				
+			}
+			if(petmovenum==10){
+				cursor.rightButtonClk(petSelect3);
+				petmovenum=0;
+				startPetColect= true;
+			}
+			petmovenum++;
+		}
+	}
+	public void searchPaliText() throws AWTException{
+		Robot rob;
+		
+		if(!paliTxtFound){
+		
+			rob = new Robot();
+			BufferedImage palliedumImg = rob.createScreenCapture(new Rectangle
+					(Toolkit.getDefaultToolkit().getScreenSize()));
+		
+		
+		 outloop:for (int y = 10; y < 300; y++) {
+	           for (int x = (palliedumImg.getWidth()/2)-58; x < (palliedumImg.getWidth()/2)+58; x++) {
+	         {
+	        	
+	             Color col = new Color(palliedumImg.getRGB(x,y)); 
+	            
+	             Color paliCSearch=new Color(254,254,254);
+				if(paliCSearch.equals(col) ){
+	            	 col = new Color(palliedumImg.getRGB(x+116,y));
+	            	 
+	            		 
+	            			 col = new Color(palliedumImg.getRGB(x+20,y));
+	            			 
+	                		 if(paliCSearch.equals(col)){
+	                			 col = new Color(palliedumImg.getRGB(x+20,y));
+	                        	 
+	                    		 if(paliCSearch.equals(col)){
+	                    			 col = new Color(palliedumImg.getRGB(x+25,y+3));
+	                            	 
+	                        		 if(paliCSearch.equals(col)){
+	                        			 col = new Color(palliedumImg.getRGB(x-1,y));
+	                        			 pallietLocation= new Point(x,y);
+	                        	           	
+	                        			 cursor.moveCursor(pallietLocation);
+	                        	           	paliTxtFound=true;
+	            		
+	            		 break outloop;
+		                        		 
+	                        		 }
+	                    		 }
+	                		 }
+	            		 
+	             }
+	         }
+	        	 
+	        };
+		}
+	}
+
+}
+	public void searchImageForPalliedum() throws AWTException{
+		rob = new Robot();
+		if(!paliedumFound){
+		 image1= rob.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+		
+		 for (int y = 150; y < (image1.getHeight()/2)-100; y++) {
+           for (int x = (image1.getWidth()/2)-400; x < (image1.getWidth()/2)+400; x++) {
+            
+        	   int c = image1.getRGB(x,y);
+             Color col = new Color(c);
+             
+              if (col.getBlue()>100 && col.getBlue()<200) {
+            	  if(new Color(image1.getRGB(x-1,y)).getBlue()<100&&new Color(image1.getRGB(x+8,y)).getBlue()>100&&new Color(image1.getRGB(x+23,y)).getBlue()<100){
+           	   pallieLocation= new Point(x,y);
+           	paliedumFound= true;
+           	startPetColect=true;
+           	cursor.moveCursor(pallieLocation);
+            	  }
+                  //System.out.println(petlocation);
+               }
+            
+              //Color colo = rob.getPixelColor(20, 20);
+           }
+		 }
+		}
+	}
+	private void setmapPoints(){
+		int leftx=116;
+		int rightx=267;
+		int distFromClowd=214;
+		leftColorLocation=new Point(mapLocate.x+leftx, mapLocate.y+180);
+		   rightColorLocation=new Point(mapLocate.x+rightx, mapLocate.y+180);
+		  moveleft = new Point (mapLocate.x+leftx, mapLocate.y+distFromClowd);
+		  moveRight = new Point (mapLocate.x+rightx, mapLocate.y+distFromClowd);
+		  runSequence[0]= new Point(mapLocate.x+104, mapLocate.y+distFromClowd);
+		  colorSearchRunSequence[0]= new Point(runSequence[0].x,runSequence[0].y-70);
+		  runSequence[1]= new Point(mapLocate.x+24, mapLocate.y+155);
+		  colorSearchRunSequence[1]= new Point(runSequence[1].x,runSequence[1].y-60);
+		  runSequence[2]= new Point(mapLocate.x+22, mapLocate.y+75);
+		  colorSearchRunSequence[2]= new Point(runSequence[2].x+100,runSequence[2].y);
+		  runSequence[3]= new Point(mapLocate.x+147, mapLocate.y+120);
+		  colorSearchRunSequence[3]= new Point(mapLocate.x+80, mapLocate.y+55);
+		  runSequence[4]= new Point(mapLocate.x+104, mapLocate.y+distFromClowd);
+		  colorSearchRunSequence[4]= new Point(runSequence[4].x,runSequence[4].y+60);
+		  runSequence[5]= new Point(mapLocate.x+200, mapLocate.y+distFromClowd);
+		  runSequence[6]= new Point(mapLocate.x+170, mapLocate.y+distFromClowd);
+		
+	}
+
+}
+

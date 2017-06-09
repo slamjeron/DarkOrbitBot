@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;habit_monster build parts1.1/src/files&apos; to &apos;user_files&apos;" description="Rename resource &apos;files&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/files" name="user_files" stamp="1482283455938" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;habit_monster build parts1.1/src/pages/Finel_Page&apos; to &apos;finel_page&apos;" description="Rename resource &apos;Finel_Page&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/pages/Finel_Page" name="finel_page" stamp="1482283660971" updateReferences="true"/>
+</session>

@@ -1,0 +1,59 @@
+package actions;
+
+import java.awt.Color;
+import java.awt.Point;
+
+import screenSearch.Petinfo;
+
+
+public class movefind extends Petinfo{
+	private Point Mdirect= moveRight;
+	private boolean md;
+	protected boolean stopfindingsec;
+
+	public void moveFinder(boolean move){
+		if(md){
+			Mdirect=moveleft;
+		}else{
+			
+			Mdirect=moveRight;
+		}
+		if(move){
+			con.rightClk(Mdirect);
+			
+		}
+		
+	
+		if(isPointSevinty(rightColorLocation)){
+			md=true;
+			Mdirect=moveleft;
+			con.rightClk(Mdirect);
+			stopfindingsec=true;
+			con.sleepc(4);
+			stopfindingsec=false;
+		}
+	
+				if(leftPadding(0)||leftPadding(1)||leftPadding(2)||leftPadding(3)||leftPadding(4)||leftPadding(5)||leftPadding(6)){
+				md=false;
+				Mdirect=moveRight;
+				con.rightClk(Mdirect);
+				stopfindingsec=true;
+				con.sleepc(4);
+				stopfindingsec=false;
+				System.out.println("worked");
+				}
+			
+			
+		
+	}
+	private boolean leftPadding(int x){
+		return isPointSevinty(leftColorLocation.x+x,leftColorLocation.y);
+	}
+	private boolean isPointSevinty(Point p){
+		return isPointSevinty(p.x,p.y);
+	}
+	private boolean isPointSevinty(int x,int y){
+		return img.compScPxtoCol(new Point (x,y), new Color(70,70,70));
+	}
+	
+}

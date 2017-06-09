@@ -1,0 +1,139 @@
+package takeAction;
+
+import seeingComputer.ShipStatus;
+import seeingComputer.StaticInfo;
+import seeingComputer.mapinfo;
+
+import java.awt.Point;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class RunFromeEnimy {
+	private CursorControl robUI;
+	private Point shipPoint;
+	private Point mapPnt;
+	private Point leftCenterGate;
+	private Point rightTopGate;
+	private Point rightBotomGate;
+	private mapinfo stc;
+	private int lm=0;
+	private int kl=0;
+	public RunFromeEnimy(CursorControl robUI, mapinfo map) {
+		this.robUI = robUI;
+		this.stc=map;
+	}
+
+	public void run(){
+	
+	}
+	Point rdirect = leftCenterGate;
+	private Point gp=new Point();
+	public void setShipPoint(Point shipPoint) {
+		
+		
+		if(lm==0){
+			
+		int leftCdist = findHipotinus(shipPoint,leftCenterGate);
+		int rTdist = findHipotinus(shipPoint,rightTopGate);
+		int rBdist = findHipotinus(shipPoint,rightBotomGate);
+		 
+		 int largest = Collections.max(Arrays.asList(leftCdist, rTdist, rBdist));
+		if(largest==leftCdist){
+			 rdirect = calkgateovershoot(leftCenterGate,shipPoint);
+			 gp=leftCenterGate;
+			 
+		}
+		if(largest==rTdist){
+			 rdirect = calkgateovershoot(rightTopGate,shipPoint);
+			gp=rightTopGate;
+		}
+		if(largest==rBdist){
+			 rdirect = calkgateovershoot(rightBotomGate,shipPoint);
+			 gp=rightBotomGate;
+		}
+		robUI.rightclick(rdirect);
+		lm=1;
+		}
+		if(lm==1){
+			System.out.println(lm);
+			if(!(shipPoint.x>gp.x+5||shipPoint.x<gp.x-5)){
+				if(kl==4){
+					robUI.type("j");
+					System.out.println("out bounds");
+				}
+				if(kl>20){
+					kl=1;
+				}
+				
+				System.out.println(kl);
+				kl++;
+			}else{
+				if(kl>0){
+					Point[] pa = stc.findgates();
+					System.out.println(pa[2]);
+					robUI.rightclick(pa[3]);
+					kl=0;
+				}
+			}
+			
+		}
+		
+			
+		
+		lm++;
+	}
+	private Point calkgateovershoot(Point gatepoint, Point shipPoint){
+		Point p1 = pcompToP(gatepoint,shipPoint);
+		
+		double m=p1.getY()/p1.getX();
+		System.out.println(p1);
+		int x=0;
+		if(p1.x<0){
+			x= p1.x-22;
+		}else{
+			x= p1.x+22;
+		}
+		
+		System.out.println(m);
+		int y=(int) (x*m);
+		
+	
+		return new Point(shipPoint.x+x,y+shipPoint.y);
+		
+	}
+	
+	private Point pcompToP(Point p, Point p1){
+		int x = p.x- p1.x;
+		int y=p.y- p1.y;
+		
+			
+		
+		
+			
+		
+		
+		return new Point(x,y);
+	}
+	private int findHipotinus(Point p, Point p1){
+		int x = p.x- p1.x;
+		int y=p.y- p1.y;
+		if(x<0){
+			x=x*(-1);
+		}
+		if(y<0){
+			y=y*(-1);
+		}
+		
+		return pyththeorem(x,y);
+	}
+	private int pyththeorem(int hp,int nownleg){
+		return (int) Math.sqrt((Math.pow(hp, 2)+Math.pow(nownleg, 2)));
+	}
+
+	public void setMapPnt(Point mapPnt) {
+		this.mapPnt = mapPnt;
+		leftCenterGate = new Point(mapPnt.x+31,mapPnt.y+100);
+		rightTopGate = new Point(mapPnt.x+314,mapPnt.y+33);
+		rightBotomGate = new Point(mapPnt.x+314,mapPnt.y+191);
+	}
+}

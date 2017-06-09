@@ -1,0 +1,25 @@
+package allUseMethods;
+
+import java.awt.AWTException;
+import java.awt.Point;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+
+public class Shard_methods {
+	private Robot rob;
+	public void moveCursor(Point p) throws AWTException{
+		
+		
+			rob = new Robot();
+			rob.mouseMove(p.x, p.y);
+	}
+	public void rightButtonClk(Point p) throws AWTException{
+		
+		rob = new Robot();
+		rob.mouseMove(p.x, p.y);
+		rob.mousePress(InputEvent.BUTTON1_MASK);
+	    rob.mouseRelease(InputEvent.BUTTON1_MASK);
+		
+	
+}
+}

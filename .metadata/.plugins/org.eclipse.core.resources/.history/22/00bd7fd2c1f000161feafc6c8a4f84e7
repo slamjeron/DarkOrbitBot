@@ -1,0 +1,62 @@
+package form;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+
+import Timers.Put_togethre;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+
+public class Find_all {
+
+	private JFrame frame;
+	private Put_togethre pal= new Put_togethre();
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Find_all window = new Find_all();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Find_all() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JButton btnStart = new JButton("start");
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				pal.start();
+			}
+		});
+		btnStart.setBounds(156, 181, 89, 23);
+		frame.getContentPane().add(btnStart);
+		
+		JLabel lblWhenShieldsAr = new JLabel("when shields ar halfed the program preses s key");
+		lblWhenShieldsAr.setBounds(62, 80, 252, 14);
+		frame.getContentPane().add(lblWhenShieldsAr);
+	}
+}

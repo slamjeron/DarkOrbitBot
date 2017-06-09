@@ -1,0 +1,261 @@
+package epic;
+
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.HeadlessException;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.ImageIcon;
+
+import allUseMethods.Shard_methods;
+import findPaladumOnMap.WhatSelected;
+
+public class BestColectClass {
+	private Timer timer= new Timer();
+	private Point pallieLocation;
+	private Shard_methods cursor= new Shard_methods();
+	private WhatSelected selectpic = new WhatSelected();
+	private Robot robot;
+	private boolean startMove;
+	private int timeTill;
+	public void colectEach10(int secColect){
+		timeTill=secColect;
+		timer.schedule(new timer1(),0, 100);
+	}
+	private int wateSafty=0;
+	private boolean stopLoop;
+	class timer1 extends TimerTask {
+		
+		@Override
+		public void run() {
+			wateSafty++;
+			if (wateSafty > timeTill) {
+				
+					autocolect2();
+				
+					
+				
+				
+			}
+			
+			//System.out.println(wateSafty);
+		}
+
+	}
+	public void findPalladum(BufferedImage img,Point p ) throws AWTException{
+		theLoope: for (int y = img.getHeight(); y > 20 ; y--) {
+
+			for (int x = 20; x < img.getWidth(); x++) {
+					if (y < 60) {
+					
+					System.out.println("worked");
+					 wateSafty=0;
+					break theLoope;
+					
+				}
+//System.out.println(new Color(img.getRGB(x, y)));
+				System.out.println(y);
+				if (x>20&&y>40&&x<img.getWidth()-50&&y<img.getHeight()-60){
+					
+				
+					
+				if (colorSimelerPallie(new Color(img.getRGB(x, y)))
+						&&colorSimelerPallie(new Color(img.getRGB(x+1, y+1)))
+						
+						&&colorSimelerPallie(new Color(img.getRGB(x+3, y-1)))
+						) {
+
+					BufferedImage pallieimg = img.getSubimage(x - 25, y - 15, 50, 51);
+					
+					int k = 0;
+					boolean next=false;
+					for (int iw = 1; iw < pallieimg.getWidth(); iw++) {
+						
+						if (nothingThere(new Color(pallieimg.getRGB(iw, 2)))
+								&& nothingThere(new Color(pallieimg.getRGB(iw, 45)))
+								&& nothingThere(new Color(pallieimg.getRGB(iw, 43)))) {
+							//System.out.println(iw);
+							k++;
+							
+							if(k == pallieimg.getWidth()-1){
+								 wateSafty=0;
+							next = true;
+							}
+						}else{
+							break;
+						}
+					}
+					int l = 0;
+					if ( next ) {
+						//System.out.println("worked");
+						for (int ih = 1; ih < pallieimg.getHeight(); ih++) {
+							if (nothingThere(new Color(pallieimg.getRGB(1, ih)))
+									&&nothingThere(new Color(pallieimg.getRGB(3, ih)))
+									&&nothingThere(new Color(pallieimg.getRGB(49, ih)))) {
+								startMove=false;
+									l++;
+									//System.out.println("this is l "+l);
+							}else{
+								break;
+							}
+
+							if (l == pallieimg.getHeight()-1) {
+								System.out.println("found");
+								pallieLocation = new Point(x + p.x, y + p.y);
+								cursor.rightButtonClk(pallieLocation);
+								// System.out.println(col);
+								
+								selectpic.getpiclable().setIcon(new ImageIcon(pallieimg));
+								
+								k = 0;
+								break theLoope;
+							}
+						}
+					}
+
+				}
+				
+				}
+				
+			}
+			
+		}
+	}
+	public void findPalladum1(BufferedImage img,Point p ) throws AWTException{
+		theLoope: for (int y = img.getHeight(); y > 20 ; y--) {
+
+			for (int x = 20; x < img.getWidth(); x++) {
+					if (y < 60) {
+					
+					System.out.println("worked");
+					 wateSafty=0;
+					break theLoope;
+					
+				}
+//System.out.println(new Color(img.getRGB(x, y)));
+				System.out.println(y);
+				if (x>20&&y>40&&x<img.getWidth()-50&&y<img.getHeight()-60){
+					
+				
+					
+				if (colorSimelerPallie(new Color(img.getRGB(x, y)))
+						&&colorSimelerPallie(new Color(img.getRGB(x+1, y+1)))
+						
+						&&colorSimelerPallie(new Color(img.getRGB(x+3, y-1)))
+						) {
+
+					BufferedImage pallieimg = img.getSubimage(x - 25, y - 15, 50, 51);
+					sizePalladium(pallieimg,x,y,p);
+					if (stopLoop){
+						break theLoope;
+					}
+
+				}
+				
+				}
+				
+			}
+			
+		}
+	}
+	
+	private void sizePalladium(BufferedImage pallieimg,int x,int y ,Point p) throws AWTException{
+		int k = 0;
+		boolean next=false;
+		stopLoop=false;
+		for (int iw = 1; iw < pallieimg.getWidth(); iw++) {
+			
+			if (nothingThere(new Color(pallieimg.getRGB(iw, 2)))
+					&& nothingThere(new Color(pallieimg.getRGB(iw, 45)))
+					&& nothingThere(new Color(pallieimg.getRGB(iw, 43)))) {
+				//System.out.println(iw);
+				k++;
+				
+				if(k == pallieimg.getWidth()-1){
+					 wateSafty=0;
+				next = true;
+				}
+			}else{
+				break;
+			}
+		}
+		int l = 0;
+		if ( next ) {
+			//System.out.println("worked");
+			for (int ih = 1; ih < pallieimg.getHeight(); ih++) {
+				if (nothingThere(new Color(pallieimg.getRGB(1, ih)))
+						&&nothingThere(new Color(pallieimg.getRGB(3, ih)))
+						&&nothingThere(new Color(pallieimg.getRGB(49, ih)))) {
+					startMove=false;
+						l++;
+						//System.out.println("this is l "+l);
+				}else{
+					break;
+				}
+
+				if (l == pallieimg.getHeight()-1) {
+					System.out.println("found");
+					pallieLocation = new Point(x + p.x, y + p.y);
+					cursor.rightButtonClk(pallieLocation);
+					// System.out.println(col);
+					
+					selectpic.getpiclable().setIcon(new ImageIcon(pallieimg));
+					
+					k = 0;
+					stopLoop=true;
+				}
+			}
+		}
+	}
+	public void autocolect2() {
+		
+		try {
+			robot = new Robot();
+			
+			Rectangle rect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+			
+			Point p = new Point((rect.width / 2) - 400, 100);
+			//cursor.moveCursor(p);
+			Point size = new Point(800, (rect.height/2) +100);
+			Rectangle rect1 = new Rectangle(p.x, p.y, size.x, size.y);
+			BufferedImage img = robot.createScreenCapture(rect1);
+			
+			findPalladum(img,p);
+		} catch (HeadlessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	public boolean colorSimelerPallie(Color test) {
+		boolean right = false;
+		if (test.getBlue() < 200 && test.getRed() < 120 && test.getGreen() < 160) {
+			if (test.getBlue() > 100 && test.getRed() > 40 && test.getGreen() > 60) {
+				if (test.getBlue() > test.getRed()) {
+
+					right = true;
+				}
+			}
+		}
+		return right;
+	}
+
+	public boolean nothingThere(Color test) {
+		boolean right = false;
+		if (test.getBlue() < 80 && test.getRed() < 80 && test.getGreen() < 80) {
+
+			right = true;
+
+		}
+		return right;
+	}
+}

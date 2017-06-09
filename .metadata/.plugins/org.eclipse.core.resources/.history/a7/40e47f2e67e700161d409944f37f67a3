@@ -1,0 +1,141 @@
+package Ulcode;
+
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Robot;
+//import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+
+public class MapFunctions extends MapInfo {
+
+	public void findship() {
+		BufferedImage mapimg = colimg.scteanImage(leftColorLocation, 200, 2);
+		for (int i = 0; i < 200; i++) {
+			if (new Color(mapimg.getRGB(i, 1)).equals(new Color(70, 70, 70))) {
+				cursor.rightButtonClk(new Point(moveleft.x + i, moveleft.y));
+			}
+		}
+
+	}
+
+	public void findPet() {
+
+		BufferedImage image2;
+		image2 = colimg.scteanImage(leftColorLocation, rightColorLocation.x - leftColorLocation.x, 70);
+
+		bob: for (int y = 0; y < image2.getHeight(); y++) {
+			for (int x = 0; x < image2.getWidth(); x++) {
+				if (new Color(204, 129, 0).equals(new Color(image2.getRGB(x, y)))) {
+					cursor.rightButtonClk(new Point(leftColorLocation.x + x, mapLocate.y + distFromClowd));
+
+					// System.out.println("pet found");
+					break bob;
+				}
+			}
+		}
+	}
+
+	protected boolean begin = false;
+	protected boolean runing;
+
+	private int runMove = 0;
+
+	public void runsequence() {
+		
+			if (runing) {
+				
+				if (runMove == 0) {
+					petMentDown = true;
+					colimg.type("dc");
+					cursor.rightButtonClk(runSequence[0]);
+					
+					begin = false;
+					runMove++;
+					
+					if (colimg.compScPxtoCol(petStatsP[0], new Color(0, 255, 0))){
+						colimg.type("ce");
+						
+						colimg.sleepc(2000);
+						
+						}
+					
+				}
+				System.out.println(runMove);
+				if (runMove == 1 || runMove == 3 ||  runMove == 2 ||runMove == 4||runMove == 5) {
+					if (colimg.compScPxtoCol(petStatsP[0], new Color(0, 255, 0))){
+						colimg.type("ce");
+						colimg.sleepc(2000);
+						}
+					if (rob.getPixelColor(colorSearchRunSequence[runMove - 1].x, colorSearchRunSequence[runMove - 1].y)
+							.equals(new Color(70, 70, 70))) {
+						if(runMove == 3){
+							colimg.type("b");
+							colimg.sleepc(10000);
+						}
+						if(runMove == 4){
+							colimg.type("b");
+						}
+						if(runMove ==5){
+						colimg.sleepc(20000);
+						}
+							cursor.rightButtonClk(runSequence[runMove]);
+							
+						runMove++;
+						
+					}
+				}
+				
+					
+						
+				
+
+				if (runMove == 6) {
+					// stopRunSequence();
+					// finishedRuning=true;
+					//System.out.println(shieldHit());
+					
+					
+					if (!shieldHit()) {
+					runMove = 0;
+					runing = false;
+					petMentDown = false;
+					}
+					// shipHit=false;
+				}
+			}
+		
+
+	}
+
+	public void rightLeft(boolean moveBigin) {
+		// System.out.println(leftColorLocation);
+
+		if (moveDirect) {
+			if (moveBigin) {
+				cursor.rightButtonClk(moveleft);
+			}
+			// System.out.println(moveDirect);
+			// System.out.println(searchleft);
+
+			if (colimg.screenColor(leftColorLocation).equals(new Color(70, 70, 70))) {
+
+				cursor.rightButtonClk(moveRight);
+				moveDirect = false;
+				colimg.sleepc(4000);
+			}
+		} else {
+			if (moveBigin) {
+				cursor.rightButtonClk(moveRight);
+				startMove = false;
+			}
+			// System.out.println(searchRight);
+			if (colimg.screenColor(rightColorLocation).equals(new Color(70, 70, 70))) {
+				cursor.rightButtonClk(moveleft);
+				moveDirect = true;
+				colimg.sleepc(4000);
+			}
+		}
+
+	}
+}

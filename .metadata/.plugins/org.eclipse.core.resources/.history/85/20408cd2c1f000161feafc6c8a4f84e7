@@ -1,0 +1,41 @@
+package screenSearch;
+
+import java.awt.Color;
+
+import java.awt.Point;
+import java.awt.image.BufferedImage;
+
+public class shipStats extends AlenFineder{
+	private boolean statsFound=false;
+	private Point stpt = new Point();
+	protected Point hitPointsEnd= new Point();
+	protected Point shieldEnd= new Point();
+	protected Point cargofullP= new Point();
+
+	public void getStats() {
+		stpt=new Point(0,160);
+BufferedImage image = img.screanImage(stpt,rect.width-190,rect.height-166);
+		
+		if(!statsFound){
+			con.moveCursor(new Point(100,100));
+			theloop:for (int y = 0; y < image.getHeight() ; y++) {
+				for (int x = 0; x < image.getWidth(); x++) {
+					if(new Color( image.getRGB(x, y)).equals(new Color(232,225,191))){
+						//System.out.println(new Color( image.getRGB(x, y+105)));
+						if(new Color( image.getRGB(x, y+104)).equals(new Color(40, 116, 144))){
+							//System.out.println(new Color( image.getRGB(x, y+105)));
+							hitPointsEnd=new Point(x+0,y+40+160);
+							shieldEnd=new Point(x+58,y+55+160);
+							cargofullP=new Point(x+154,y+40+160);
+							
+							//con.moveCursor(hitPointsEnd);
+							statsFound=true;
+							break theloop;
+						}
+					}
+				}
+			}
+		}
+	
+	}
+}

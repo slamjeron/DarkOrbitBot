@@ -1,0 +1,236 @@
+package Ulcode;
+
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class Petinfo extends Shipstats{
+	public Robot rob;
+	private Timer timer = new Timer();;
+	public boolean petfound = false;
+	private Images colimg = new Images();
+
+	private CursorControls cursor = new CursorControls();
+	private Point[] petControlPoints = new Point[5];
+	protected Point[] petStatsP = new Point[5];
+	public BufferedImage image;
+	public boolean petisShot;
+	private boolean autocolpetfound = false;
+	private boolean repPetFound = false;
+	private Point dropdown;
+
+	public void findePet(Color color, Point p) {
+		Color[] petupcolor = new Color[] { new Color(232, 225, 191), new Color(232, 225, 191), new Color(232, 225, 191),
+				new Color(232, 225, 191), new Color(232, 225, 191), new Color(232, 225, 191), new Color(232, 225, 191),
+				new Color(134, 125, 105), new Color(47, 46, 44), new Color(31, 41, 46), new Color(40, 45, 45),
+				new Color(60, 52, 45), new Color(232, 225, 191), new Color(232, 225, 191), new Color(232, 225, 191),
+				new Color(232, 225, 191), new Color(232, 225, 191), new Color(232, 225, 191), new Color(170, 166, 143),
+				new Color(37, 43, 45), new Color(33, 42, 45), new Color(36, 43, 46) };
+		if (!petfound) {
+			if (color.equals(new Color(232, 225, 191))) {
+				BufferedImage image = colimg.scteanImage(p, 21, 2);
+
+				for (int x = 0; x < image.getWidth(); x++) {
+					if (!new Color(image.getRGB(x, 1)).equals(petupcolor[x])) {
+						break;
+					}
+					if (x > 19) {
+						// cursor.moveCursor(p);
+						getPetPoints(p);
+						petfound = true;
+
+					}
+					// colorPrint( new Color (image.getRGB(x, 1)));
+
+				}
+
+			}
+
+		}
+
+		// TODO Auto-generated method stub
+
+	}
+
+	private void getPetPoints(Point p) {
+		petControlPoints[0] = new Point(p.x, p.y + 110);
+
+		petControlPoints[1] = new Point(p.x + 150, p.y + 110);
+		// pet hp start
+		petStatsP[0] = new Point(p.x + 55, p.y + 55);
+		// pet is down
+		if (colimg.compScPxtoCol(petStatsP[0], new Color(0, 0, 0))) {
+			cursor.rightButtonClk(petControlPoints[0]);
+		}
+		colimg.sleepc(1000);
+		if (colimg.compScPxtoCol(petStatsP[0], new Color(0, 255, 0))) {
+			cursor.rightButtonClk(petControlPoints[1]);
+		}
+
+		// pet hp end
+		petStatsP[1] = new Point(p.x + 117, p.y + 55);
+		// pet sh end
+		petStatsP[2] = new Point(p.x + 115, p.y + 55 + 19);
+
+		colimg.sleepc(1000);
+		if (colimg.compScPxtoCol(new Point(p.x + 96, p.y + 180), new Color(34, 34, 34))) {
+			autocolpetfound = false;
+			findAutoResource(p);
+
+		}
+		// cursor.moveCursor(petStatsP[0]);
+		// puts out the pet
+		// Determines if pet is being shot
+
+		// petControlOff();
+		timer.schedule(new searchpet(), 0, 100);
+	}
+
+	private void findAutoResource(Point p) {
+		// image of the drop down menu
+		dropdown = new Point(p.x + 96, p.y + 183);
+		image = colimg.scteanImage(dropdown, 100, 200);
+
+		// searches drop down to find auto recourse collector
+		 for (int y = 0; y < image.getHeight() - 2; y++) {
+			for (int x = 0; x < image.getWidth() - 20; x++) {
+
+				// colimg.colorPrint(new Color (image.getRGB(x, y)));
+				/*if (!repPetFound) {
+					if (new Color(image.getRGB(x, y)).equals(new Color(225, 159, 4))) {
+						petControlPoints[3] = (new Point(dropdown.x + x, dropdown.y + y + 5));
+						if (new Color(image.getRGB(x + 19, y + 2)).equals(new Color(255, 255, 255))
+								&& new Color(image.getRGB(x + 6, y + 11)).equals(new Color(255, 179, 0))) {
+							petControlPoints[3] = (new Point(dropdown.x + x, dropdown.y + y + 5));
+							System.out.println(petControlPoints[3]);
+
+							cursor.moveCursor(petControlPoints[3]);
+							repPetFound = true;
+						}
+					}
+				}*/
+				if (!autocolpetfound) {
+
+					if (new Color(image.getRGB(x, y)).equals(new Color(255, 179, 0))
+							&& new Color(image.getRGB(x + 20, y + 2)).equals(new Color(255, 255, 255))
+							&& new Color(image.getRGB(x + 86, y + 5)).equals(new Color(255, 255, 255))) {
+						// colimg.colorPrint(new Color (image.getRGB(x+20,
+						// y+2)));
+
+						petControlPoints[2] = (new Point(p.x + x + 96, p.y + y + 190));
+
+						autocolpetfound = true;
+
+					}
+
+					// colorPrint( new Color (image.getRGB(x, 1)));
+				}
+			}
+		}
+		cursor.rightButtonClk(petControlPoints[2]);
+	}
+
+	public void startPetcolect() {
+		colimg.sleepc(1000);
+		if (colimg.compScPxtoCol(petStatsP[0], new Color(0, 0, 0))) {
+			cursor.rightButtonClk(petControlPoints[0]);
+		}
+		colimg.sleepc(1000);
+		cursor.rightButtonClk(petControlPoints[1]);
+		colimg.sleepc(1000);
+		cursor.rightButtonClk(petControlPoints[2]);
+		colimg.sleepc(10000);
+	}
+
+	protected boolean petMentDown = false;
+
+	class searchpet extends TimerTask {
+
+		private int i = 0;
+		private boolean petBringout = false;
+		private boolean presd = true;
+		private boolean petNotDown = true;
+
+		private void whatIfPetShot() {
+			// when pet is shot
+			// when pet is up put pet down
+			if (petNotDown) {
+				// when pet gets shot
+				if (presd) {
+
+					colimg.type("g");
+					presd = false;
+				}
+
+				if (colimg.compScPxtoCol(petStatsP[0], new Color(0, 255, 0))) {
+					colimg.sleepc(1000);
+					cursor.rightButtonClk(petControlPoints[0]);
+					colimg.sleepc(1000);
+					if (colimg.compScPxtoCol(petStatsP[0], new Color(0, 0, 0))) {
+						petNotDown = false;
+
+					}
+
+				}
+			}
+			// when pet is shot
+			// when pet shields are up again
+			if (colimg.compScPxtoCol(petStatsP[2], new Color(0, 0, 255))) {
+				System.out.println("pet is healed");
+				petisShot = false;
+				petNotDown = false;
+			}
+		}
+
+		@Override
+		public void run() {
+			// when the pet is down bring it up
+			if (!petMentDown) {
+				if (colimg.compScPxtoCol(petStatsP[0], new Color(0, 0, 0))) {
+					petBringout = true;
+				} else {
+
+					if (!petisShot) {
+
+						if (colimg.compScPxtoCol(petStatsP[2], new Color(0, 0, 0))) {
+							petisShot = true;
+							System.out.println("pet is shot");
+							petNotDown = true;
+							presd = true;
+						}
+					}
+				}
+				if (petisShot) {
+					whatIfPetShot();
+
+				}
+				// starts the pet collecting
+				if (petBringout) {
+
+					if (i == 10) {
+
+						startPetcolect();
+						petBringout = false;
+					}
+
+					i++;
+				}
+				// System.out.println(wateSafty);
+			}
+		}
+
+	}
+	/*
+	 * private void startPetrep(){ cursor.rightButtonClk(petControlPoints[1]);
+	 * try { Thread.sleep(1000); } catch(InterruptedException ex) {
+	 * Thread.currentThread().interrupt(); }
+	 * cursor.rightButtonClk(petControlPoints[3]); }
+	 */
+	/*
+	 * public void petControlOff(){ if(searchPeton){ timer.cancel();
+	 * timer.purge(); timer =new Timer(); } }
+	 */
+}

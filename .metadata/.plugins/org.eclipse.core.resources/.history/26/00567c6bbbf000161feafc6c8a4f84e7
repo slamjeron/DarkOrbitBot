@@ -1,0 +1,100 @@
+package screenSearch;
+
+
+
+
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+
+
+public class map extends shipStats{
+	
+
+	protected boolean mapfound;
+
+	protected int mwidth;
+
+	protected Rectangle maploc;
+
+	protected Point[] colorSearchRunSequence= new Point[20];
+
+	protected Point[] runSequence= new Point[20];
+
+	protected Point moveRight=new Point();
+
+	protected Point mapLocate=new Point();
+
+	protected Point leftColorLocation=new Point();
+
+	protected Point rightColorLocation=new Point();
+
+	protected Point moveleft=new Point();
+
+	protected int newmapHight;
+
+	protected int newmapwidth;
+
+	protected int oldmapHight;
+
+	protected int oldmapwidth;
+
+	protected boolean moveDirect;
+
+	protected boolean startMove;
+
+	
+	public boolean getmap() {
+		// TODO Auto-generated method stub
+		BufferedImage image = img.screanImage(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+		
+		if(!mapfound){
+			
+			for (int y = 200; y < image.getHeight()-200 ; y++) {
+				for (int x = 100; x < image.getWidth()-280; x++) {	
+		if(new Color(image.getRGB(x, y)).equals(new Color(153 ,204 , 255))){
+			mapfound=true;
+			mapLocate= new Point(x,y);
+          setmapPoints();
+          //System.out.println(mapLocate);
+          return true;
+				//colimg.colorPrint(new Color (image.getRGB(x, 1)));
+			}
+		}
+			}
+		}
+		 return false;
+		}
+
+	
+	
+
+	public int distFromClowd=214;
+private void setmapPoints(){
+		int leftx=108;
+		int rightx=275;
+		
+		leftColorLocation=new Point(mapLocate.x+leftx, mapLocate.y+distFromClowd-2);
+		   rightColorLocation=new Point(mapLocate.x+rightx, mapLocate.y+distFromClowd-1);
+		  moveleft = new Point (mapLocate.x+leftx, mapLocate.y+190);
+		  moveRight = new Point (mapLocate.x+rightx, mapLocate.y+190);
+		  runSequence[0]= new Point(mapLocate.x+leftx-5, mapLocate.y+distFromClowd);
+		  colorSearchRunSequence[0]= new Point(runSequence[0].x,runSequence[0].y-90);
+		  runSequence[1]= new Point(mapLocate.x+24, mapLocate.y+155);
+		  colorSearchRunSequence[1]= new Point(runSequence[1].x,runSequence[1].y-60);
+		  runSequence[2]= new Point(mapLocate.x+22, mapLocate.y+75);
+		  colorSearchRunSequence[2]= new Point(runSequence[2].x+60,runSequence[2].y);
+		  runSequence[3]= new Point(mapLocate.x+86, mapLocate.y+98);
+		  colorSearchRunSequence[3]= new Point(runSequence[3].x, runSequence[3].y+50);
+		  runSequence[4]= new Point(mapLocate.x+104, mapLocate.y+distFromClowd);
+		  colorSearchRunSequence[4]= new Point(runSequence[4].x-79,runSequence[4].y);
+		  runSequence[5]= new Point(mapLocate.x+260, mapLocate.y+distFromClowd);
+		  colorSearchRunSequence[5]= new Point(runSequence[5].x+100,runSequence[5].y);
+		  runSequence[6]= new Point(mapLocate.x+170, mapLocate.y+distFromClowd);
+		
+	}
+	
+}
+

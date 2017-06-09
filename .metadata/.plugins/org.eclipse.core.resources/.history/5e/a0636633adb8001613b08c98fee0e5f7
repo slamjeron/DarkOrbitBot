@@ -1,0 +1,240 @@
+package pages;
+import java.awt.Component;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.JMenu;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import actions.Create_NTask;
+import actions.HabitVarStorig;
+import actions.Open_Userinfo;
+import actions.Save_habitinfo;
+import javax.swing.JToggleButton;
+import javax.swing.JMenuItem;
+import com.toedter.calendar.JDateChooser;
+
+public class TestFrame {
+
+	private JFrame frame;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TestFrame window = new TestFrame();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public TestFrame() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		Open_Userinfo openui= new Open_Userinfo();
+		Create_NTask creatTask=new Create_NTask();
+		frame = new JFrame();
+		frame.setBounds(100, 100, 365, 365);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Save_habitinfo save = new Save_habitinfo();
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		openui.open_users();
+		openui.open_tasks();
+		JMenu mnNewMenu = new JMenu("File");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmSave = new JMenuItem("Save");
+		mntmSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				save.save();
+			}
+		});
+		mnNewMenu.add(mntmSave);
+		
+		JMenuItem mntmReset = new JMenuItem("reset");
+		mntmReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				creatTask.deleatalltasks();
+			}
+		});
+		mnNewMenu.add(mntmReset);
+		frame.getContentPane().setLayout(null);
+		
+		
+		
+		
+		JButton btnAddTag = new JButton("add tag");
+		btnAddTag.setBounds(192, 41, 89, 23);
+		frame.getContentPane().add(btnAddTag);
+		
+		textField = new JTextField();
+		textField.setBounds(72, 42, 86, 20);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblTaskText = new JLabel("task text");
+		lblTaskText.setBounds(10, 45, 65, 14);
+		frame.getContentPane().add(lblTaskText);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 103, 300, 146);
+		frame.getContentPane().add(tabbedPane);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("repeat every", null, panel, null);
+		panel.setLayout(null);
+		
+		JToggleButton btnMonday = new JToggleButton("monday");
+		btnMonday.setBounds(99, 21, 79, 23);
+		panel.add(btnMonday);
+		
+		JToggleButton btnSunday = new JToggleButton("sunday");
+		btnSunday.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnSunday.setBounds(20, 21, 69, 23);
+		panel.add(btnSunday);
+		
+		JToggleButton btnTuesday = new JToggleButton("tuesday");
+		btnTuesday.setBounds(188, 21, 89, 23);
+		panel.add(btnTuesday);
+		
+		JToggleButton btnThersday = new JToggleButton("thersday");
+		btnThersday.setBounds(112, 55, 89, 23);
+		panel.add(btnThersday);
+		
+		JToggleButton btnFriday = new JToggleButton("friday");
+		btnFriday.setBounds(208, 55, 69, 23);
+		panel.add(btnFriday);
+		
+		JToggleButton btnWednesday = new JToggleButton("wednesday");
+		btnWednesday.setBounds(10, 55, 89, 23);
+		panel.add(btnWednesday);
+		
+		JToggleButton btnSaterday = new JToggleButton("saterday");
+		btnSaterday.setBounds(99, 88, 89, 23);
+		panel.add(btnSaterday);
+		
+		JButton btnEachDay = new JButton("each day");
+		btnEachDay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for(Component toglebt : panel.getComponents()){
+					 if (toglebt instanceof JToggleButton){
+					JToggleButton tb =(JToggleButton) toglebt;
+					
+					if(tb.isSelected()){
+						tb.setSelected(false);
+					}else{
+					tb.setSelected(true);
+					}
+					 }
+					//System.out.println(weakday[i]);
+					
+				}
+			}
+		});
+		btnEachDay.setBounds(134, 122, 89, 23);
+		panel.add(btnEachDay);
+		
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("due date", null, panel_1, null);
+		panel_1.setLayout(null);
+		char e = '_';
+		JDateChooser dateChooser = new JDateChooser("MM/dd/yyyy HH","##/##/#### ##",e);
+		
+		
+		dateChooser.setBounds(98, 50, 115, 20);
+		panel_1.add(dateChooser);
+		
+		JPanel panel_2 = new JPanel();
+		tabbedPane.addTab("repeat in # days", null, panel_2, null);
+		panel_2.setLayout(null);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(1, 1, 500, 1));
+		spinner.setBounds(114, 31, 69, 20);
+		panel_2.add(spinner);
+		
+		JLabel lblRepeatEvery = new JLabel("repeat every");
+		lblRepeatEvery.setBounds(31, 34, 73, 14);
+		panel_2.add(lblRepeatEvery);
+		
+		
+		
+		JButton btnNewTask = new JButton("new task");
+		btnNewTask.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				String tname =textField.getText();
+				if(tname.isEmpty()){
+					infoBox("Error: you must add a task name", "Error");
+				}else{
+				ArrayList<Boolean> weakday= new ArrayList<Boolean>();
+				
+				for(Component toglebt : panel.getComponents()){
+					if (toglebt instanceof JToggleButton){
+					JToggleButton tb =(JToggleButton) toglebt;
+					weakday.add(tb.isSelected());
+					//System.out.println(weakday[i]);
+					}
+				}
+				
+				Date Datedue= dateChooser.getDate();
+				 
+				
+				ArrayList<String> contags= new ArrayList<String>();
+				int daystildue = 0;
+				
+				System.out.println("you tride to add a task");
+				creatTask.Create(tname, contags);
+				int panselect = tabbedPane.getSelectedIndex();
+				if(panselect ==1 && Datedue!=null){
+				creatTask.addDateDue(weakday, Datedue, daystildue,panselect);
+				}else{
+					infoBox("Error: you must add a valid date","Error");
+				}
+					
+			}
+			}
+		});
+		btnNewTask.setBounds(126, 260, 89, 23);
+		frame.getContentPane().add(btnNewTask);
+		
+		
+		
+	}
+	 public static void infoBox(String infoMessage, String titleBar)
+	    {
+	        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	    }
+}

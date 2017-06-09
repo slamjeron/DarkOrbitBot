@@ -1,0 +1,172 @@
+package Ulcode;
+
+import java.awt.Color;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class TimerKeeper extends TextFinder {
+
+	private Timer timer;
+
+	public void startSearching() {
+		palTextFound = false;
+		startMove = true;
+		rightLeft(true);
+		timer = new Timer();
+		timer.schedule(new findPallie(), 0, 100);
+		timer.schedule(new pallieTest(), 0, 100);
+	}
+
+	public void stopfinded() {
+
+		timer.cancel();
+	}
+	private class pallieTest extends TimerTask {
+		
+		private int wate = 0;
+		private int stsearch;
+		private boolean startsearch;
+		private int stay;
+		private boolean movepet;
+		private int stillLooke = 0;
+		private boolean norome=false;
+		private boolean logout=false;
+		@Override
+		public void run() {
+			runsequence();
+			
+					if(!runing){
+			if(!palTextFound){
+				
+			rightLeft(false);
+			}
+			if(cargoFull()){
+			System.out.println(cargoFull());
+			norome=true;
+			}
+			if(shieldHit()){
+				System.out.println("run");
+				petMentDown = true;
+				runing=true;
+				
+			}
+			
+			if(logout){
+				colimg.type("e");
+			}
+			if(norome){
+				logout=true;
+			}else{
+			if (palTextFound) {
+				// System.out.println(wate);
+				if (colimg.compScPxtoCol(pallieLocate, new Color(254, 254, 254))) {
+					if (stay > 50) {
+						// pallieLost=true;
+						movepet = true;
+						if (movepet) {
+							findPet();
+							movepet = false;
+							colimg.type("c");
+						}
+						// palladumFound();
+						//System.out.println(stay);
+						// findship();
+						stay = 0;
+					}
+					petMentDown = false;
+					stay++;
+					stillLooke=0;
+					palladumFound();
+					pallieLost = false;
+					startsearch = false;
+					stsearch = 0;
+					wate = 0;
+					pals.move = true;
+				} else {
+					// when there is no paladum
+					if (wate > 29) {
+						if (!pallieLost) {
+							//System.out.println("time to move" + wate);
+							// startMove=true;
+							colimg.type("c");
+							stillLooke = 0;
+							petMentDown = true;
+							rightLeft(true);
+							startsearch = true;
+							pallieLost = true;
+							stsearch = 0;
+							wate = 0;
+
+							
+
+						}
+
+					}
+					wate++;
+					if (stsearch > 15) {
+						if (startsearch) {
+							boolean b = pals.autocolect2();
+							stsearch = 20;
+							//System.out.println(b);
+							if (b) {
+								wate = 0;
+								palladumFound();
+								startsearch = false;
+							}
+						}
+					}
+
+					if (stillLooke > 200) {
+						petMentDown = true;
+						stillLooke = 0;
+						rightLeft(true);
+						startsearch = true;
+						pallieLost = true;
+						if (colimg.compScPxtoCol(petStatsP[0], new Color(0, 255, 0))){
+						colimg.type("e");
+						}
+						stsearch = 0;
+						wate = 0;
+					}
+
+					if (startsearch) {
+						stsearch++;
+						stillLooke++;
+						//System.out.println(stillLooke);
+						rightLeft(false);
+					}
+
+				}
+			}
+			
+		}
+		}
+		}
+	}
+	public seePalladum pals = new seePalladum();
+	private class findPallie extends TimerTask {
+	
+
+		@Override
+		public void run() {
+			// System.out.println("searching for pallie text");
+			
+			findPallie();
+			
+		}
+	}
+
+	private void palladumFound() {
+		// the only reson pallie would be found is if it was lost first
+
+		if (pallieLost) {
+			//System.out.println("stop move");
+			findship();
+			startPetcolect();
+			findPet();
+			
+			pallieLost = false;
+
+		}
+	}
+}

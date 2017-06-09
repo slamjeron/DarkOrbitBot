@@ -1,0 +1,107 @@
+package pages;
+
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JTabbedPane;
+import javax.swing.JToggleButton;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JSpinner;
+import javax.swing.JLabel;
+import java.awt.Dimension;
+
+public class Taskeditor_add_date extends JPanel {
+	private JTabbedPane tabbedPane;
+	private JButton button;
+	private JSpinner spinner;
+	private JDateChooser dateChooser;
+	private JPanel panel;
+
+	/**
+	 * Create the panel.
+	 */
+	public Taskeditor_add_date() {
+		setMinimumSize(new Dimension(200, 200));
+		setLayout(null);
+		
+		button = new JButton("new task");
+		button.setBounds(103, 158, 89, 23);
+		add(button);
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(0, 0, 300, 146);
+		add(tabbedPane);
+		
+		panel = new JPanel();
+		panel.setLayout(null);
+		tabbedPane.addTab("repeat every", null, panel, null);
+		
+		JToggleButton toggleButton = new JToggleButton("monday");
+		toggleButton.setBounds(99, 21, 79, 23);
+		panel.add(toggleButton);
+		
+		JToggleButton toggleButton_1 = new JToggleButton("sunday");
+		toggleButton_1.setBounds(20, 21, 69, 23);
+		panel.add(toggleButton_1);
+		
+		JToggleButton toggleButton_2 = new JToggleButton("tuesday");
+		toggleButton_2.setBounds(188, 21, 89, 23);
+		panel.add(toggleButton_2);
+		
+		JToggleButton toggleButton_3 = new JToggleButton("thersday");
+		toggleButton_3.setBounds(112, 55, 89, 23);
+		panel.add(toggleButton_3);
+		
+		JToggleButton toggleButton_4 = new JToggleButton("friday");
+		toggleButton_4.setBounds(208, 55, 69, 23);
+		panel.add(toggleButton_4);
+		
+		JToggleButton toggleButton_5 = new JToggleButton("wednesday");
+		toggleButton_5.setBounds(10, 55, 89, 23);
+		panel.add(toggleButton_5);
+		
+		JToggleButton toggleButton_6 = new JToggleButton("saterday");
+		toggleButton_6.setBounds(99, 88, 89, 23);
+		panel.add(toggleButton_6);
+		
+		JButton button_1 = new JButton("each day");
+		button_1.setBounds(134, 122, 89, 23);
+		panel.add(button_1);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		tabbedPane.addTab("due date", null, panel_1, null);
+		
+		dateChooser = new JDateChooser();
+		dateChooser.setDateFormatString("MM/dd/yyyy HH");
+		dateChooser.setBounds(98, 50, 115, 20);
+		panel_1.add(dateChooser);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		tabbedPane.addTab("repeat in # days", null, panel_2, null);
+		
+		spinner = new JSpinner();
+		spinner.setBounds(114, 31, 69, 20);
+		panel_2.add(spinner);
+		
+		JLabel label = new JLabel("repeat every");
+		label.setBounds(31, 34, 73, 14);
+		panel_2.add(label);
+
+	}
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
+	}
+	public JButton getnewTaskbtn() {
+		return button;
+	}
+	public JSpinner getrepeatspin() {
+		return spinner;
+	}
+	public JDateChooser getoftask() {
+		return dateChooser;
+	}
+	public JPanel getDayWeakduePanel() {
+		return panel;
+	}
+}

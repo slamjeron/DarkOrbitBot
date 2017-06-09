@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Image_pane.java&apos; to &apos;bot creat/src/move_colect&apos;&#x0D;&#x0A;- Original project: &apos;habit_monster2&apos;&#x0D;&#x0A;- Destination element: &apos;bot creat/src/move_colect&apos;&#x0D;&#x0A;- Original element: &apos;mpage_builder.Image_pane.java&apos;" description="Copy compilation unit" destination="=bot creat/src&lt;move_colect" element1="/src&lt;mpage_builder{Image_pane.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1481672261239" units="1" version="1.0"/>
+</session>

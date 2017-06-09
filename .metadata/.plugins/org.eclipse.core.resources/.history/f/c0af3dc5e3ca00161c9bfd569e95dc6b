@@ -1,0 +1,119 @@
+package cursor;
+
+import java.awt.AWTException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import colors.InfoViewer;
+
+public class Menuedit extends Cursor_controls {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public InfoViewer info = new InfoViewer();
+	private JMenuItem mntmPetStart;
+	private JMenuItem mntmFindPet;
+	/**
+	 * Launch the application.
+	 */
+	
+
+	/**
+	 * Create the frame.
+	 */
+	public Menuedit() {
+		
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnEditor = new JMenu("editor");
+		menuBar.add(mnEditor);
+		
+		JMenuItem mntmShowInfo = new JMenuItem("Show Info");
+		mntmShowInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				info.setVisible(true);
+				JLabel lblNewLabel = new JLabel("New label");
+				lblNewLabel.setBounds(236, 90, 46, 14);
+				info.getContentPane().add(lblNewLabel);
+				setBounds(100, 100, 450, 416);
+				info.getBtnColorPaliLocation().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+						moveCursor(paliColectLocate);
+						} catch (AWTException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+				info.getBtnLeftColorView().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							moveCursor(leftColorLocation);
+						} catch (AWTException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+				info.getBtnRightColorView().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							moveCursor(rightColorLocation);
+						} catch (AWTException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		mnEditor.add(mntmShowInfo);
+		
+		JMenu mnPlayPart = new JMenu("play part");
+		menuBar.add(mnPlayPart);
+		
+		mntmPetStart = new JMenuItem("pet start");
+		mntmPetStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					startPet();
+					
+				} catch (AWTException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnPlayPart.add(mntmPetStart);
+		
+		mntmFindPet = new JMenuItem("find pet");
+		mntmFindPet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					findPet();
+				} catch (AWTException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		mnPlayPart.add(mntmFindPet);
+	}
+
+	public JMenuItem getMntmPetStart() {
+		return mntmPetStart;
+	}
+	public JMenuItem getMntmFindPet() {
+		return mntmFindPet;
+	}
+}

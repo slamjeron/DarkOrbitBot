@@ -1,0 +1,46 @@
+package cursor;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.awt.event.ActionEvent;
+
+public class Controls extends Menuedit {
+
+	private static final long serialVersionUID = 1L;
+	public Timer timer = new Timer();
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Controls frame = new Controls();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Controls() {
+		getBtnStartBot().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				timer.cancel();
+				timer.purge();
+			}
+		});
+		
+		
+		
+	}
+	
+	
+	}
+
+

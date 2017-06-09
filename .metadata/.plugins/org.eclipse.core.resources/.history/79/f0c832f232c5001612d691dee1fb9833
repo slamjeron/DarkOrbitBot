@@ -1,0 +1,402 @@
+package cursor;
+
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.image.BufferedImage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.JFrame;
+
+import move_colect.Image_Btns;
+
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
+import colors.InfoViewer;
+import javax.swing.JLabel;
+public class Cursor_controls extends Image_Btns {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Cursor_controls frame = new Cursor_controls();
+					
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	InfoViewer info = new InfoViewer();
+	/**
+	 * Create the frame.
+	 */
+	Color leftcolorsearch;
+	Color rightcolorsearch;
+	Point leftColorLocation=new Point();
+	Point rightColorLocation=new Point();
+	public Cursor_controls() {
+		
+		
+		getScreansize();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnEditor = new JMenu("editor");
+		menuBar.add(mnEditor);
+		
+		JMenuItem mntmShowInfo = new JMenuItem("Show Info");
+		mntmShowInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				info.setVisible(true);
+				JLabel lblNewLabel = new JLabel("New label");
+				lblNewLabel.setBounds(236, 90, 46, 14);
+				info.getContentPane().add(lblNewLabel);
+				setBounds(100, 100, 450, 416);
+				info.getBtnColorPaliLocation().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							moveCursor(paliColectLocate);
+						} catch (AWTException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+				info.getBtnLeftColorView().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							moveCursor(leftColorLocation);
+						} catch (AWTException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+				info.getBtnRightColorView().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							moveCursor(rightColorLocation);
+						} catch (AWTException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		mnEditor.add(mntmShowInfo);
+		getBtnStartBot_1().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				findMap();
+				 Timer timer = new Timer();
+                 timer.schedule(new SayHello(), 0, 1000);
+                 
+                 Robot rob;
+				try {
+					rob = new Robot();
+					leftcolorsearch =rob.getPixelColor(leftColorLocation.x,leftColorLocation.y);
+					rightcolorsearch = rob.getPixelColor(rightColorLocation.x, rightColorLocation.y);
+					
+					
+					rightcolorsearch =mapColorset(rightcolorsearch);
+					leftcolorsearch=mapColorset(leftcolorsearch);
+					
+					
+					info.getLblColorToSearch().setText(leftcolorsearch.toString());
+					info.getLblColorToSearch_1().setText(rightcolorsearch.toString());
+				} catch (AWTException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                 
+			}
+		});
+		getBtnStartBot().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+	}
+	private Color mapColorset(Color color){
+		if(color.getRed()==7){
+			color = new Color(70,70,70,255);
+		}else {
+			color=new Color(88,88,88, 255);
+		}
+		return color;
+	}
+	private Point mapLocate = new Point();
+	private Color mapColor = new Color(153 ,204 , 255,255);
+	private BufferedImage image1;
+	public void findMap(){
+		try {
+			Robot rob = new Robot();
+			
+		     image1= rob.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+		    
+		   
+            searchImage(image1);
+            
+		   leftColorLocation=new Point(mapLocate.x+leftX, mapLocate.y+180);
+		   rightColorLocation=new Point(mapLocate.x+rightX, mapLocate.y+180);
+		} catch (AWTException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	public void moveCursor(Point p) throws AWTException{
+		Robot rob;
+		
+			rob = new Robot();
+			rob.mouseMove(p.x, p.y);
+		
+			// TODO Auto-generated catch block
+			
+		
+		
+	}
+	private Point healthBarPoint = new Point();
+	private Color shipHealth = new Color(137,219,131);
+	boolean paliTxtFound=false;
+	public void searchPaliText() throws AWTException{
+		Robot rob;
+		
+		if(paliTxtFound){
+		}else{
+			rob = new Robot();
+			image1= rob.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+		
+		
+		 outloop:for (int y = 0; y < 400; y++) {
+             for (int x = (screenWidth/2)-200; x < (screenWidth/2)+200; x++) {
+            	
+                 Color col = new Color(image1.getRGB(x,y)); 
+                 if(paliCSearch.equals(col)){
+                	 col = new Color(image1.getRGB(x+116,y));
+                	 if(paliCSearch.equals(col)){
+                		 playResourcesound("/sounds/pallie.wav");
+                		 paliColectLocate=new Point(x,y);
+                		
+                		 paliTxtFound=true;
+                		 break outloop;
+                	 }
+                 }
+             }
+            	 
+            };
+		}
+	}
+	private Point mapBotomCorner= new Point();
+	public void searchImage(BufferedImage image1) throws AWTException{
+		
+		Boolean mapfound = false;
+		Boolean healthfound = false;
+		int ms=1;
+		int ms1=1;
+		 for (int y = 0; y < image1.getHeight(); y++) {
+             for (int x = 0; x < image1.getWidth(); x++) {
+               int c = image1.getRGB(x,y);
+               Color col = new Color(c);
+               if (mapfound){
+            	   if(ms1==5){
+            		   moveCursor(mapLocate);
+            	   playResourcesound("/sounds/maplocated.wav");
+            	   ms1=10;
+            	   }
+            	   
+               }else{
+                if (col.equals(mapColor)) {
+                	mapLocate= new Point(x,y);
+                	mapfound = true;
+                	
+                	ms1=5;
+                	
+                 }
+               }
+               if(col.equals(new Color(133,133,133))){
+            	   mapBotomCorner=new Point(x-mapLocate.x,y-mapLocate.y);
+            	   System.out.println(mapBotomCorner);
+               }
+               if (healthfound){
+            	   if(ms==5){
+            		   
+            	   playResourcesound("/sounds/health.wav");
+            	   ms=10;
+            	   }
+               }else{
+                if (col.equals(shipHealth)) {
+                	healthBarPoint= new Point(x,y);
+                	healthfound = true;
+                	moveCursor(healthBarPoint);
+                	
+                    	ms=5;
+                    	
+                	
+                 }
+               }
+                //Color colo = rob.getPixelColor(20, 20);
+             }
+		 }
+	}
+	private void playResourcesound(String resource){
+	 try {
+	     URL defaultSound = getClass().getResource(resource);
+	     
+	     
+	     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(defaultSound);
+	     Clip clip = AudioSystem.getClip();
+	     clip.open(audioInputStream);
+	     clip.start( );
+	     Thread.sleep(clip.getMicrosecondLength()/1000);
+	} catch (Exception ex) {
+		
+	     ex.printStackTrace();
+	}
+	}
+	private int wate =0;
+	public void leftClick() throws AWTException{
+		
+			rightButtonClk(mapLocate.x+leftX, mapLocate.y+distFromClowd);
+			
+	}
+	public void senterClickleft() throws AWTException{
+		rightButtonClk((screenWidth/2)-400, screenheight/2);
+		
+	}
+	public void senterClickright() throws AWTException{
+		rightButtonClk((screenWidth/2)+400, screenheight/2);
+		
+	}
+	public void rightClick() throws AWTException{
+		
+		rightButtonClk(mapLocate.x+rightX, mapLocate.y+distFromClowd);
+		
+	}
+	int distFromClowd=214;
+	private void rightButtonClk(int x,int y) throws AWTException{
+		Robot rob;
+		
+			rob = new Robot();
+			rob.mouseMove(x, y);
+			rob.mousePress(InputEvent.BUTTON1_MASK);
+		    rob.mouseRelease(InputEvent.BUTTON1_MASK);
+			
+		
+	}
+	private Boolean rightbool = true;
+	private int rightX= 260;
+	private int leftX= 116;
+	private int screenWidth=0;
+	private int screenheight=0;
+	private Color paliCSearch = new Color(254,254,254, 255);
+	private void getScreansize(){
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		 screenWidth = gd.getDisplayMode().getWidth();
+		 screenheight = gd.getDisplayMode().getHeight();
+	}
+			private Point paliColectLocate=new Point();
+	class SayHello extends TimerTask {
+	    public void run() {
+	       Robot rob;
+	       
+		try {
+			rob = new Robot();
+			Color colo = rob.getPixelColor(leftColorLocation.x, leftColorLocation.y);
+			Color colo2 = rob.getPixelColor(rightColorLocation.x, rightColorLocation.y);
+			
+			Color palicolected = rob.getPixelColor(paliColectLocate.x, paliColectLocate.y);
+			searchPaliText();
+			 info.getLblLeftcolorviewerlbl().setText("location="+leftColorLocation.toString()+"color="+colo.toString());
+			 info.getLblRightcolorviewerlbl().setText("location="+rightColorLocation.toString()+"color="+colo2.toString());
+			 info.getLblPalliecolectviewerlbl().setText("location="+paliColectLocate.toString()+"color="+palicolected.toString());
+			
+			 if(colo.equals(leftcolorsearch )){
+				rightClick();
+				rightbool=true;
+			}
+			
+			if(colo2.equals(rightcolorsearch)){
+				leftClick();
+				rightbool=false;
+			}
+			if(palicolected.equals(paliCSearch)){
+				if(wate>5){
+					if(rightbool){
+				senterClickleft();
+					}else{
+						senterClickright();
+						
+					}
+				}
+				wate=0;
+				wate++;
+				if(wate==4){
+					if(rightbool){
+				senterClickleft();
+					}else{
+						senterClickright();
+						
+					}
+				}
+				wate=0;
+			}
+			
+			if(wate ==5){
+				if(rightbool){
+					rightClick();
+					
+				}else{
+					leftClick();
+				}
+				
+			}
+			wate++;
+			if(wate == 1000){
+				Runtime r=Runtime.getRuntime();
+				 try {
+					r.exec("shutdown -h");
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
+				this.cancel();
+			}
+				
+			
+		} catch (AWTException e) {
+			
+			e.printStackTrace();
+		}
+	      
+	    }
+	}
+}

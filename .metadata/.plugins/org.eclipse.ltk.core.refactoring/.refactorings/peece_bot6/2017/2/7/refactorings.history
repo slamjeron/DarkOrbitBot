@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;peece_bot6/src/lookAtMap2&apos; to &apos;GuiForBot&apos;" description="Rename resource &apos;lookAtMap2&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/lookAtMap2" name="GuiForBot" stamp="1487113662586" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;peece_bot6/src/GuiForBot&apos; to &apos;guiForBot&apos;" description="Rename resource &apos;GuiForBot&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/GuiForBot" name="guiForBot" stamp="1487113811036" updateReferences="true"/>
+</session>

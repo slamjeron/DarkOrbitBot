@@ -1,0 +1,62 @@
+package move_colect;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
+import java.awt.Color;
+
+public class Image_pane extends JPanel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public Image_pane(String imglocal) {
+		setBackground(Color.BLACK);;
+		setLayout(null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 0, 0, 89);
+		add(panel_1);
+		panel_1.setLayout(new SpringLayout());
+		
+		try {
+            image = ImageIO.read(getClass().getResource(imglocal));
+        } catch (IOException ex) {
+            
+        }
+		
+	}
+	BufferedImage image;
+    
+ 
+	
+	ArrayList<String> tags = new ArrayList<String>();
+	@Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+       
+        float rateX =  (float)this.getWidth()/(float)image.getWidth();
+        float rateY = (float)this.getHeight()/(float)image.getHeight();
+        if (rateX>rateY){
+            int W=(int)(image.getWidth()*rateY);
+            int H=(int)(image.getHeight()*rateY);
+            int x = (this.getWidth() -  W) / 2;
+            int y = (this.getHeight() - H) / 2;
+            g.drawImage(image, x, y,W,H, null);
+        }
+        else{
+            int W=(int)(image.getWidth()*rateX);
+            int H=(int)(image.getHeight()*rateX);
+            int x = (this.getWidth() -  W) / 2;
+            int y = (this.getHeight() - H) / 2;
+            g.drawImage(image, x, y,W,H, null);
+        }
+
+    }
+}

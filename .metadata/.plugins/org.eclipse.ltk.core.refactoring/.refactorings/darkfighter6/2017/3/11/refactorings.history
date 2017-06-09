@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;darkfighter/src/fighting/pixelSearch/ToolBar&apos; to &apos;pet&apos;" description="Rename resource &apos;ToolBar&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/fighting/pixelSearch/ToolBar" name="pet" stamp="1489762682991" updateReferences="true"/>
+</session>

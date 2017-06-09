@@ -1,0 +1,71 @@
+package Allimg_file;
+
+
+import java.awt.EventQueue;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.SpringLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+
+import net.miginfocom.swing.MigLayout;
+import net.miginfocom.swing.SwingComponentWrapper;
+import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
+
+public class File_image_to_background extends Image_wrap {
+	private static final long serialVersionUID = 1L;
+	/*
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					File_image_to_background frame = new File_image_to_background();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+      
+	/**
+	 * Create the frame.
+	 */
+	public File_image_to_background() {
+		SpringLayout springLayout = (SpringLayout) getContentPane().getLayout();
+		getBtnShowPictures().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
+		
+		
+	}
+}

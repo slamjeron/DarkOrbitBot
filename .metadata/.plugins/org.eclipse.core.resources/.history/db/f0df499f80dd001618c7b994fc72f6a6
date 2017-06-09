@@ -1,0 +1,63 @@
+package epic;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class BestColoecter {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BestColoecter window = new BestColoecter();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public BestColoecter() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JButton btnStartColecting = new JButton("start colecting");
+		btnStartColecting.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				colect();
+			}
+
+			
+		});
+		btnStartColecting.setBounds(120, 191, 147, 23);
+		frame.getContentPane().add(btnStartColecting);
+	}
+	BestColectClass colect= new BestColectClass();
+	private void colect() {
+		colect.colectEach10(20);
+		
+	}
+	
+}

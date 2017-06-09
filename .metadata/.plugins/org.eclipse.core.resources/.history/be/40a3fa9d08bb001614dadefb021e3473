@@ -1,0 +1,137 @@
+package pages;
+
+import static java.lang.System.out;
+
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import actions.Create_NTask;
+import actions.Open_Userinfo;
+import actions.Save_habitinfo;
+public class TestFrame {
+
+	private JFrame frame;
+	private JMenuItem mntmOpen;
+	private JMenuItem mntmSave;
+	private Taskeditor_add_date taskdate;
+	private Tag_Panel tag_Panel;
+	private Top_Page_Edit top_Page_Edit;
+	private JMenuItem mntmReset;
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TestFrame window = new TestFrame();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	public TestFrame() {
+		Menue();
+		AllButMenue();
+		menueActions();
+		contentActions();
+	}
+	private Create_NTask creatTask=new Create_NTask();
+	private Save_habitinfo save = new Save_habitinfo();
+	private void Menue() {
+		Open_Userinfo openui= new Open_Userinfo();
+		openui.open_users();
+		openui.open_tasks();
+		
+		
+		frame = new JFrame();
+		frame.setMinimumSize(new Dimension(0, 300));
+		frame.setBounds(100, 100, 333, 353);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		JMenu mnNewMenu = new JMenu("File");
+		menuBar.add(mnNewMenu);
+		mntmSave = new JMenuItem("Save");
+		
+		mnNewMenu.add(mntmSave);
+		mntmReset = new JMenuItem("reset");
+		
+		
+		mntmOpen = new JMenuItem("open");
+		
+		mnNewMenu.add(mntmOpen);
+		mnNewMenu.add(mntmReset);
+		frame.getContentPane().setLayout(null);
+		
+		
+	}
+	private void menueActions() {
+		mntmSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				save.save();
+			}
+		});
+		mntmOpen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		mntmReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				creatTask.deleatalltasks();
+			}
+		});
+		
+	}
+	private void AllButMenue() {
+		top_Page_Edit = new Top_Page_Edit();
+		top_Page_Edit.setBounds(10, 27, 301, 35);
+		frame.getContentPane().add(top_Page_Edit);
+		taskdate = new Taskeditor_add_date();
+		taskdate.setBounds(10, 75, 301, 189);
+		frame.getContentPane().add(taskdate);
+		tag_Panel = new Tag_Panel();
+		
+		
+		tag_Panel.setVisible(false);
+		
+		tag_Panel.setBounds(33, 58, 256, 225);
+		frame.getContentPane().add(tag_Panel);
+	}
+	private void contentActions() {
+		out.println("hi");
+		top_Page_Edit.getBtnSelectTags().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(tag_Panel.isVisible()){
+				tag_Panel.setVisible(true);
+				taskdate.setLocation(taskdate.getX(), taskdate.getY()+200);
+				Dimension d = frame.getMinimumSize();
+				frame.setMinimumSize(new Dimension(( d.width),d.height+200) );
+				}
+			}
+		});
+		tag_Panel.btnNewTag.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		taskdate.getnewTaskbtn().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		tag_Panel.btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!tag_Panel.isVisible()){
+					tag_Panel.setVisible(false);
+					taskdate.setLocation(taskdate.getX(), taskdate.getY()-200);
+					}
+			}
+		});
+	}
+}

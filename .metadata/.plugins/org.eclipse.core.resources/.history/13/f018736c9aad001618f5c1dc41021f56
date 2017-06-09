@@ -1,0 +1,62 @@
+package habit_monster;
+
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JCheckBox;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JTextPane;
+
+public class Taskpanel extends JPanel {
+
+	private static final long serialVersionUID = 1L;
+	Task_Panel_Actions actions = new Task_Panel_Actions();
+	
+	public Taskpanel() {
+		setBackground( new Color(0, 0, 255, 100) );
+		setLayout(null);
+		
+		JCheckBox chckbxTaskcb = new JCheckBox("task_cb");
+		chckbxTaskcb.setFont(new Font("Tahoma", Font.BOLD, 14));
+		chckbxTaskcb.setForeground(Color.WHITE);
+		chckbxTaskcb.setOpaque(false);
+		chckbxTaskcb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actions.Task();
+			}
+		});
+		chckbxTaskcb.setBounds(38, 47, 21, 23);
+		add(chckbxTaskcb);
+		
+		JButton btnEdit = new JButton("edit");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actions.Edit_tsk();
+			}
+		});
+		
+		btnEdit.setBounds(362, 11, 89, 23);
+		add(btnEdit);
+		
+		JButton btnTags = new JButton("tags");
+		btnTags.setBounds(276, 11, 76, 23);
+		add(btnTags);
+		
+		JTextPane txtpnDoseThisWork = new JTextPane();
+		txtpnDoseThisWork.setToolTipText("size");
+		txtpnDoseThisWork.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtpnDoseThisWork.setForeground(Color.WHITE);
+		txtpnDoseThisWork.setOpaque(false);
+		txtpnDoseThisWork.setText("dose this work this is jeron i like to play chess");
+		txtpnDoseThisWork.setBounds(61, 33, 318, 52);
+		add(txtpnDoseThisWork);
+		
+		
+		
+
+	}
+}

@@ -1,0 +1,91 @@
+package pages;
+
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import java.awt.event.ActionListener;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import actions.Create_NTask;
+import actions.HabitVarStorig;
+import actions.Open_Userinfo;
+import actions.Save_habitinfo;
+import javax.swing.JMenuItem;
+import static java.lang.System.out;
+public class TestFrame {
+
+	private JFrame frame;
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TestFrame window = new TestFrame();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	public TestFrame() {
+		Menue();
+		AllButMenue();
+	}
+	private void Menue() {
+		Open_Userinfo openui= new Open_Userinfo();
+		openui.open_users();
+		openui.open_tasks();
+		Create_NTask creatTask=new Create_NTask();
+		
+		frame = new JFrame();
+		frame.setBounds(100, 100, 333, 574);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Save_habitinfo save = new Save_habitinfo();
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		JMenu mnNewMenu = new JMenu("File");
+		menuBar.add(mnNewMenu);
+		JMenuItem mntmSave = new JMenuItem("Save");
+		mntmSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				save.save();
+			}
+		});
+		mnNewMenu.add(mntmSave);
+		JMenuItem mntmReset = new JMenuItem("reset");
+		mntmReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				creatTask.deleatalltasks();
+			}
+		});
+		mnNewMenu.add(mntmReset);
+		frame.getContentPane().setLayout(null);
+		
+		
+	}
+	private void AllButMenue() {
+		Taskeditor_add_date taskdate = new Taskeditor_add_date();
+		taskdate.setBounds(10, 75, 301, 189);
+		frame.getContentPane().add(taskdate);
+		
+		Top_Page_Edit top_Page_Edit = new Top_Page_Edit();
+		top_Page_Edit.getBtnSelectTags().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		top_Page_Edit.setBounds(10, 27, 301, 35);
+		frame.getContentPane().add(top_Page_Edit);
+		
+		Tag_Panel tag_Panel = new Tag_Panel();
+		tag_Panel.setVisible(false);
+		tag_Panel.btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		tag_Panel.setBounds(33, 58, 256, 225);
+		frame.getContentPane().add(tag_Panel);
+		HabitVarStorig.getCurintdate();
+	}
+}

@@ -1,0 +1,148 @@
+package move_colect;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JLabel;
+
+public class Image_Btns extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JButton btnStartBot;
+	private JButton btnStartBot_1;
+	private JLabel lblRightColor;
+	private JLabel lblWereShip;
+	private JLabel lblMap;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Image_Btns frame = new Image_Btns();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Image_Btns() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		Image_pane image_pane = new Image_pane("/images/reaper.jpg");
+		contentPane.add(image_pane);
+		image_pane.setLayout(null);
+		
+		btnStartBot = new JButton("Stop Bot");
+		btnStartBot.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnStartBot.setForeground(Color.WHITE);
+		btnStartBot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnStartBot.setOpaque(false);
+		btnStartBot.setContentAreaFilled(false);
+		btnStartBot.setBorderPainted(false);
+		try {
+			btnStartBot.setIcon(new ImageIcon(getScaledImage(ImageIO.read(getClass().getResource("/images/stop-button-black-clip-art.png")),50,50)));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		btnStartBot.setBounds(64, 181, 195, 52);
+		image_pane.add(btnStartBot);
+		
+		btnStartBot_1 = new JButton("Start Bot");
+		btnStartBot_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnStartBot_1.setForeground(Color.WHITE);
+		try {
+			btnStartBot_1.setIcon(new ImageIcon(getScaledImage(ImageIO.read(getClass().getResource("/images/robot1.png")),80,80)));
+			btnStartBot_1.setBounds(64, 118, 195, 52);
+			image_pane.add(btnStartBot_1);
+			btnStartBot_1.setOpaque(false);
+			btnStartBot_1.setContentAreaFilled(false);
+			btnStartBot_1.setBorderPainted(false);
+			
+			lblRightColor = new JLabel("right color");
+			lblRightColor.setForeground(Color.WHITE);
+			lblRightColor.setBounds(127, 267, 96, 14);
+			image_pane.add(lblRightColor);
+			
+			lblWereShip = new JLabel("were ship");
+			lblWereShip.setForeground(Color.WHITE);
+			lblWereShip.setBounds(127, 229, 46, 14);
+			image_pane.add(lblWereShip);
+			
+			lblMap = new JLabel("map");
+			lblMap.setForeground(Color.WHITE);
+			lblMap.setBounds(127, 295, 46, 14);
+			image_pane.add(lblMap);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	private BufferedImage getScaledImage(BufferedImage src, int w, int h){
+	    int finalw = w;
+	    int finalh = h;
+	    double factor = 1.0d;
+	    if(src.getWidth() > src.getHeight()){
+	        factor = ((double)src.getHeight()/(double)src.getWidth());
+	        finalh = (int)(finalw * factor);                
+	    }else{
+	        factor = ((double)src.getWidth()/(double)src.getHeight());
+	        finalw = (int)(finalh * factor);
+	    }   
+
+	    BufferedImage resizedImg = new BufferedImage(finalw, finalh, BufferedImage.TRANSLUCENT);
+	    Graphics2D g2 = resizedImg.createGraphics();
+	    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+	    g2.drawImage(src, 0, 0, finalw, finalh, null);
+	    g2.dispose();
+	    return resizedImg;
+	}
+	public JButton getBtnStartBot() {
+		return btnStartBot;
+	}
+	public JButton getBtnStartBot_1() {
+		return btnStartBot_1;
+	}
+	public JLabel getLblRightColor() {
+		return lblRightColor;
+	}
+	public JLabel getLblWereShip() {
+		return lblWereShip;
+	}
+	public JLabel getLblMap() {
+		return lblMap;
+	}
+}

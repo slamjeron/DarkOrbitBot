@@ -1,0 +1,80 @@
+package habit_monster;
+
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JCheckBox;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+
+import javax.swing.JTextPane;
+import java.awt.BorderLayout;
+
+public class Taskpanel extends JPanel {
+
+	private static final long serialVersionUID = 1L;
+	Task_Panel_Actions actions = new Task_Panel_Actions();
+	
+	public Taskpanel() {
+		setOpaque(false);
+		setLayout(new BorderLayout(0, 0));
+		JPanel panel = new JPanel()
+		{
+		   
+			private static final long serialVersionUID = 1L;
+
+			protected void paintComponent(Graphics g)
+		    {
+		        g.setColor( getBackground() );
+		        g.fillRect(0, 0, getWidth(), getHeight());
+		        super.paintComponent(g);
+		    }
+		};
+		panel.setOpaque(false);
+		panel.setBackground( new Color(0, 0, 255, 100) );
+		add(panel);
+		panel.setLayout(null);
+		
+		JCheckBox chckbxTaskcb = new JCheckBox("task_cb");
+		chckbxTaskcb.setFont(new Font("Tahoma", Font.BOLD, 14));
+		chckbxTaskcb.setForeground(Color.WHITE);
+		chckbxTaskcb.setOpaque(false);
+		chckbxTaskcb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actions.Task();
+			}
+		});
+		chckbxTaskcb.setBounds(38, 47, 21, 23);
+		panel.add(chckbxTaskcb);
+		
+		JButton btnEdit = new JButton("edit");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actions.Edit_tsk();
+			}
+		});
+		
+		btnEdit.setBounds(362, 11, 89, 23);
+		panel.add(btnEdit);
+		
+		JButton btnTags = new JButton("tags");
+		btnTags.setBounds(276, 11, 76, 23);
+		panel.add(btnTags);
+		
+		JTextPane txtpnDoseThisWork = new JTextPane();
+		txtpnDoseThisWork.setToolTipText("size");
+		txtpnDoseThisWork.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtpnDoseThisWork.setForeground(Color.WHITE);
+		txtpnDoseThisWork.setOpaque(false);
+		txtpnDoseThisWork.setText("dose this work this is jeron i like to play chess saflksdlkfalsdfka fjeof fjasfd fasdlkfads ");
+		txtpnDoseThisWork.setBounds(61, 33, 318, 52);
+		panel.add(txtpnDoseThisWork);
+		
+		
+		
+
+	}
+}

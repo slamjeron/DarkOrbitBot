@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;TestFrame.java&apos; to &apos;habit_monster build parts/src/pages&apos;&#x0D;&#x0A;- Original project: &apos;habit_monster3.1&apos;&#x0D;&#x0A;- Destination element: &apos;habit_monster build parts/src/pages&apos;&#x0D;&#x0A;- Original element: &apos;pages.TestFrame.java&apos;" description="Copy compilation unit" destination="=habit_monster build parts/src&lt;pages" element1="/src&lt;pages{TestFrame.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1481043217926" units="1" version="1.0"/>
+</session>

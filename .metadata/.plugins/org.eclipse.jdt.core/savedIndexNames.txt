@@ -1,0 +1,2 @@
+INDEX VERSION 1.130+C:\Users\slamj\Documents\GitHub\DarkOrbitBot\DarkOrbitBot\.metadata\.plugins\org.eclipse.jdt.core
+1805556766.index

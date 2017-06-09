@@ -1,0 +1,42 @@
+package Ulcode;
+
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+
+public class GatherInfo extends TimerKeeper{
+	
+	public void findAll(){
+		BufferedImage image = colimg.screanImage(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+		
+		
+		
+		for (int y = 200; y < image.getHeight(); y++) {
+		    for (int x = 0; x < image.getWidth(); x++) {
+		    	if(x==(image.getWidth()/2)-200){
+		    		x+=300;
+		    	}
+		    	getStats(new Color (image.getRGB(x, y)),new Point(x,y), image.getHeight());
+		    	
+		    	//pet.findePet( new Color (image.getRGB(x, y)),new Point(x,y));
+		    	if(new Color (image.getRGB(x, y)).getRed()>200){
+		    		if(!shipStatsFound){
+		    	getStats(new Color (image.getRGB(x, y)),new Point(x,y));
+		    		}
+		    	if(!petfound){
+		    	findePet( new Color (image.getRGB(x, y)),new Point(x,y));
+		    	}
+		    	}
+		    	
+		    
+		    }
+		}
+		
+		//pall.startSearching();
+		
+	}
+	
+	
+}

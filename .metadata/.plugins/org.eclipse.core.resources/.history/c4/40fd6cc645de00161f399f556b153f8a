@@ -1,0 +1,176 @@
+package startPet;
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.Point;
+import java.awt.Rectangle;
+
+import javax.swing.JFrame;
+
+import allUseMethods.Shard_methods;
+
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.awt.event.ActionEvent;
+
+public class Startpet {
+	Robot robot;
+	
+	private BufferedImage image1;
+	private Timer timer= new Timer();
+	
+		
+	private Shard_methods cursor= new Shard_methods();
+	public void petStartColecting(){
+		 movePet=true;
+		 timer.schedule(new SayHello(), 0, 300);
+		
+	}
+	
+	public void findPet() throws AWTException{
+		robot=new Robot();
+		 image1= robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+		    
+         
+         	petfound= false;
+				searchImage(image1);
+				
+	}
+	public void findPetTest() throws AWTException{
+		robot=new Robot();
+		 image1= robot.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+		    
+         
+         	petfound= false;
+				searchImage(image1);
+				
+					cursor.moveCursor(petSelect3);
+				
+			
+	}
+	public Point petStart=new Point(100,100);
+	private Point petSelect;
+	private Point petSelect3;
+	private boolean petfound;
+	private Point petlocation;
+	private Point shieldLoctation;
+	private Point petSelect2;
+	private Point petSelect4;
+	public boolean movePet;
+
+	private int petmovenum;;
+	public void searchImage(BufferedImage image1) throws AWTException{
+		 
+		
+		 for (int y = 0; y < image1.getHeight(); y++) {
+            for (int x = 0; x < image1.getWidth(); x++) {
+              int c = image1.getRGB(x,y);
+              Color col = new Color(c);
+              if(!petfound){
+               if (col.equals(new Color(0,255,0))&&new Color( image1.getRGB(x+1,y)).getGreen()<100) {
+            	   setpetpoints(x,y);
+                   //System.out.println(petlocation);
+                }
+              }
+               //Color colo = rob.getPixelColor(20, 20);
+            }
+		 }
+	}
+	public BufferedImage petDropDown;
+	private void setpetpoints(int x,int y) throws AWTException{
+       	petlocation=new Point(x,y);
+       
+       
+       	shieldLoctation=new Point(x,y+20);
+       	petStart=new Point(x-100,y+56);
+       	petSelect=new Point(x+87,y+60);
+       	petSelect2=new Point(x+87,y+56+23);
+       	findPetDropdown(x,y);
+       	Color ColorAutoColect = new Color(211,148,1);
+       	//then the petSelect3 = the location of the auto collect
+       	petSelect4=new Point(x+87,y+56+23+12+13);
+       	petfound=true;
+	}
+	//48,227,38
+	
+	public void startPet() throws AWTException{
+		if(movePet){
+		if(petmovenum==1){
+			cursor.rightButtonClk(petStart);
+			}
+			if(petmovenum==5){
+				cursor.rightButtonClk(petSelect);
+				
+			}
+			if(petmovenum==10){
+				cursor.rightButtonClk(petSelect3);
+				petmovenum=0;
+				movePet= false;
+			}
+			petmovenum++;
+		}
+	}
+	public void findPetDropdown(int x,int y) throws AWTException{
+		//click the pet drop down
+       	cursor.rightButtonClk(petSelect);
+       	//get an image of the pet drop down
+       	Point pointRectStart = new Point(x-26,y+130);
+       	robot.delay(500);
+       	petDropDown = robot.createScreenCapture(new 
+       			Rectangle(pointRectStart.x,pointRectStart.y,28,150));
+       	//then search for the pet auto collect
+       outLoop:	for (int schy = 0; schy < 149; schy++) {
+            for (int schx = 0; schx < 27; schx++) {
+             Color petDropPix =new Color(petDropDown.getRGB(schx, schy));
+             Point p = new Point(schx,schy);
+             System.out.println(p);
+             if(schy==148){
+            	 
+            	 petSelect3 =new Point (pointRectStart.x+p.x+5,pointRectStart.y+p.y+6);
+            	 break outLoop;
+             }
+            
+             //look for orange 
+             if(petDropPix.equals(new Color (255,179,0))){
+            	 if(new Color(petDropDown.getRGB
+            			 (schx+6, schy+5)).equals(new Color (255,179,0))){
+            		 
+            		 Color othergold = new Color(petDropDown.getRGB
+                			 (schx-7, schy+4));
+            		 System.out.println(othergold);
+            		 if(othergold.equals(new Color(152,111,15))){
+            			 othergold = new Color(petDropDown.getRGB
+                    			 (schx-6, schy+4));
+            			 System.out.println(othergold);
+            		if(othergold.equals(new Color(221,156,4))){
+            	   cursor.rightButtonClk(new Point (pointRectStart.x+p.x,pointRectStart.y+p.y));
+            	   petSelect3 =new Point (pointRectStart.x+p.x+5,pointRectStart.y+p.y+6);
+            	   
+            	   System.out.println("finished");
+                   break outLoop;
+            		}
+            		 }
+            	 }
+             }
+            }
+            	   //-7,5 color (197,140,8)
+         }
+	}
+class SayHello extends TimerTask {
+		public void run() {
+			try {
+				startPet();
+			} catch (AWTException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	}
+	
+}

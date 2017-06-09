@@ -1,0 +1,117 @@
+package habit_monster;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import java.awt.Component;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+
+public class Image_pane extends JPanel {
+	public int y_locat = 30;
+	public Image_pane() {
+		JPanel panel = new JPanel();
+		panel.setOpaque(false);
+		panel.setBackground(Color.RED);
+		SpringLayout springLayout = new SpringLayout();
+		setLayout(springLayout);
+		
+		JButton btnNewTask = new JButton("new task");
+		springLayout.putConstraint(SpringLayout.SOUTH, btnNewTask, -28, SpringLayout.SOUTH, this);
+		springLayout.putConstraint(SpringLayout.EAST, btnNewTask, -37, SpringLayout.EAST, this);
+		btnNewTask.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				for(Component task: panel.getComponents() ){
+					task.setBounds(5, task.getY()+120 ,500, 100);
+				}
+				Taskpanel tpan = new Taskpanel();
+				tpan.setBounds(5, 30 ,500, 100);
+				panel.add(tpan);
+				y_locat =y_locat + 120;
+				panel.setPreferredSize(new Dimension(10, y_locat+100));
+				panel.revalidate();
+				panel.repaint();
+				
+			}
+		});
+		add(btnNewTask);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		springLayout.putConstraint(SpringLayout.NORTH, scrollPane, 13, SpringLayout.NORTH, this);
+		springLayout.putConstraint(SpringLayout.WEST, scrollPane, 10, SpringLayout.WEST, this);
+		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane, 18, SpringLayout.SOUTH, btnNewTask);
+		springLayout.putConstraint(SpringLayout.EAST, scrollPane, 558, SpringLayout.WEST, this);
+		scrollPane.setOpaque(false);
+		  scrollPane.getViewport().setOpaque(false);
+		    scrollPane.setBorder(null);
+		scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		add(scrollPane);
+		
+		
+		scrollPane.setViewportView(panel);
+		panel.setLayout(null);
+		
+		textField = new JTextField();
+		springLayout.putConstraint(SpringLayout.WEST, textField, -26, SpringLayout.WEST, btnNewTask);
+		springLayout.putConstraint(SpringLayout.SOUTH, textField, -6, SpringLayout.NORTH, btnNewTask);
+		springLayout.putConstraint(SpringLayout.EAST, textField, 0, SpringLayout.EAST, this);
+		add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNameOfTask = new JLabel("name of task");
+		springLayout.putConstraint(SpringLayout.SOUTH, lblNameOfTask, -6, SpringLayout.NORTH, textField);
+		springLayout.putConstraint(SpringLayout.EAST, lblNameOfTask, 0, SpringLayout.EAST, btnNewTask);
+		add(lblNameOfTask);
+		
+		
+		
+	}
+
+
+	
+	private static final long serialVersionUID = 1L;
+	BufferedImage image;
+	private JTextField textField;
+    {
+        try {
+            image = ImageIO.read(getClass().getResource("/habit_monster/anime_earth_warrior.jpg"));
+        } catch (IOException ex) {
+            Logger.getLogger(Task_Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+       
+        float rateX =  (float)this.getWidth()/(float)image.getWidth();
+        float rateY = (float)this.getHeight()/(float)image.getHeight();
+        if (rateX>rateY){
+            int W=(int)(image.getWidth()*rateY);
+            int H=(int)(image.getHeight()*rateY);
+            int x = (this.getWidth() -  W) / 2;
+            int y = (this.getHeight() - H) / 2;
+            g.drawImage(image, x, y,W,H, null);
+        }
+        else{
+            int W=(int)(image.getWidth()*rateX);
+            int H=(int)(image.getHeight()*rateX);
+            int x = (this.getWidth() -  W) / 2;
+            int y = (this.getHeight() - H) / 2;
+            g.drawImage(image, x, y,W,H, null);
+        }
+
+    }
+}

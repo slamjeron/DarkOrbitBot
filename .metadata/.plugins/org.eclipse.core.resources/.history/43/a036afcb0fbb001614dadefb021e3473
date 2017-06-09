@@ -1,0 +1,63 @@
+package pages;
+
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
+import java.awt.Dimension;
+
+
+public class Tag_Panel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField textField;
+
+	/**
+	 * Create the panel.
+	 */
+	public JPanel panel = new JPanel();
+	public JButton btnSave;
+	public JButton btnNewTag;
+	public Tag_Panel() {
+		
+		setLayout(null);
+		
+		
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 45, 213, 133);
+		add(scrollPane);
+		
+		
+		panel.setPreferredSize(new Dimension(20, 20));
+		scrollPane.setViewportView(panel);
+		panel.setLayout(null);
+		
+		
+		
+		
+		
+		textField = new JTextField();
+		textField.setBounds(91, 14, 142, 20);
+		add(textField);
+		textField.setColumns(10);
+		
+		btnNewTag = new JButton("new tag");
+		
+		btnNewTag.setBounds(10, 11, 71, 23);
+		add(btnNewTag);
+		
+		btnSave = new JButton("Save Select");
+		
+		btnSave.setBounds(66, 189, 89, 23);
+		add(btnSave);
+	}
+	
+	
+	public JTextField getTextField() {
+		return textField;
+	}
+}
