@@ -33,6 +33,7 @@ public class ColectingGui extends Timers{
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					//lets see what hapens
 				}
 			}
 		});
