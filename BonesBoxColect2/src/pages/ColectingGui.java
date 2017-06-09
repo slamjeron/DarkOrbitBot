@@ -1,28 +1,22 @@
 package pages;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Point;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import seeingComputer.StaticInfo;
 import takeAction.Timers;
-import takeAction.Translate;
 
 public class ColectingGui extends Timers{
 
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
