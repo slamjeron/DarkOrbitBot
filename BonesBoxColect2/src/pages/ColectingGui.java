@@ -1,8 +1,6 @@
 package pages;
 
 import java.awt.EventQueue;
-import java.awt.Point;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -44,7 +42,6 @@ public class ColectingGui extends Timers{
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private boolean start=true;
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 233, 135);
