@@ -26,10 +26,11 @@ public class Timers {
 	private boolean runing;
 	private Point shipPoint;
 	private boolean bclick=false;
-	private boolean shipHit;
-	private boolean run;
+	private boolean shipHit=false;
+	private boolean run=false;
 	private Point mapPnt;
 	private Travel travel=new Travel(stc.flylocate,runf);
+	private boolean start;
 	public void startSeeing(){
 		stc.search();
 		shipPoint=stc.map.keapshipLock();
@@ -38,15 +39,23 @@ public class Timers {
 		mapPnt=stc.map.getMappnt();
 		runf.setMapPnt(mapPnt);
 		travel.seeAthome();
-		System.out.println(travel.onHomescreen);
+		runf.resetRuning();
+		stc.shipstat.enimyonscreen();
+		run=false;
+		start=true;
+		//System.out.println(travel.onHomescreen);
+		//stc.imgcon.scipMap(22,22);
+		//begin=false;
 		if(begin){
 			//stc.petSt.petColecting();
 		timer.scheduleAtFixedRate (
 			    new TimerTask() {
+					
+
 					public void run() {
+						if(start){
 						if(!shipHit){
 						travel.flytoPvp();
-						
 						}
 						
 						travel.seeAthome();
@@ -55,8 +64,8 @@ public class Timers {
 							runf.setRun(false);
 						}
 						
-						if(!run&&!travel.traveling&&!travel.onHomescreen){
-								System.out.println("trying to colect");
+						if(!run&&!travel.traveling&&
+								!travel.onHomescreen){
 						colectingsetup();
 						bonesBox.findBonesBox(5, 20);
 						bonesBox.Cargoonship(1, 1);
@@ -71,16 +80,17 @@ public class Timers {
 							colecting=false;
 							if(run){
 							runf.setShipPoint(shipPoint);
-							runf.run();
 							}
 							
+						}
 						}
 			        	}}, 0, 1);
 		timer.scheduleAtFixedRate (
 			    new TimerTask() {
 					private int nm=0;
-					private boolean petHit;
+					
 					public void run() {
+						if(start){
 						stc.petSt.petmoniter();
 						if(!run&&!travel.traveling&&!travel.onHomescreen){
 						if(!bonesBox.cargoFound){
@@ -102,6 +112,7 @@ public class Timers {
 							nm=0;
 						}
 						}
+						}
 					}}, 0, 1);
 		
 			timer.scheduleAtFixedRate (
@@ -112,7 +123,7 @@ public class Timers {
 				
 
 				public void run() {
-					
+					if(start){
 					if(colecting){
 					colect.startPet();
 					colect.keepPetColoecting();
@@ -130,7 +141,7 @@ public class Timers {
 						}
 						if(tl==0){
 							dn++;
-							System.out.println("died "+dn+"time");
+							
 						}
 						tl++;
 					}else{
@@ -141,7 +152,7 @@ public class Timers {
 					
 					
 					boolean petHit=stc.petSt.petLesSH;
-					if(shipHit||petHit){
+					if(shipHit&&stc.shipstat.enimyonscreen()||petHit){
 					runf.setRun(true);
 					
 					}
@@ -149,10 +160,11 @@ public class Timers {
 					//System.out.println(runf.isRun());
 					run=runf.isRun();
 			if(run){
-				
-				runf.setShipPoint(shipPoint);
+				//runf.setShipPoint(shipPoint);
+				runf.run4_1(shipPoint);
 			}
 		        	}
+					}
 				}
 				}, 0, 1);
 		begin=false;
@@ -165,6 +177,37 @@ public class Timers {
 		}
 		
 	}
+	public void testruning(){
+		stc.search();
+		shipPoint=stc.map.keapshipLock();
+		colect.colect(shipPoint);
+		colect.stmove();
+		mapPnt=stc.map.getMappnt();
+		runf.setMapPnt(mapPnt);
+		travel.seeAthome();
+		//System.out.println(travel.onHomescreen);
+		runf.setRun(true);
+		//robUI.moveCursor(runf.mpPlesPnt(runf.cjumpgate2[2][0]));
+		
+		if(begin){
+			//stc.petSt.petColecting();
+			timer.scheduleAtFixedRate (
+			new TimerTask() {
+				public void run() {
+					shipPoint=stc.map.keapshipLock();
+					runf.run4_1(shipPoint);
+				}}, 0, 1);
+		begin=false;
+		
+		//shipPoint=stc.map.keapshipLock();
+		
+		
+		
+		
+		}
+		
+	}
+	
 	private void colectingsetup(){
 		shipPoint=stc.map.keapshipLock();
 		if(on1_1){
@@ -176,6 +219,7 @@ public class Timers {
 			}
 		}else{
 			if(runing){
+				System.out.println("trinng to run");
 			runAway();
 			}else{
 		colect.colect(shipPoint);
@@ -192,7 +236,7 @@ public class Timers {
 		// TODO Auto-generated method stub
 		stc.search();
 		stc.map.findgates();
-		
+		start=false;
 		
 		/*if(stc.petSt.petup){
 			if(n==1){

@@ -1,28 +1,24 @@
 package pages;
 
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Point;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import seeingComputer.StaticInfo;
 import takeAction.Timers;
-import takeAction.Translate;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
+import javax.swing.JCheckBox;
 
-public class ColectingGui extends Timers{
+public class ColectingGui {
 
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
+	Timers time=new Timers();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -50,10 +46,9 @@ public class ColectingGui extends Timers{
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private boolean start=true;
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 233, 135);
+		frame.setBounds(100, 100, 245, 171);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setAlwaysOnTop(true);
@@ -63,7 +58,7 @@ public class ColectingGui extends Timers{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//startBot();
-				startSeeing();
+				time.startSeeing();
 				//System.out.println(Color.BLACK);
 			}
 		});
@@ -74,12 +69,35 @@ public class ColectingGui extends Timers{
 		btnStop.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				stopPet();
-				
+				time.stopPet();
 			}
 		});
 		btnStop.setBounds(10, 45, 89, 23);
 		frame.getContentPane().add(btnStop);
+		
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				time.searcharea=comboBox.getSelectedIndex();
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"all map", "top map", "search map ", "auto"}));
+		comboBox.setSelectedIndex(0);
+		comboBox.setBounds(120, 46, 75, 20);
+		frame.getContentPane().add(comboBox);
+		
+		JLabel lblWhereSearch = new JLabel("where search");
+		lblWhereSearch.setBounds(120, 15, 75, 14);
+		frame.getContentPane().add(lblWhereSearch);
+		
+		JCheckBox chckCompleteAuto = new JCheckBox("compleat aughto");
+		chckCompleteAuto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				time.runf.nothear=chckCompleteAuto.isSelected();
+			}
+		});
+		chckCompleteAuto.setBounds(20, 75, 141, 23);
+		frame.getContentPane().add(chckCompleteAuto);
 		
 
 		JMenuBar menuBar = new JMenuBar();
@@ -103,6 +121,15 @@ public class ColectingGui extends Timers{
 
 		JMenuItem mntmDeterminIfDead = new JMenuItem("ded");
 		mnStartPart.add(mntmDeterminIfDead);
+		TestingInfo test = new TestingInfo(time);
+		JMenuItem mntmShowTestingPage = new JMenuItem("show testing page");
+		mntmShowTestingPage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				test.frame.setVisible(true);
+			}
+		});
+		mnFile.add(mntmShowTestingPage);
 		mntmDeterminIfDead.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

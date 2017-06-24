@@ -8,10 +8,14 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="petmoniter"/>
-			<item value="(49,171)"/>
-			<item value="new Point(214,172)"/>
-			<item value="204,204,204)"/>
+			<item value="11,7"/>
+			<item value="on1_1"/>
+			<item value="seeAthome"/>
+			<item value="keepToolActive"/>
+			<item value="64,112"/>
+			<item value="188,99"/>
+			<item value="39,191"/>
+			<item value="mapPnt.x+322,mapPnt.y+100"/>
 		</list>
 		<list key="replacehistory">
 		</list>
@@ -20,7 +24,7 @@
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="391" key="DIALOG_HEIGHT"/>
-		<item value="1411" key="DIALOG_X_ORIGIN"/>
-		<item value="489" key="DIALOG_Y_ORIGIN"/>
+		<item value="1040" key="DIALOG_X_ORIGIN"/>
+		<item value="419" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
