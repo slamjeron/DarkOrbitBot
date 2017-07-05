@@ -1,6 +1,9 @@
 package seeingComputer;
 
+<<<<<<< HEAD
 import java.awt.Color;
+=======
+>>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -16,6 +19,29 @@ public class mapinfo {
 		imgcon=i;
 		
 	}
+<<<<<<< HEAD
+=======
+	public boolean petnearShip(int width, int hight){
+		BufferedImage shimg = imgcon.screanImage(shipPoint.x-(width),
+				shipPoint.y-(hight)
+				, width*2, hight*2);
+		for (int y =0;y<shimg.getHeight(); y++){
+			for (int x =0;x<shimg.getWidth(); x++){
+				if(imgcon.pointEcolor(shimg, x, y, 204, 129, 0)){
+					
+					return true;
+				}
+			}	
+		}
+		return false;
+	}
+	public boolean moving(){
+		Point mpnt1 = new Point(mappnt.x+96,mappnt.y-10);
+		
+		return imgcon.pointEcolor(mpnt1, 255,255,255);
+		
+	}
+>>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	public Point findShip() {
 		int yLocation = getMappnt().y+18;
 		int xLocation = getMappnt().x+120;

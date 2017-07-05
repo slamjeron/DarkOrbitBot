@@ -14,7 +14,6 @@ public class mapinfo {
 	private int n;
 	public mapinfo( GetImage i) {
 		imgcon=i;
-		
 	}
 	public Point findShip() {
 		int yLocation = getMappnt().y+18;
@@ -52,7 +51,6 @@ public class mapinfo {
 		Point searchPoint = new Point(mappnt.x+10,mappnt.y+10);
 		BufferedImage mapImage;
 			mapImage=imgcon.screanImage(searchPoint, 360, 221);
-			
 			for (int y =0;y<mapImage.getHeight()-4; y++){
 				//System.out.println(y);
 			for (int x =0;x<mapImage.getWidth()-4; x++){

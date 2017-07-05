@@ -10,7 +10,7 @@
 </mappings>
 </org.eclipse.team.ui.MODEL_PARTICIPANT_MAPPINGS>
 </org.eclipse.team.ui.MODEL_PARTICIPANT_SETTINGS>
-<gitSynchronizeData container="C:/Users/slamj/Documents/GitHub/DarkOrbitBot/DarkOrbitBot/BonesBoxColect2" dstRev="HEAD" inludeLocal="true" srcRev="HEAD"/>
+<gitSynchronizeData container="C:/Users/slamj/Documents/GitHub/DarkOrbitBot/DarkOrbitBot/pointmath" dstRev="HEAD" inludeLocal="true" srcRev="HEAD"/>
 </data>
 </participant>
 </syncparticipants>

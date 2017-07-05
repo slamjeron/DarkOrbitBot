@@ -50,6 +50,7 @@ public void search(){
 	}
 	flylocate.setPoints(mappnt);
 }
+
 private void petStats(BufferedImage img, int x, int y) {
 	// TODO Auto-generated method stub
 	if (imgcon.pointEcolor(img,x,y,232,225,191)&&
@@ -88,7 +89,8 @@ private void MapPoint(BufferedImage img, int x, int y) {
 		mapf=true;
 		mappnt=new Point(x,y);
 		map.setMappnt(mappnt);
-		
+		System.out.println(mappnt);
+		imgcon.mapPoint = mappnt;
 	}
 	// TODO Auto-generated method stub
 	

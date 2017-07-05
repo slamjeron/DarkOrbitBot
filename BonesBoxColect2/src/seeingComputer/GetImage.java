@@ -9,10 +9,19 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 public class GetImage {
-	
+	public Point mapPoint;
 	private Rectangle screen=new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 	public final Point centerpt = new Point(screen.width/2,screen.height/2);
 	private Robot rob;
+	public boolean scipMap(int x,int y){
+		if(mapPoint.x>x||mapPoint.x+300<x||mapPoint.y>y||mapPoint.y+218<y){
+			//System.out.println("this is not the map"+x+mapPoint);
+			return true;
+		}else{
+			//System.out.println("this is the map"+x+mapPoint);
+			return false;
+		}
+	}
 	public GetImage() {
 		try {
 			rob=new Robot();

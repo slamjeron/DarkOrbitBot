@@ -10,12 +10,31 @@ public class ShipStatus {
 		// TODO Auto-generated constructor stub
 		this.imgcon=imgcon;
 	}
-	private Point stpt = new Point();
 	public Point hitPointsEnd= new Point();
 	public Point shieldEnd= new Point();
 	private GetImage imgcon;
 	protected Point cargofullP= new Point();
 	public Point repbtn;
+	public boolean enimyonscreen(){
+		BufferedImage scimg = imgcon.screanImage();
+		for (int y =100;y<scimg.getHeight(); y++){
+		for (int x =0;x<scimg.getWidth(); x++){
+			if(imgcon.scipMap(x,y)){
+				if(imgcon.pointEcolor(scimg,x,y,33,100,134)||
+						imgcon.pointEcolor(scimg,x,y,119,205,33)){
+					//System.out.println("enimy on screen");
+					//comcon.moveCursor(x,y);
+					return true;
+					
+				}
+			}else{
+				x+=300;
+			}
+			
+		}
+		}
+		return false;
+	}
 	public boolean shipDead(){
 		repbtn=new Point(imgcon.centerpt.x-87,imgcon.centerpt.y+201);
 		return(imgcon.pointEcolor(imgcon.centerpt.x-90,imgcon.centerpt.y+120,new Color(28,35,41))

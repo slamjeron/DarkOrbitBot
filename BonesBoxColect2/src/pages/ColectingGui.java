@@ -55,6 +55,7 @@ public class ColectingGui extends Timers{
 			public void actionPerformed(ActionEvent arg0) {
 				//startBot();
 				startSeeing();
+				//testruning();
 				//System.out.println(Color.BLACK);
 			}
 		});

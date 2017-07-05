@@ -15,6 +15,7 @@ private RunFromeEnimy runf;
 	public boolean traveling;
 	private boolean on1_1;
 	private boolean on2_1;
+<<<<<<< HEAD
 	public void seeAthome(){
 		on1_1=flylocate.on1_1();
 		 on2_1=flylocate.on2_1();
@@ -23,6 +24,24 @@ private RunFromeEnimy runf;
 				}else{
 					onHomescreen=true;
 				}
+=======
+	public int timeserch=0;
+	public void seeAthome(){
+		
+		if(timeserch>20){
+		on1_1=flylocate.on1_1();
+		 on2_1=flylocate.on2_1();
+		 if(!on1_1&&!on2_1){
+					onHomescreen=false;
+				}else{
+					onHomescreen=true;
+					//System.out.println("on the home screen");
+					
+				}
+		 timeserch=0;
+		}
+		timeserch++;
+>>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	}
 	public void flytoPvp(){
 		

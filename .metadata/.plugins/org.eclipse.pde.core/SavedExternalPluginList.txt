@@ -1,4 +1,4 @@
-# List of external plug-in models previously loaded. Timestamp: 1496514377046
+# List of external plug-in models previously loaded. Timestamp: 1499094542972
 file:/C:/Users/slamj/.p2/pool/plugins/ch.qos.logback.classic_1.0.7.v20121108-1250.jar
 file:/C:/Users/slamj/.p2/pool/plugins/ch.qos.logback.core_1.0.7.v20121108-1250.jar
 file:/C:/Users/slamj/.p2/pool/plugins/ch.qos.logback.slf4j_1.0.7.v201505121915.jar
@@ -123,11 +123,14 @@ file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.ecf.provider.filetransfer.http
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.ecf.provider.filetransfer.httpclient4.ssl_1.1.0.v20160823-2221.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.ecf.provider.filetransfer.ssl_1.0.0.v20160823-2221.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.ecf.ssl_1.2.0.v20160823-2221.jar
-file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit_4.6.1.201703071140-r.jar
-file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.core_4.6.1.201703071140-r.jar
-file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.doc_4.6.1.201703071140-r.jar
-file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.mylyn.ui_4.6.1.201703071140-r.jar
-file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.ui_4.6.1.201703071140-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.core_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.doc_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.gitflow_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.gitflow.ui_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.mylyn.ui_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.ui_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.ui.smartimport_4.7.1.201706071930-r.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.emf.common_2.12.0.v20160420-0247.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.emf.common.ui_2.11.0.v20160526-0356.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.emf.databinding_1.3.0.v20160526-0356.jar
@@ -232,8 +235,13 @@ file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jetty.util_9.3.9.v20160517.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jface_3.12.2.v20170113-2113.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jface.databinding_1.8.1.v20161026-1531.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jface.text_3.11.2.v20170220-1911.jar
-file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit_4.6.1.201703071140-r.jar
-file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit.archive_4.6.1.201703071140-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit.archive_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit.http.apache_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit.lfs_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit.lfs.server_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit.pgm_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit.ui_4.7.1.201706071930-r.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jsch.core_1.3.0.v20160422-1917.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jsch.ui_1.3.0.v20160323-1650.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.ltk.core.refactoring_3.7.0.v20160419-0705.jar
@@ -519,6 +527,7 @@ file:/C:/Users/slamj/.p2/pool/plugins/org.gradle.toolingapi_2.14.1.v201608311651
 file:/C:/Users/slamj/.p2/pool/plugins/org.hamcrest.core_1.3.0.v201303031735.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.jsoup_1.7.2.v201411291515.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.junit_4.12.0.v201504281640/
+file:/C:/Users/slamj/.p2/pool/plugins/org.kohsuke.args4j_2.0.21.v201301150030.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.objectweb.asm_5.0.1.v201404251740.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.objectweb.asm.tree_5.0.1.v201404251740.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.python.pydev_5.7.0.201704111357/
@@ -549,6 +558,13 @@ file:/C:/Users/slamj/.p2/pool/plugins/com.python.pydev.debug.source_5.7.0.201704
 file:/C:/Users/slamj/.p2/pool/plugins/com.python.pydev.fastparser.source_5.7.0.201704111357.jar
 file:/C:/Users/slamj/.p2/pool/plugins/com.python.pydev.refactoring.source_5.7.0.201704111357.jar
 file:/C:/Users/slamj/.p2/pool/plugins/com.python.pydev.source_5.7.0.201704111357.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.core.source_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.gitflow.source_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.gitflow.ui.source_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.mylyn.ui.source_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.egit.ui.source_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit.pgm.source_4.7.1.201706071930-r.jar
+file:/C:/Users/slamj/.p2/pool/plugins/org.eclipse.jgit.source_4.7.1.201706071930-r.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.python.pydev.ast.source_5.7.0.201704111357.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.python.pydev.core.source_5.7.0.201704111357.jar
 file:/C:/Users/slamj/.p2/pool/plugins/org.python.pydev.customizations.source_5.7.0.201704111357.jar
