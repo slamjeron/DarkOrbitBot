@@ -32,6 +32,15 @@ public class GetImage {
  			return cP.x;
  		}
  	}	
+	public boolean skipPnts(int x, int y,Rectangle[] rect){
+		for(Rectangle r: rect){
+			if(r.x<x&&r.y<y&&r.x>x+r.width
+					&&r.y>y+r.height){
+				return true;
+			}
+		}
+		return false;
+	}
  	private Point[] sortpnt(Point p,Point p2){
  		int bigy;
  		int smally;
