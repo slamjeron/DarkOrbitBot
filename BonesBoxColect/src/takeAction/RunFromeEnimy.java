@@ -41,11 +41,11 @@ public class RunFromeEnimy {
 		if(mnum<size){
 			jumpgate(cjumpgate2[gate[mnum][0]][gate[mnum][1]],
 					cjumpgate2[gate[mnum+1][0]][gate[mnum+1][1]]);
-			if(rnum==2){
+			if(rnum==3){
 				rnum=0;
 			mnum+=2;
 			}
-			System.out.println(mnum);
+			//System.out.println(mnum);
 			moving=true;
 		}else{
 			if(moving){
@@ -124,17 +124,21 @@ public class RunFromeEnimy {
 		return new Point(mapPnt.x+p.x,mapPnt.y+p.y);
 	}
 	public int mnum=0;
-	private int rnum=0;
+	public int rnum=0;
+	public boolean movingc;
+	
 	public boolean moveTPnt(Point mpnt){
 		Point mpnt1 = new Point(mapPnt.x+mpnt.x,mapPnt.y+mpnt.y);
 		if(!flylocate.plocate(mpnt1)){
+			if(!moving){
 		if(wate==8){
 			robUI.rightclick(mpnt1);
 		}
-		if(wate>300){
+		if(wate>30){
 			wate=0;
 		}
 			wate++;
+			}
 		}else{
 			return true;
 		}
@@ -145,25 +149,30 @@ public class RunFromeEnimy {
 		Point jpnt=new Point(mapPnt.x+p.x,mapPnt.y+p.y);
 		Point dpnt = new Point(mapPnt.x+p2.x,mapPnt.y+p2.y);
 		if(rnum==0){
+			robUI.rightclick(jpnt);
+			rnum++;
+		}
+		if(rnum==1){
 		if(flylocate.plocate(jpnt)){
-			rnum=1;
+			rnum++;
 			wate=0;
 			//System.out.println(rnum);
 		}else{
-			if(wate==8){
+			if(!movingc){
+			if(wate==7){
 				robUI.rightclick(jpnt);
 			}
-			if(wate>300){
+			if(wate>30){
 				wate=0;
+			}
 			}
 				wate++;
 		}
 		}
-		if(rnum==1){
+		if(rnum==2){
 			if(flylocate.plocate(dpnt)){
-				rnum=2;
+				rnum++;
 				wate=0;
-				robUI.moveCursor(dpnt);
 			}else{
 				if(flylocate.plocate(jpnt)){
 				if(wate==10){

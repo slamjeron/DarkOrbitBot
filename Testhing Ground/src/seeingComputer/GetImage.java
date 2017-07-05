@@ -12,6 +12,8 @@ public class GetImage {
 	
 	private Rectangle screen=new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 	public final Point centerpt = new Point(screen.width/2,screen.height/2);
+	public int scwidth=screen.width;
+	public int scheight=screen.height;
 	private Robot rob;
 	public Point mapPoint=new Point();
 	public GetImage() {
@@ -84,7 +86,7 @@ public boolean scipMap(int x,int y){
 	public Color pointColor(int x,int y){
 		return rob.getPixelColor(x, y);
 	}
-	protected boolean pointEcolor(BufferedImage image
+	public boolean pointEcolor(BufferedImage image
 			, int x, int y, int r, int g, int b) {
 		return pointEcolor(image, x, y,new Color(r, g, b));
 	}
@@ -135,5 +137,23 @@ public boolean scipMap(int x,int y){
 	public int twoPntSkip(int x1, int y1, int i, int j, int k, int l) {
 		// TODO Auto-generated method stub
 		return twoPntSkip(new Point (x1,y1),new Point(i,j),new Point (k,l));
+	}
+	public boolean searchBoundries(BufferedImage mapimg,Point p){
+		return (p.x<mapimg.getWidth()&&p.y<mapimg.getHeight()&&p.x>0&&p.y>0);
+				
+	}
+	public int findHipotinus(Point p, Point p1){
+		int x = p.x- p1.x;
+		int y=p.y- p1.y;
+		if(x<0){
+			x=x*(-1);
+		}
+		if(y<0){
+			y=y*(-1);
+		}
+		return pyththeore(x,y);
+	}
+	private int pyththeore(int hp,int nownleg){
+		return (int) Math.sqrt((Math.pow(hp, 2)+Math.pow(nownleg, 2)));
 	}
 }

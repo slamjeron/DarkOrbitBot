@@ -15,7 +15,7 @@ private RunFromeEnimy runf;
 	public boolean traveling;
 	private boolean on1_1;
 	private boolean on2_1;
-	private int timeserch=0;
+	public int timeserch=0;
 	public void seeAthome(){
 		
 		if(timeserch>20){

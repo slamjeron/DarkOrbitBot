@@ -13,7 +13,7 @@ public class NormalColect {
 	
 	
 	
-	private boolean flytoRight;
+	public boolean flytoRight;
 	private int boundtimekeap=0;
 	private int tst;
 	
@@ -80,6 +80,10 @@ public void startPet(){
 	private Point shpnt;
 	private int k;
 	private int tn;
+	public void colectst(Point shipPoint,int movespec) {
+		shpnt=shipPoint;
+		move.inBounds(shipPoint, movespec);
+	}
 	public void colect(Point shipPoint,int movespec) {
 		
 		
@@ -265,8 +269,8 @@ public void chp2() {
 			mp=stc.map.getMappnt();
 			minPnt=new Point(mp.x+70,mp.y+12);
 			maxPnt=new Point(mp.x+270,mp.y+210);
-			boolean left = minPnt.x+3>shipPoint.x;
-			boolean right = maxPnt.x-3<shipPoint.x;
+			boolean left = minPnt.x+5>shipPoint.x;
+			boolean right = maxPnt.x-5<shipPoint.x;
 			boolean up =minPnt.y+1>shipPoint.y;
 			boolean down = maxPnt.y-1<shipPoint.y;
 			if(left){

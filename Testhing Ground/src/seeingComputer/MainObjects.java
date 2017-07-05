@@ -3,10 +3,8 @@ package seeingComputer;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import cargoSight.bonesBoxsearch;
-import cargoSight.boxes;
 
-public class StaticInfo {
+public class MainObjects {
 	public boolean mapf=false;
 	public boolean shipstf=false;
 	public boolean toolBarF=false;
@@ -16,11 +14,9 @@ public class StaticInfo {
 	private Point mappnt=new Point(0,0);
 	private Point petstat;
 public GetImage imgcon = new GetImage();
-public bonesBoxsearch bBColect=new bonesBoxsearch(imgcon);
-public boxes bBColect2=new boxes(imgcon);
 public ToolBarinfo toolbar = new ToolBarinfo(imgcon);
 public PetStats petSt = new PetStats(imgcon);
-public mapinfo map = new mapinfo(imgcon);
+public ShipPetTrack shipPet = new ShipPetTrack(imgcon);
 public ShipStatus shipstat = new ShipStatus(imgcon);
 public FlytoLocation flylocate = new FlytoLocation(imgcon);
 private int spaceingint;
@@ -48,19 +44,15 @@ public void search(){
 			}
 		}
 	}
-	bBColect.setpts(petstat, shipStatspnt);
 	flylocate.setPoints(mappnt);
 }
 public boolean active(){
-	if(spaceingint>100){
-	imgcon.printPColer(petstat.x-1,petstat.y);
-	imgcon.printPColer(mappnt.x,mappnt.y-2);
-	imgcon.printPColer(mappnt.x-1,mappnt.y-2);
+	
+	
 	return (imgcon.pointEcolor(petstat.x,petstat.y,49,47,44)||
 			imgcon.pointEcolor(petstat.x,petstat.y,49,47,44)||
 			imgcon.pointEcolor(petstat.x,petstat.y,49,47,44));
-	}
-	return mapf;
+	
 		
 	
 }
@@ -101,7 +93,7 @@ private void MapPoint(BufferedImage img, int x, int y) {
 	if( imgcon.pointEcolor(img, x, y,153 ,204 , 255)){
 		mapf=true;
 		mappnt=new Point(x,y);
-		map.setMappnt(mappnt);
+		shipPet.setMappnt(mappnt);
 		imgcon.mapPoint=mappnt;
 	}
 	// TODO Auto-generated method stub

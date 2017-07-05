@@ -13,6 +13,11 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class ColectingGui {
 
@@ -48,7 +53,7 @@ public class ColectingGui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 245, 171);
+		frame.setBounds(100, 100, 232, 227);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setAlwaysOnTop(true);
@@ -89,15 +94,48 @@ public class ColectingGui {
 		JLabel lblWhereSearch = new JLabel("where search");
 		lblWhereSearch.setBounds(120, 15, 75, 14);
 		frame.getContentPane().add(lblWhereSearch);
-		
+		time.runf.nothear=true;
 		JCheckBox chckCompleteAuto = new JCheckBox("compleat aughto");
+		chckCompleteAuto.setSelected(true);
 		chckCompleteAuto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				time.runf.nothear=chckCompleteAuto.isSelected();
 			}
 		});
-		chckCompleteAuto.setBounds(20, 75, 141, 23);
+		chckCompleteAuto.setBounds(56, 73, 141, 23);
 		frame.getContentPane().add(chckCompleteAuto);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				time.psw=(int) spinner.getValue();
+			}
+		});
+		spinner.setModel(new SpinnerNumberModel(new Integer(7), new Integer(1), null, new Integer(1)));
+		spinner.setBounds(80, 119, 46, 20);
+		frame.getContentPane().add(spinner);
+		
+		JLabel lblPetSearch = new JLabel("pet search");
+		lblPetSearch.setBounds(10, 107, 60, 14);
+		frame.getContentPane().add(lblPetSearch);
+		
+		JLabel lblWidth = new JLabel("width");
+		lblWidth.setBounds(89, 94, 46, 14);
+		frame.getContentPane().add(lblWidth);
+		
+		JLabel lblHight = new JLabel("hight");
+		lblHight.setBounds(147, 94, 46, 14);
+		frame.getContentPane().add(lblHight);
+		
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				time.psh=(int) spinner_1.getValue();
+			}
+		});
+		spinner_1.setModel(new SpinnerNumberModel(new Integer(5), new Integer(1), null, new Integer(1)));
+		spinner_1.setBounds(136, 119, 46, 20);
+		frame.getContentPane().add(spinner_1);
 		
 
 		JMenuBar menuBar = new JMenuBar();

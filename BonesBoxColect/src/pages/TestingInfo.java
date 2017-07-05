@@ -49,11 +49,15 @@ public class TestingInfo {
 		frame.getContentPane().add(time.lblAbleToTravel);
 		
 		
-		time.lblRedyToRun.setBounds(10, 110, 150, 14);
+		time.lblRedyToRun.setBounds(10, 100, 150, 14);
 		frame.getContentPane().add(time.lblRedyToRun);
 		
 		time.lblWateTime = new JLabel("wate time =");
-		time.lblWateTime.setBounds(10, 164, 155, 14);
+		time.lblWateTime.setBounds(10, 134, 155, 14);
 		frame.getContentPane().add(time.lblWateTime);
+		
+		time.lblCt = new JLabel("ct=");
+		time.lblCt.setBounds(10, 164, 200, 14);
+		frame.getContentPane().add(time.lblCt);
 	}
 }
