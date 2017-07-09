@@ -25,16 +25,7 @@ public class Timers {
 public void showShipPNT(){
 	if(start){
 		mo.search();
-		mappnt= mo.imgcon.mapPoint;
-		shipPnt=mo.shipPet.keapshipLock();
-		start=false;
-	 mapimg=mo.imgcon.screanImage(mappnt, 360, 220);
-	 for(int y = 0;y<mapimg.getHeight();y++){
-	 for(int x = 0;x<mapimg.getWidth();x++){
-		 	 mapimg.setRGB(x, y,Color.black.getRGB());
-		
-	 }
-	 }
+	
 	//lblMap.setIcon(new ImageIcon(mapimg));
 	timer.scheduleAtFixedRate (
 		    new TimerTask() {

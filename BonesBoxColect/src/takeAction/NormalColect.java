@@ -13,14 +13,9 @@ public class NormalColect {
 	
 	
 	
-<<<<<<< HEAD
-	private boolean flytoRight;
-	private int boundtimekeap=0;
-=======
 	public boolean flytoRight;
 	private int boundtimekeap=0;
 	private int tst;
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	
 	public NormalColect(CursorControl r, StaticInfo s) {
 		// TODO Auto-generated constructor stub
@@ -41,11 +36,7 @@ public class NormalColect {
 				System.out.println(n);
 		}
 	}
-<<<<<<< HEAD
-	public void startPet(){
-=======
 	public void startPet1(){
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 		
 		
 		if(stc.petSt.petdown){
@@ -53,22 +44,13 @@ public class NormalColect {
 			robUI.rightclick(stc.petSt.petControlPoints[0]);
 			}
 			if(n>20){
-<<<<<<< HEAD
-=======
 				tst++;
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 				n=0;
 			}
 			n++;
 			
 		}
 	}
-<<<<<<< HEAD
-	private move move=new move();
-	private Point shpnt;
-	private int k;
-	public void colect(Point shipPoint) {
-=======
 	
 public void startPet(){
 		if(stc.petSt.petdown){
@@ -103,26 +85,18 @@ public void startPet(){
 		move.inBounds(shipPoint, movespec);
 	}
 	public void colect(Point shipPoint,int movespec) {
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 		
 		
 		if(k>30){
 		robUI.keepToolActive(6);
-<<<<<<< HEAD
-=======
 		robUI.keepToolActive(7);
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 		k=0;
 		}
 		k++;
 		
 		
 		shpnt=shipPoint;
-<<<<<<< HEAD
-		move.inBounds(shipPoint);
-=======
 		move.inBounds(shipPoint, movespec);
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	}
 	public void stmove(){
 		move.moveside();
@@ -135,21 +109,6 @@ public void startPet(){
 		
 		if(stc.petSt.petup){
 			if(!stc.petSt.petColecting()){
-<<<<<<< HEAD
-				if(n==6){
-				robUI.rightclick(stc.petSt.petControlPoints[1]);
-				}
-				if(n>10){
-					if(stc.petSt.dropdownShown()){
-						robUI.rightclick(stc.petSt.petControlPoints[2]);
-						n=0;
-					}
-					if(n>30){
-						n=0;
-					}
-				}
-				n++;
-=======
 				if(tn==4){
 				robUI.rightclick(stc.petSt.petControlPoints[1]);
 				}
@@ -158,14 +117,13 @@ public void startPet(){
 						robUI.rightclick(stc.petSt.petControlPoints[2]);
 						tn=0;
 					}
-					if(tn>30){
+					if(tn>40){
 						tn=0;
 					}
 				}
 				tn++;
 			}else{
 				tn=0;
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 			}
 			
 		}
@@ -177,11 +135,7 @@ public void startPet(){
 		private Point maxPnt;
 		private int i=0;
 		private int yi=0;
-<<<<<<< HEAD
-		public void chp() {
-=======
 		public void chp4() {
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 			
 			boolean baseFound=false;
 			if (baseFound) {
@@ -216,11 +170,6 @@ public void startPet(){
 					case 3:
 						yi = 198;
 						break;
-<<<<<<< HEAD
-
-					}
-				if (i > 3) {
-=======
 					case 4:
 						yi = 170;
 						break;
@@ -229,16 +178,11 @@ public void startPet(){
 						break;
 					}
 				if (i > 5) {
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 					yi = 7;
 					i = 0;
 				}
 			}
 		}
-<<<<<<< HEAD
-
-		public void inBounds(Point shipPoint) {
-=======
 public void chp() {
 				i++;
 					switch (i) {
@@ -321,22 +265,10 @@ public void chp2() {
 	}
 }
 		public void inBounds(Point shipPoint,int movespec) {
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 			// TODO Auto-generated method stub
 			mp=stc.map.getMappnt();
 			minPnt=new Point(mp.x+70,mp.y+12);
 			maxPnt=new Point(mp.x+270,mp.y+210);
-<<<<<<< HEAD
-			boolean left = minPnt.x+3>shipPoint.x;
-			boolean right = maxPnt.x-3<shipPoint.x;
-			boolean up =minPnt.y+1>shipPoint.y;
-			boolean down = maxPnt.y-1<shipPoint.y;
-			if(left){
-				moveRight(true,shipPoint.y);
-			}
-			if(right){
-				moveRight(false,shipPoint.y);
-=======
 			boolean left = minPnt.x+5>shipPoint.x;
 			boolean right = maxPnt.x-5<shipPoint.x;
 			boolean up =minPnt.y+1>shipPoint.y;
@@ -346,29 +278,17 @@ public void chp2() {
 			}
 			if(right){
 				moveRight(false,shipPoint.y,movespec);
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 			}
 			
 			if(!up&&!left&&!right&&!down){
-				boundtimekeap=17;
+				boundtimekeap=0;
 			}else{
-<<<<<<< HEAD
-				if(boundtimekeap>20){
-=======
-				if(boundtimekeap>15){
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
+				if(boundtimekeap>10){
 					boundtimekeap=0;
 				}
 				boundtimekeap++;
 			}
 		}
-<<<<<<< HEAD
-		private void moveRight(boolean b, int y) {
-			// TODO Auto-generated method stub
-			if(boundtimekeap==2){
-			flytoRight=b;
-			chp();
-=======
 		private void moveRight(boolean b, int y,int movespec) {
 			// TODO Auto-generated method stub
 			if(boundtimekeap==2){
@@ -384,7 +304,6 @@ public void chp2() {
 				chp2();
 				break;
 			}
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 			moveside();
 			}
 		}
@@ -404,11 +323,7 @@ public void chp2() {
 				robUI.rightclick(minPnt.x, minPnt.y+yi);
 			}
 		}
-<<<<<<< HEAD
-		private void moveAwayhightbounds(boolean atTop){
-=======
 		/*private void moveAwayhightbounds(boolean atTop){
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 			if(boundtimekeap==2){
 			int x;
 			int y;
@@ -428,10 +343,6 @@ public void chp2() {
 			
 			
 		}
-<<<<<<< HEAD
-
-=======
 */
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	}
 }

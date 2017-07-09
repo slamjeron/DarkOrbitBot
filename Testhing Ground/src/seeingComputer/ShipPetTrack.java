@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import imglogic.GetImage;
+
 public class ShipPetTrack {
 	private Point mappnt=new Point(200,200);
 	private GetImage imgcon;

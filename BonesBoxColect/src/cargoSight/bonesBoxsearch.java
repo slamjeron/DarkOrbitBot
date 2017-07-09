@@ -2,16 +2,6 @@ package cargoSight;
 
 import java.awt.Color;
 import java.awt.Point;
-<<<<<<< HEAD
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-
-import seeingComputer.GetImage;
-
-public class bonesBoxsearch {
-
-public GetImage imgcon = new GetImage();
-=======
 import java.awt.image.BufferedImage;
 
 import seeingComputer.GetImage;
@@ -20,7 +10,6 @@ import takeAction.NormalColect;
 public class bonesBoxsearch {
 
 public GetImage imgcon;
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	//public Petinfo pet = new Petinfo();
 	protected Point palliePoint;
 	public boolean cargoFound=false;
@@ -33,12 +22,6 @@ public GetImage imgcon;
 	public Point mapPnt;
 	private int somelse;
 	private int oncargo;
-<<<<<<< HEAD
-	private boolean searchBoundries(int x,int y){
-		return (y<imgcon.centerpt.y-60&&y>-(imgcon.centerpt.y-60)&&
-				x<imgcon.centerpt.x-60&&x>-(imgcon.centerpt.x-60));
-				
-=======
 	private boolean pfound;
 	private BufferedImage pallieimg;
 	private boolean moving;
@@ -60,7 +43,6 @@ public GetImage imgcon;
 	private boolean searchBoundries(int x,int y){
 		return (y<imgcon.centerpt.y-60&&y>-(imgcon.centerpt.y-60)&&
 				x<imgcon.centerpt.x-60&&x>-(imgcon.centerpt.x-60));
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	}
 	private boolean cargo(Color c){
 		return(imgcon.colMoreLess(c, new Color(240,180,90)));
@@ -70,19 +52,6 @@ public GetImage imgcon;
 		return(imgcon.colMoreLess(c, new Color(160,120,60)));
 				
 		}
-<<<<<<< HEAD
-	public boolean Cargoonship(int xs,int ys){
-		if(cargoFound){
-			if(cargoNotClose>10){
-				cargoNotClose=0;
-				ct=26;
-				cargoFound=false;
-			}
-			//System.out.println(cargoNotClose);
-			
-			ct++;
-			cargoNotClose++;
-=======
 	
  	public boolean Cargoonship(int xs,int ys){
 		if(cargoFound){
@@ -104,52 +73,32 @@ public GetImage imgcon;
 				ct++;
 				
 				}
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 			Point tp = new Point(imgcon.centerpt.x-130,imgcon.centerpt.y-54);
 		BufferedImage img = imgcon.screanImage(tp,260,137);
 		Point dp=new Point();
 		int max=img.getWidth();
 		for(int y= ys;y<img.getHeight()-5;y+=5){
 			for(int x=xs;x<max-3;x+=5){
-<<<<<<< HEAD
-=======
-				
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 					if(cargo2(new Color(img.getRGB(x, y+5)))
 							&&cargo2(new Color(img.getRGB(x, y)))&&
 							cargo2(new Color(img.getRGB(x+1, y)))
 							&&cargo2(new Color(img.getRGB(x+2, y)))){
 						dp=new Point(tp.x+x,tp.y+y);
-<<<<<<< HEAD
-						if(ct>30){
-				if(!click){
-					clickpoint=dp;
-					click=true;
-					ct=26;
-					
-					
-=======
 						if(getCt()>2){
 							setCt(0);
 						}
 						if(getCt()==0){
 				if(!click){
 					if(clickcount>2){
-						
 						cargoFound=false;
-						
 					}
 					clickcount++;
 					clickpoint=dp;
 					click=true;
 					cargoNotClose=0;
 					ct++;
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 				}
 						}
-						
-						
-				
 				return true;
 					}
 			}
@@ -157,23 +106,12 @@ public GetImage imgcon;
 		}
 		
 		}
-<<<<<<< HEAD
-		
-		return false;
-		
-	}
-	public boolean findBonesBox(int increment,int str){
-		if(cargoFound){
-		Point dell = new Point(imgcon.centerpt.x,(imgcon.centerpt.y+70));
-		Point dell2 = new Point(imgcon.centerpt.x,(imgcon.centerpt.y+73));
-		Point dell3 = new Point(imgcon.centerpt.x,(imgcon.centerpt.y+80));
-=======
 			
 		}
 		return false;
 		
 	}
- 	public boolean cargo(boolean moving, NormalColect colect){
+ 	public boolean cargo(boolean farpnt,boolean moving, NormalColect colect){
  		this.moving=moving;
 		boolean mf=false;
 		if(cargoFound){
@@ -290,23 +228,31 @@ public GetImage imgcon;
 					}
 					
 					int small = 6000;
-					
+					int bg=0;
 					 for(int l=0;l<20;l++){
 						//System.out.println(e[l]);
 						 if(bbPNts[l]==null){
 							 break;
 						 }
-						 if(e[l]>0){
+						if(!farpnt){
 						if(small>e[l]){
-							
 							small=e[l];
 							clickpoint=new Point(bbPNts[l].x+5,bbPNts[l].y+5);
 							click=true;
 							cargoFound=true;
 							movetime=0;
 						}
-						 }
-						
+						}else{
+							if(pcount>1){
+						if(bg<e[l]){
+							bg=e[l];
+							clickpoint=new Point(bbPNts[l].x+5,bbPNts[l].y+5);
+							click=true;
+							cargoFound=true;
+							movetime=0;
+						}
+						}
+						}
 					}
 					}
 		}
@@ -338,7 +284,6 @@ public GetImage imgcon;
 				(imgcon.centerpt.y+73));
 		Point dell3 = new Point(imgcon.centerpt.x,
 				(imgcon.centerpt.y+80));
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 		Color cl = imgcon.pointColor(dell);
 		Color cl2 = imgcon.pointColor(dell2);
 		Color cl3 = imgcon.pointColor(dell3);
@@ -359,13 +304,8 @@ public GetImage imgcon;
 			}
 		}
 		}else{
-<<<<<<< HEAD
-			cargoNotClose=0;
-			ct=27;
-=======
 			setCargoNotClose(0);
 			setCt(27);
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 		BufferedImage palieimg = imgcon.screanImage();
 		Point dp=new Point();
 		Point dp2=new Point();
@@ -375,12 +315,9 @@ public GetImage imgcon;
 		for(int y= (int)(-r/1.41);y<(int)(r/1.41)+1;y+=4){
 			
 			int x=pyththeorem(r, y);
-<<<<<<< HEAD
-=======
 			if(!imgcon.scipMap(x, y)){
 				break;
 			}
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 			if(searchBoundries(x,y)){
 				if(cargoFound){
 					return true;
@@ -407,12 +344,9 @@ public GetImage imgcon;
 				return true;
 			}
 			int y=pyththeorem(r, x);
-<<<<<<< HEAD
-=======
 			if(!imgcon.scipMap(x, y)){
 				break;
 			}
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 			if(searchBoundries(x,y)){
 				
 			dp=new Point(imgcon.centerpt.x+x,imgcon.centerpt.y+y);
@@ -448,19 +382,11 @@ private int pyththeorem(int hp,int nownleg){
 					//dFind(palliePoint);
 			if(thisPaliePic(img.getSubimage(x-10, y-20, 60, 60))){
 					// System.out.println(new Point(x,y));
-<<<<<<< HEAD
-				if(!click){
-					clickpoint=new Point(x+5,y+5);
-					click=true;
-					cargoFound=true;
-				}
-=======
 				for(int y1=y-20;y1<y+40;y1++){
 					for(int x1=x-10;x1<x+50;x1++){
 					pallieimg.setRGB(x1, y1,new Color(0,0,0).getRGB());
 					}
 					}
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 					//img.colorPrint(new Color(pallieimg.getRGB(x, y)));
 				
 				return true;
@@ -502,8 +428,6 @@ private int pyththeorem(int hp,int nownleg){
 		//colmore one first color>second color  return true
 		return(imgcon.colMoreLess(new Color(130,130,130), c));
 	}
-<<<<<<< HEAD
-=======
 	public int getCt() {
 		return ct;
 	}
@@ -516,5 +440,4 @@ private int pyththeorem(int hp,int nownleg){
 	public void setCargoNotClose(int cargoNotClose) {
 		this.cargoNotClose = cargoNotClose;
 	}
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 }

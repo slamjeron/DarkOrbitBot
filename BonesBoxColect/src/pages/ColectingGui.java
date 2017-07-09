@@ -9,14 +9,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import takeAction.Timers;
-<<<<<<< HEAD
-
-public class ColectingGui extends Timers{
-
-	private JFrame frame;
-
-	
-=======
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
@@ -32,7 +24,6 @@ public class ColectingGui {
 	private JFrame frame;
 
 	Timers time=new Timers();
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -62,11 +53,7 @@ public class ColectingGui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-<<<<<<< HEAD
-		frame.setBounds(100, 100, 233, 135);
-=======
-		frame.setBounds(100, 100, 232, 227);
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
+		frame.setBounds(100, 100, 219, 182);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setAlwaysOnTop(true);
@@ -76,11 +63,7 @@ public class ColectingGui {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//startBot();
-<<<<<<< HEAD
-				startSeeing();
-=======
 				time.startSeeing();
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 				//System.out.println(Color.BLACK);
 			}
 		});
@@ -91,19 +74,12 @@ public class ColectingGui {
 		btnStop.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-<<<<<<< HEAD
-				stopPet();
-				
-=======
 				time.stopPet();
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 			}
 		});
-		btnStop.setBounds(10, 45, 89, 23);
+		btnStop.setBounds(10, 40, 89, 23);
 		frame.getContentPane().add(btnStop);
 		
-<<<<<<< HEAD
-=======
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -112,7 +88,7 @@ public class ColectingGui {
 		});
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"all map", "top map", "search map ", "auto"}));
 		comboBox.setSelectedIndex(0);
-		comboBox.setBounds(120, 46, 75, 20);
+		comboBox.setBounds(120, 41, 75, 20);
 		frame.getContentPane().add(comboBox);
 		
 		JLabel lblWhereSearch = new JLabel("where search");
@@ -126,7 +102,7 @@ public class ColectingGui {
 				time.runf.nothear=chckCompleteAuto.isSelected();
 			}
 		});
-		chckCompleteAuto.setBounds(56, 73, 141, 23);
+		chckCompleteAuto.setBounds(54, 64, 141, 23);
 		frame.getContentPane().add(chckCompleteAuto);
 		
 		JSpinner spinner = new JSpinner();
@@ -135,20 +111,20 @@ public class ColectingGui {
 				time.psw=(int) spinner.getValue();
 			}
 		});
-		spinner.setModel(new SpinnerNumberModel(new Integer(7), new Integer(1), null, new Integer(1)));
-		spinner.setBounds(80, 119, 46, 20);
+		spinner.setModel(new SpinnerNumberModel(new Integer(10), new Integer(1), null, new Integer(1)));
+		spinner.setBounds(66, 94, 46, 20);
 		frame.getContentPane().add(spinner);
 		
 		JLabel lblPetSearch = new JLabel("pet search");
-		lblPetSearch.setBounds(10, 107, 60, 14);
+		lblPetSearch.setBounds(10, 97, 75, 14);
 		frame.getContentPane().add(lblPetSearch);
 		
-		JLabel lblWidth = new JLabel("width");
-		lblWidth.setBounds(89, 94, 46, 14);
+		JLabel lblWidth = new JLabel("small rade");
+		lblWidth.setBounds(66, 83, 60, 14);
 		frame.getContentPane().add(lblWidth);
 		
-		JLabel lblHight = new JLabel("hight");
-		lblHight.setBounds(147, 94, 46, 14);
+		JLabel lblHight = new JLabel("big rade");
+		lblHight.setBounds(136, 83, 46, 14);
 		frame.getContentPane().add(lblHight);
 		
 		JSpinner spinner_1 = new JSpinner();
@@ -157,11 +133,10 @@ public class ColectingGui {
 				time.psh=(int) spinner_1.getValue();
 			}
 		});
-		spinner_1.setModel(new SpinnerNumberModel(new Integer(5), new Integer(1), null, new Integer(1)));
-		spinner_1.setBounds(136, 119, 46, 20);
+		spinner_1.setModel(new SpinnerNumberModel(new Integer(33), new Integer(1), null, new Integer(1)));
+		spinner_1.setBounds(136, 94, 46, 20);
 		frame.getContentPane().add(spinner_1);
 		
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -184,8 +159,6 @@ public class ColectingGui {
 
 		JMenuItem mntmDeterminIfDead = new JMenuItem("ded");
 		mnStartPart.add(mntmDeterminIfDead);
-<<<<<<< HEAD
-=======
 		TestingInfo test = new TestingInfo(time);
 		JMenuItem mntmShowTestingPage = new JMenuItem("show testing page");
 		mntmShowTestingPage.addActionListener(new ActionListener() {
@@ -195,7 +168,6 @@ public class ColectingGui {
 			}
 		});
 		mnFile.add(mntmShowTestingPage);
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 		mntmDeterminIfDead.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

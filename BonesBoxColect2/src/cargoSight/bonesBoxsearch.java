@@ -62,8 +62,6 @@ public GetImage imgcon = new GetImage();
 					clickpoint=dp;
 					click=true;
 					ct=26;
-					
-					
 				}
 						}
 						
@@ -182,8 +180,6 @@ private int pyththeorem(int hp,int nownleg){
 					click=true;
 					cargoFound=true;
 				}
-					//img.colorPrint(new Color(pallieimg.getRGB(x, y)));
-				
 				return true;
 			}
 		}
@@ -196,24 +192,16 @@ private int pyththeorem(int hp,int nownleg){
 		for (int y = 0; y < imPalie.getHeight(); y++) {
 			for (int x = 0; x < imPalie.getWidth(); x++) {
 				if (y == 1 || y == 2 || y == 59 || y == 60 ) {
-					
-					if (backGround(new Color(imPalie.getRGB(x, y)))) {
-						//System.out.println(new Color(imPalie.getRGB(x, y)));
-					} else {
+					if (!backGround(new Color(imPalie.getRGB(x, y)))) {
 						return false;
 					}
 				}
 				if (x == 1 ||x == 50||x == 51) {
 					//System.out.println(new Color(imPalie.getRGB(x, y)));
-					if (backGround(new Color(imPalie.getRGB(x, y)))) {
-						
-					} else {
+					if (!backGround(new Color(imPalie.getRGB(x, y)))) {
 						return false;
-						
 					}
 				}
-				
-				
 			}
 		}
 		return true;

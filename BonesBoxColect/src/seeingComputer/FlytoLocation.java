@@ -2,10 +2,7 @@ package seeingComputer;
 
 import java.awt.Color;
 import java.awt.Point;
-<<<<<<< HEAD
-=======
 import java.awt.image.BufferedImage;
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 
 
 public class FlytoLocation {
@@ -41,19 +38,6 @@ public boolean base11color(int x,int y){
 	return imgcon.pointEcolor(
 			new Point(mapcPoint.x+x, mapcPoint.y+y), new Color(204,0,0));
 }
-<<<<<<< HEAD
-public boolean on1_1(){
-	
-	return (mPEColor(21,36,204,198,125))&&mPEColor(56,36,204,198,125);
-}
-public boolean on2_1(){
-	
-	return (mPEColor(324,49,204,198,125))&&mPEColor(343,36,204,198,125);
-}
-public boolean mPEColor(int mx,int my,int r,int g,int b){
-	return imgcon.pointEcolor(new Point(mapcPoint.x+mx, mapcPoint.y+my),new Color(r,g,b));
-}
-=======
 public Point[] mapnum={
 new Point(11,5),
 new Point(12,5),
@@ -137,7 +121,6 @@ public boolean on2_1(){
 	return false; 
 }
 
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 public void run4_1(){
 	
 	 switch (gateNumber) {
@@ -163,11 +146,6 @@ public boolean gateJump(Point p,Point othersideP){
 switch (gateJumpCount){
 
 case 1:
-<<<<<<< HEAD
-	
-
-=======
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 if(plocate(p)){
 	
 	mTimer=70;
@@ -207,16 +185,8 @@ return false;
 }
 public boolean plocate(Point p){
 	
-<<<<<<< HEAD
-	return this.imgcon.pointEcolor(new Point(p.x+10, p.y)
-			, new Color(70,70,70))&&
-			imgcon.pointEcolor(new Point(p.x, p.y-10)
-					, new Color(70,70,70))&&
-			imgcon.pointEcolor(new Point(p.x-10, p.y)
-=======
 	return !moving&&
 			imgcon.pointEcolor(new Point(p.x, p.y-10)
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 					, new Color(70,70,70));
 }
 public boolean isTypj() {

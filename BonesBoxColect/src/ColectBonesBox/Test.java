@@ -2,7 +2,6 @@ package ColectBonesBox;
 
 import java.awt.AWTException;
 import java.awt.EventQueue;
-import java.awt.Point;
 
 import javax.swing.JFrame;
 
@@ -10,7 +9,6 @@ import takeAction.CursorControl;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
 public class Test {
@@ -43,7 +41,7 @@ public class Test {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private bonesBoxsearch box=new bonesBoxsearch();
+	//private bonesBoxsearch box=new bonesBoxsearch();
 	private TypingFun type;
 	private int k=0;
 	private void initialize() {
@@ -74,14 +72,14 @@ public class Test {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					st="\"Hello\"";
+					
 					
 					
 					type.type("It is also worth noting that you can"
-							+ " include arbitrary Unicode characters "
-							+ "in your source code using Unicode escape"
-							+ " sequences of the form where the are "+st
-							+ "hexadecimal digits. However, these are different"
+							+ " include arbitrary Unicode characters"
+							+ " in your source code using Unicode escape"
+							+ " sequences of the form where the are \"Hello\""
+							+ " hexadecimal digits. However, these are different"
 							+ " from ordinary string and character escapes in that"
 							+ " you can use them anywhere in a Java program ... not"
 							+ " just in string and character literals; see JLS sections"
