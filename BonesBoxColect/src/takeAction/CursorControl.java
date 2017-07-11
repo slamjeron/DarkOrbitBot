@@ -5,10 +5,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
-<<<<<<< HEAD
-=======
 import java.awt.event.KeyEvent;
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 
 import seeingComputer.StaticInfo;
 
@@ -24,8 +21,6 @@ public class CursorControl {
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-=======
 	public CursorControl() {
 		try {
 			rob=new Robot();
@@ -34,7 +29,6 @@ public class CursorControl {
 		}
 		// TODO Auto-generated constructor stub
 	}
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	public void type(int i){
 		int key = 48+i;
 		rob.keyPress(key);
@@ -53,8 +47,6 @@ public class CursorControl {
 		rightClick();
 		moveCursor(mp);
 	}
-<<<<<<< HEAD
-=======
 	public void sleep(int i){
 		try {
 			rob.wait(i*100);
@@ -63,7 +55,6 @@ public class CursorControl {
 			e.printStackTrace();
 		}
 	}
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	public void rightclick(int x,int y){
 		rightclick(new Point(x,y));
 	}
@@ -80,17 +71,6 @@ public void keepToolActive(int k){
 		type(k);
 	}
 }
-<<<<<<< HEAD
-public void type(String string) {
-	 byte[] bytes = string.getBytes();
-	   for (byte b : bytes){
-	     int code = b;
-	     if (code > 96 && code < 123) code = code - 32;
-	     rob.keyPress(code);
-	     rob.keyRelease(code);
-	   }
-	
-=======
 public void typep(){
 rob.keyPress(KeyEvent.VK_SHIFT);
 rob.keyPress(KeyEvent.VK_QUOTE);
@@ -249,6 +229,5 @@ private void doType(int[] keyCodes, int offset, int length) {
     rob.keyPress(keyCodes[offset]);
     doType(keyCodes, offset + 1, length - 1);
     rob.keyRelease(keyCodes[offset]);
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 }
 }

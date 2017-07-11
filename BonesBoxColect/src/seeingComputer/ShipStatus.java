@@ -10,10 +10,6 @@ public class ShipStatus {
 		// TODO Auto-generated constructor stub
 		this.imgcon=imgcon;
 	}
-<<<<<<< HEAD
-	private Point stpt = new Point();
-=======
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	public Point hitPointsEnd= new Point();
 	public Point shieldEnd= new Point();
 	private GetImage imgcon;
@@ -29,8 +25,6 @@ public class ShipStatus {
 		shieldEnd=new Point(shipStatpnt.x+58,shipStatpnt.y+55);
 	return imgcon.pointEcolor(shieldEnd,new Color(76,82,80));
 	}
-<<<<<<< HEAD
-=======
 	
 	public boolean enimyonscreen(){
 		BufferedImage scimg = imgcon.screanImage();
@@ -52,7 +46,6 @@ public class ShipStatus {
 		}
 		return false;
 	}
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	public Point getShipStatpnt() {
 		return shipStatpnt;
 	}

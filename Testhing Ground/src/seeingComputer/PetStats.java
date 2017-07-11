@@ -3,6 +3,8 @@ package seeingComputer;
 import java.awt.Color;
 import java.awt.Point;
 
+import imglogic.GetImage;
+
 public class PetStats {
 
 	

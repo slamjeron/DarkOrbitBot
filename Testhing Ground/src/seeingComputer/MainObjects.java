@@ -1,7 +1,11 @@
 package seeingComputer;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
+import cargoSight.boxes;
+import imglogic.GetImage;
 
 
 public class MainObjects {
@@ -9,10 +13,10 @@ public class MainObjects {
 	public boolean shipstf=false;
 	public boolean toolBarF=false;
 	public boolean petstf=false;
-	private Point toolbarPnt;
-	private Point shipStatspnt;
+	private Point toolbarPnt=new Point(0,0);
+	private Point shipStatspnt=new Point(0,0);
 	private Point mappnt=new Point(0,0);
-	private Point petstat;
+	private Point petstat=new Point(0,0);
 public GetImage imgcon = new GetImage();
 public ToolBarinfo toolbar = new ToolBarinfo(imgcon);
 public PetStats petSt = new PetStats(imgcon);
@@ -20,6 +24,7 @@ public ShipPetTrack shipPet = new ShipPetTrack(imgcon);
 public ShipStatus shipstat = new ShipStatus(imgcon);
 public FlytoLocation flylocate = new FlytoLocation(imgcon);
 private int spaceingint;
+public boxes colect=new boxes(imgcon);
 public void search(){
 	mapf=false;
 	shipstf=false;
@@ -44,17 +49,20 @@ public void search(){
 			}
 		}
 	}
+	if(mapf&&shipstf&&petstf&&toolBarF){
+		Rectangle[] skipZone={new Rectangle
+				(toolbarPnt.x,toolbarPnt.y,370,30)
+				,new Rectangle(shipStatspnt.x-20,shipStatspnt.y,200,102)
+				,new Rectangle(mappnt.x,mappnt.y,360,230)
+				,new Rectangle(petstat.x,petstat.y,236,183)};
+		colect.skipZone=skipZone;
+	}
 	flylocate.setPoints(mappnt);
 }
 public boolean active(){
-	
-	
 	return (imgcon.pointEcolor(petstat.x,petstat.y,49,47,44)||
 			imgcon.pointEcolor(petstat.x,petstat.y,49,47,44)||
 			imgcon.pointEcolor(petstat.x,petstat.y,49,47,44));
-	
-		
-	
 }
 private void petStats(BufferedImage img, int x, int y) {
 	// TODO Auto-generated method stub

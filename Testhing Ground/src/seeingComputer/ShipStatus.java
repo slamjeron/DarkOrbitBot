@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
+import imglogic.GetImage;
+
 public class ShipStatus {
 	private Point shipStatpnt;
 	public ShipStatus(GetImage imgcon) {

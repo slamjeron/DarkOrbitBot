@@ -1,4 +1,4 @@
-package cargoSight;
+package ColectBonesBox;
 
 import java.awt.Color;
 import java.awt.Point;

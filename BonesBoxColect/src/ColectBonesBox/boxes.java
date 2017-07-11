@@ -1,12 +1,8 @@
-package cargoSight;
+package ColectBonesBox;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 import seeingComputer.GetImage;
 

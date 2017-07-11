@@ -2,6 +2,8 @@ package seeingComputer;
 
 import java.awt.Point;
 
+import imglogic.GetImage;
+
 public class ToolBarinfo {
 	
 	private GetImage imgcon;

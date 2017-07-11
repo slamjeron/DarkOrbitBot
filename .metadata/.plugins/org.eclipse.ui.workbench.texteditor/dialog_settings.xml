@@ -2,22 +2,26 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="VK" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="VK"/>
-			<item value="KeyEvent"/>
-			<item value="x"/>
-			<item value="flylocate"/>
-			<item value="stc.bBColect"/>
-			<item value="bonesBox"/>
-			<item value="11,7"/>
-			<item value="on1_1"/>
+			<item value="nlct++;"/>
+			<item value="imgCchange"/>
+			<item value="imgCchange2"/>
+			<item value="0,0,0"/>
+			<item value="pallieimg"/>
+			<item value="colMoreLess"/>
+			<item value="======="/>
+			<item value="&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
+			<item value="//imgCchange"/>
+			<item value="img"/>
+			<item value="t=new Point(0,0);"/>
 			<item value="KeyEvent.VK"/>
 			<item value="y"/>
 			<item value="stc.bBColect"/>
@@ -27,7 +31,7 @@
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="391" key="DIALOG_HEIGHT"/>
-		<item value="615" key="DIALOG_X_ORIGIN"/>
-		<item value="325" key="DIALOG_Y_ORIGIN"/>
+		<item value="1313" key="DIALOG_X_ORIGIN"/>
+		<item value="439" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

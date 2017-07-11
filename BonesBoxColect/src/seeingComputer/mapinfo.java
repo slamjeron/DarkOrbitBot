@@ -1,9 +1,5 @@
 package seeingComputer;
 
-<<<<<<< HEAD
-import java.awt.Color;
-=======
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -15,12 +11,50 @@ public class mapinfo {
 	private Rectangle mapsize;
 	
 	private int n;
+	public Point petpnt;
 	public mapinfo( GetImage i) {
 		imgcon=i;
 		
 	}
-<<<<<<< HEAD
-=======
+	public boolean[] petnearShip1(int smradius,int bgradius){
+		int searchsize=bgradius+10;
+		Point shpnt = new Point(shipPoint.x-(searchsize),
+				shipPoint.y-(searchsize));
+		Point mspnt = new Point(shpnt.x+searchsize*2
+				,shpnt.y+searchsize*2);
+	int mx = 0;
+	if(mspnt.x>imgcon.scwidth){
+		mx=mspnt.x-imgcon.scwidth;
+	}
+		BufferedImage shimg = imgcon.screanImage(shpnt.x,
+				shpnt.y, searchsize-mx, searchsize-mx);
+		boolean[] petlogic={false,false,false,false};
+		for (int y =0;y<shimg.getHeight(); y++){
+			for (int x =0;x<shimg.getWidth(); x++){
+				if(imgcon.pointEcolor(shimg, x, y, 204, 129, 0)){
+					petlogic[2]=true;
+					petpnt=new Point(shpnt.x+x,shpnt.y+y);
+					int spnt = imgcon.findHipotinus(petpnt,shipPoint);
+					if(spnt<4){
+						petlogic[3]=true;
+					}
+					if(spnt<smradius&&spnt>4){
+						petpnt=new Point((shpnt.x+x)-mappnt.x,(shpnt.y+y)-mappnt.y);
+						petlogic[0]=true;
+					}
+					if(spnt>bgradius){
+						petpnt=new Point((shpnt.x+x)-mappnt.x,(shpnt.y+y)-mappnt.y);
+						petlogic[1]=true;
+					}
+				}
+			}	
+		}
+		if(!petlogic[2]){
+			petlogic[1]=false;
+		}
+		return petlogic;
+	}
+	
 	public boolean petnearShip(int width, int hight){
 		BufferedImage shimg = imgcon.screanImage(shipPoint.x-(width),
 				shipPoint.y-(hight)
@@ -41,7 +75,6 @@ public class mapinfo {
 		return imgcon.pointEcolor(mpnt1, 255,255,255);
 		
 	}
->>>>>>> 50a73e1ff4a29e8fafe043d87a4b4f8904ae7201
 	public Point findShip() {
 		int yLocation = getMappnt().y+18;
 		int xLocation = getMappnt().x+120;
