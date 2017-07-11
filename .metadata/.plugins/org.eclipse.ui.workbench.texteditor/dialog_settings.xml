@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="imgCchange" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="nlct++;"/>
 			<item value="imgCchange"/>
 			<item value="imgCchange2"/>
 			<item value="0,0,0"/>
@@ -15,12 +16,11 @@
 			<item value="colMoreLess"/>
 			<item value="======="/>
 			<item value="&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD"/>
-			<item value="t;"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="//imgCchange"/>
 			<item value="img"/>
-			<item value=""/>
 			<item value="t=new Point(0,0);"/>
 			<item value="KeyEvent.VK"/>
 			<item value="y"/>

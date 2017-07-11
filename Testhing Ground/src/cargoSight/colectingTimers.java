@@ -5,10 +5,12 @@ import java.util.TimerTask;
 
 public class colectingTimers {
 	protected Timer timer= new Timer();
-public void colectT(){
+	private boxes3 cbox=new boxes3();
+public void colect(){
 	
-	boxes3 cbox=new boxes3();
-	cbox.nearShipSearch();
+	
+	cbox.findBonesBox();
+	/*cbox.nearShipSearch();
 	timer.scheduleAtFixedRate (
 		    new TimerTask() {
 				@Override
@@ -16,6 +18,12 @@ public void colectT(){
 					// TODO Auto-generated method stub
 					cbox.findBonesBox();
 				}
-		    }, 0, 2);
+		    }, 0, 2);*/
+}
+public void colectT(){
+	
+	boxes3 cbox=new boxes3();
+	cbox.clkup();
+	
 }
 }

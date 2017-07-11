@@ -48,6 +48,7 @@ public class TPage {
 	 */
 	private void initialize() {
 		colectingTimers cbox= new colectingTimers();
+		
 		frame = new JFrame();
 		frame.setUndecorated( true );
 		frame.getRootPane().setWindowDecorationStyle(6 );
@@ -61,7 +62,7 @@ public class TPage {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				cbox.colectT();
+				cbox.colect();
 				
 			}
 		});

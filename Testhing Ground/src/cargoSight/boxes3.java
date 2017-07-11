@@ -17,7 +17,7 @@ import userControls.Mouse;
 
 public class boxes3  {
 	private ImgRobot imgrob=new ImgRobot();
-	private Mouse mouse = new Mouse();
+	public Mouse mouse = new Mouse();
 	 private GetImage getimage=imgrob.image;
 	private searchMath imgmath=imgrob.smath;
 	private Colorlogic clgc=imgrob.clogic;
@@ -25,51 +25,28 @@ public class boxes3  {
 	private Point[] bbPNts;
 	private int pntcnt;
 	private BufferedImage img;
-	private int imgnum;
+	private int imgnum=0;
 	private BufferedImage img2;
 	private Point clickpoint;
 	private int scount;
 	private int oncargo;
 	private boolean goingToBox=false;
 	private int colectseqns=0;
-	private boolean backGround(Color c){
-		scount++;
-		return(clgc.colMoreLess(new Color(150,150,160),c));
-	}
-	private boolean backGround(BufferedImage img, int x, int y){
-		return backGround(clgc.pointColor(img, x, y));
-	}
 	private void rightclick(Point p){
-		
-		for(int y= p.y-2;y<p.y+3;y++){
+		for(int y= p.y-2;y<p.y+2;y++){
 			for(int x =p.x-2;x< p.x+2;x++){
 				if(!imgmath.inBounds(img, x, y)){
-					System.out.println(x);
 		imgCchange(x,y,100,0,200);
-		
 				}
 			}
 		}
+		if(!imgmath.inBounds(img, p.x, p.y)){
 		mouse.rightclick(p);
-	}
-	private void onTopBobesBox(){
-		if(colectseqns==2){
-		Point dell = new Point(getimage.centerpt.x,
-				(this.getimage.centerpt.y+70));
-		Point dell2 = new Point(getimage.centerpt.x,
-				(getimage.centerpt.y+73));
-		Point dell3 = new Point(getimage.centerpt.x,
-				(getimage.centerpt.y+80));
-		
-		if(cargoC(dell3)||cargoC(dell2)||cargoC(dell)){
-			rightclick(dell);
-			colectseqns=0;
-		}
 		}
 	}
 	private boolean cargoC(Color c){
 		scount++;
-		return(clgc.colMoreLess(c, new Color(240,180,90)));
+		return(clgc.colMoreLess(c, new Color(200,82,92)));
 	}
 	private boolean cargoC(BufferedImage img, int x, int y){
 		return cargoC(clgc.pointColor(img, x, y));
@@ -77,72 +54,92 @@ public class boxes3  {
 	private boolean cargoC(Point p){
 		return cargoC(clgc.pointColor( p.x, p.y));
 	}
-	public boolean findBonesBox(){
-		System.out.println(colectseqns);
-		if(colectseqns==0){
-		 img = getimage.screanImage();
-		 img2=img;
-		 pntcnt=0;
-		 scount=0;
-		 bbPNts=new Point[20];
-		for(int y= 100;y<img.getHeight()-70;y+=15){
-			
-			for(int x=50;x<img.getWidth()-50;x+=15){
-				findbb(x,y);
-				
-			}
+	private boolean backGround(Color c){
+		scount++;
+		return(clgc.colMoreLess(new Color(150,150,160),c));
+	}
+	private boolean backGround(BufferedImage img, int x, int y){
+		return backGround(clgc.pointColor(img, x, y));
+	}
+	
+	public void findBonesBox1(){
+		img2 = getimage.screanImage();
+		for(int y1=0;y1>-16;y1--){
+			imgCchange(100,100+y1,200,0,0);
+			imgCchange(100+y1,100,200,0,0);
 		}
-		if(pntcnt!=0){
-			Point p = findClosePnt(bbPNts);
-			rightclick(p);
-		//System.out.println(nlct);
 		
-		//System.out.println(scount);
-			
-		imgnum++;
 		try {
 			ImageIO.write(img2, "BMP", new File("pallsearch"+imgnum+".bmp"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		colectseqns=1;
-		}
-		 }
-		if(colectseqns==1){
-			nearShipSearch();
-		 }
-		if(colectseqns==2){
-			onTopBobesBox(); 
-		 }
-		return false;
-		
+		imgnum++;
 	}
-	public void nearShipSearch() {
-		// TODO Auto-generated method stub
-		Point sp = new Point(getimage.centerpt.x-100,
-				getimage.centerpt.y-100);
-		img = getimage.screanImage(sp.x,
-				sp.y,200,200);
-		pntcnt=0;
-		for(int y= 43;y<img.getHeight()-43;y+=15){
-			for(int x=43;x<img.getWidth()-43;x+=15){
-				findbb(x,y);
-				System.out.println(x);
+	public boolean findBonesBox(){
+		if(colectseqns==0){
+		 img = getimage.screanImage();
+		 img2=img;
+		 pntcnt=0;
+		 scount=0;
+		 bbPNts=new Point[20];
+		 for(int y= 70;y<img.getHeight()-70;y++){
+				for(int x=50;x<img.getWidth()-50;x++){
+					if(this.cargoC(img, x, y)
+							&&this.cargoC(img, x+1, y)){
+					
+					}else{
+						//this.imgCchange(x, y, 0, 0, 0);
+						this.imgCchange2(x, y, 0, 0, 0);
+					}
+				}
 			}
+		 for(int y= 70;y<img.getHeight()-70;y+=20){
+				for(int x=50;x<img.getWidth()-50;x+=20){
+					if(this.cargoC(img, x, y)
+							&&this.cargoC(img, x+1, y)){
+					
+					}else{
+						this.imgCchange(x, y, 0, 0, 0);
+					}
+				}
+			}
+		
+		try {
+			ImageIO.write(img2, "BMP", new File("pallsearch"+imgnum+".bmp"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if(pntcnt!=0){
-			Point p = findClosePnt(bbPNts);
-			Point np = new Point(sp.x+p.x,sp.y+p.y);
-			rightclick(np);
-			colectseqns=2;
 		}
+		imgnum++;
+		return false;
 	}
+	
 	private void findbb(int x,int y){
 		if(cargoC(img,x,y)&&cargoC(img,x+1,y)
-				&&cargoC(img,x,y-1)){
-			loop:for(int y1=y-4;y1<y+4;y1+=2){
-			for(int x1=x-4;x1<x+4;x1+=2){
+				&&cargoC(img,x,y+1)){
+			int sy=0;
+			for(int y1=0;y1>-16;y1--){
+				System.out.println(y1);
+				if(!cargoC(img,x,y-y1)){
+					sy=y1;
+					break;
+				}
+				imgCchange(x,y-y1,255,0,0);
+			}
+			int sx=0;
+			for(int x1=0;x1<16;x1++){
+				if(!cargoC(img,x-x1,y)){
+					sx=x1;
+					break;
+				}
+				imgCchange(x-x1,y,255,0,0);
+			}
+			
+			loop:for(int y1=(y-sy)+4;y1<y+1;y1+=2){
+			for(int x1=(x-sx)+4;x1<x+1;x1+=2){
 			if(bonesBox(x1,y1,x,y)){
 				bbPNts[pntcnt] = new Point(x1,y1);
 				pntcnt++;
@@ -208,7 +205,7 @@ public class boxes3  {
 						// System.out.println(new Point(x,y));
 					
 					for(int y1=y2-15;y1<y+41;y1+=15){
-						for(int x1=x2;x1<x+41;x1+=15){
+						for(int x1=x2-15;x1<x+41;x1+=15){
 							
 						if(cargoC(img,x1,y1)){
 							imgCchange2(x1, y1,0,0,0);
@@ -227,11 +224,15 @@ public class boxes3  {
 		}
 	private void imgCchange2(int x, int y, int r, int g, int b) {
 		// TODO Auto-generated method stub
+		if(!imgmath.inBounds(img, x, y)){
 			img.setRGB(x, y,new Color(r,g,b).getRGB());
+		}
 	}
 		private void imgCchange(int x, int y, int r, int g, int b) {
 		// TODO Auto-generated method stub
+			
 			img2.setRGB(x, y,new Color(r,g,b).getRGB());
+			
 	}
 		private boolean thisPaliePic(int x1,int y1,BufferedImage imPalie) {
 			
