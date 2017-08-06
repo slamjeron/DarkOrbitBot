@@ -2,165 +2,176 @@ package cargoSight;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import imglogic.Colorlogic;
 import imglogic.GetImage;
 import imglogic.ImgRobot;
 import imglogic.searchMath;
+import triangle.Rtriangle;
 import userControls.Mouse;
-
 public class boxes3  {
-	private ImgRobot imgrob=new ImgRobot();
+	public ImgRobot imgrob=new ImgRobot();
+	private Rectangle[] skipZone;
 	public Mouse mouse = new Mouse();
+	Rtriangle tryangle=new Rtriangle();
 	 private GetImage getimage=imgrob.image;
 	private searchMath imgmath=imgrob.smath;
 	private Colorlogic clgc=imgrob.clogic;
-	private boolean yskip;
 	private Point[] bbPNts;
 	private int pntcnt;
 	private BufferedImage img;
-	private int imgnum=0;
-	private BufferedImage img2;
 	private Point clickpoint;
-	private int scount;
-	private int oncargo;
-	private boolean goingToBox=false;
-	private int colectseqns=0;
-	private void rightclick(Point p){
-		for(int y= p.y-2;y<p.y+2;y++){
-			for(int x =p.x-2;x< p.x+2;x++){
-				if(!imgmath.inBounds(img, x, y)){
-		imgCchange(x,y,100,0,200);
-				}
-			}
-		}
-		if(!imgmath.inBounds(img, p.x, p.y)){
+	private Point tp;
+	public void rightclick(Point p){
+		
+		
 		mouse.rightclick(p);
-		}
+		
 	}
+	
 	private boolean cargoC(Color c){
-		scount++;
+		
+		
 		return(clgc.colMoreLess(c, new Color(200,82,92)));
 	}
 	private boolean cargoC(BufferedImage img, int x, int y){
+		
+		if(imgmath.searchBoundries(img,new Point(x,y))){
+			
 		return cargoC(clgc.pointColor(img, x, y));
-	}
-	private boolean cargoC(Point p){
-		return cargoC(clgc.pointColor( p.x, p.y));
-	}
-	private boolean backGround(Color c){
-		scount++;
-		return(clgc.colMoreLess(new Color(150,150,160),c));
-	}
-	private boolean backGround(BufferedImage img, int x, int y){
-		return backGround(clgc.pointColor(img, x, y));
+		}else{
+		return false;
+		}
 	}
 	
-	public void findBonesBox1(){
-		img2 = getimage.screanImage();
-		for(int y1=0;y1>-16;y1--){
-			imgCchange(100,100+y1,200,0,0);
-			imgCchange(100+y1,100,200,0,0);
-		}
-		
-		try {
-			ImageIO.write(img2, "BMP", new File("pallsearch"+imgnum+".bmp"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		imgnum++;
+
+
+	public boolean boxcolected(){
+		 tp = new Point(getimage.centerpt.x,getimage.centerpt.y+120);
+		/* if(fst){
+			 mouse.moveCursor(tp);
+			 fst=false;
+		 }*/
+		 //System.out.println(clgc.pointColor(tp));
+		return !(this.clgc.colMoreLess(new Color(200,140,140), clgc.pointColor( tp)));
 	}
-	public boolean findBonesBox(){
-		if(colectseqns==0){
-		 img = getimage.screanImage();
-		 img2=img;
-		 pntcnt=0;
-		 scount=0;
-		 bbPNts=new Point[20];
-		 for(int y= 70;y<img.getHeight()-70;y++){
-				for(int x=50;x<img.getWidth()-50;x++){
-					if(this.cargoC(img, x, y)
-							&&this.cargoC(img, x+1, y)){
-					
-					}else{
-						//this.imgCchange(x, y, 0, 0, 0);
-						this.imgCchange2(x, y, 0, 0, 0);
-					}
-				}
-			}
-		 for(int y= 70;y<img.getHeight()-70;y+=20){
-				for(int x=50;x<img.getWidth()-50;x+=20){
-					if(this.cargoC(img, x, y)
-							&&this.cargoC(img, x+1, y)){
-					
-					}else{
-						this.imgCchange(x, y, 0, 0, 0);
-					}
-				}
-			}
+	public boolean findBonesBox3(){
 		
-		try {
-			ImageIO.write(img2, "BMP", new File("pallsearch"+imgnum+".bmp"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Point p = new Point(30,70);
+		 img = getimage.screanImage(p,getimage.scwidth-60,getimage.scheight-140);
+		 pntcnt=0;
+		 bbPNts=new Point[20];
+		
+		 //thisPaliePic(400,400);
+		 for(int y= 4;y<img.getHeight()-4;y+=60){
+				for(int x=4;x<img.getWidth()-4;x+=60){
+				int x1 = imgrob.smath.skipPnts(new Point(x, y), skipZone);
+					if(x1<img.getWidth()-10){
+						x=x1;
+					}
+					if(!(cargoC(img, x, y)&&cargoC(img, x+1, y)
+							||cargoC(img, x-1, y))&&
+							!clgc.pointColor(img, x, y,31,36,43)&&
+							!clgc.pointColor(img, x, y,28,33,40)&&
+							!clgc.pointColor(img, x, y,27,33,38)&&
+							!clgc.pointColor(img, x, y,7,7,7)&&
+							!clgc.pointColor(img, x, y,0,0,0)&&
+							!clgc.pointColor(img, x, y,22,38,47)){
+						
+						loop:for(int i =(-30);i<30;i+=15){
+							for(int j =(-30);j<30;j+=15){
+								 if(imgrob.smath.skipPnts(x+j, y+i, skipZone)){
+									 break;
+								 }
+								if(x1<img.getWidth()-10){
+									x=x1;
+								}
+								if(findbb2(x+j,y+i)){
+									break loop;
+								}
+								
+								
+							}
+						}
+					}else{
+						findbb2(x,y);
+						
+					}
+					
+				}
+			}
+		 //System.out.println(bnum);
+		 //System.out.println(itorations);
+		 if(pntcnt!=0){
+				rightclick(findClosePnt());
+				
+				System.out.println("hipotinose = "+hipotinose);
+				return true;
 		}
-		}
-		imgnum++;
 		return false;
 	}
 	
-	private void findbb(int x,int y){
-		if(cargoC(img,x,y)&&cargoC(img,x+1,y)
-				&&cargoC(img,x,y+1)){
-			int sy=0;
-			for(int y1=0;y1>-16;y1--){
-				System.out.println(y1);
-				if(!cargoC(img,x,y-y1)){
-					sy=y1;
-					break;
-				}
-				imgCchange(x,y-y1,255,0,0);
+	private boolean findbb2(int x,int y){
+		if(cargoC(img, x+1, y)
+				||cargoC(img, x-1, y)){
+				findbb(x,y);
+				return true;
 			}
-			int sx=0;
-			for(int x1=0;x1<16;x1++){
-				if(!cargoC(img,x-x1,y)){
-					sx=x1;
-					break;
-				}
-				imgCchange(x-x1,y,255,0,0);
-			}
-			
-			loop:for(int y1=(y-sy)+4;y1<y+1;y1+=2){
-			for(int x1=(x-sx)+4;x1<x+1;x1+=2){
-			if(bonesBox(x1,y1,x,y)){
-				bbPNts[pntcnt] = new Point(x1,y1);
-				pntcnt++;
-				break loop;
-			}
-			imgCchange(x1,y1,255,0,0);
-			
-			
-			}
-			}
-			//System.out.println(nlct1);
-		}
+		return false;
 	}
-	private Point findClosePnt(Point[] bbPNts2){
+	public int hipotinose=0;
+	private void findbb(int x,int y){
+		
+		loop:for(int x1=(-17);x1<8;x1++){
+			for(int y1=(-17);y1<8;y1++){
+				int tempx=x+x1;
+				int tempy=y+y1;
+				if(cargoC(img, tempx, tempy)){
+				if(thisPaliePic3(tempx,tempy)){
+					if(thisPaliePic(tempx-13,tempy-15)){
+					//dracBox(tempx-10,tempy-10);
+					
+					
+					bbPNts[pntcnt]=new Point(tempx+7,tempy+5);
+					pntcnt++;
+					//System.out.println(new Point(tempx+7,tempy+5));
+					break loop;
+					}
+				}
+					}
+			}
+				}
+	
+			}
+	private boolean thisPaliePic3(int x, int y) {
+		for(int i=0;i<3;i++){
+		for(int x1=0;x1<13;x1+=1){
+			if(!cargoC(img, x+x1-i, y)
+					&&!cargoC(img, x+x1-i, y+7)){
+				return false;
+			}
+			}
+		for(int y1=0;y1<9;y1+=1){
+			if(!cargoC(img, x, y+y1-i)
+					&&!cargoC(img, x+12, y+y1-i)){
+				return false;
+			}
+		}
+		}
+		return true;
+	}
+	private Point findClosePnt(){
 		clickpoint=new Point(0,0);
+		Point p1 = new Point(30,70);
 		int[] e =new int[20];
 		int i=0;
 		int numpnt = 0;
 		for(Point p:bbPNts){
 			if(p!=null){
-				e[i]=findHipotinus(getimage.centerpt,p);
+				
+				e[i]=findHipotinus(getimage.centerpt,new Point(p.x,p.y-115));
+				
 				numpnt++;
 				i++;
 			
@@ -168,15 +179,15 @@ public class boxes3  {
 				break;
 			}
 		}
-		int small = 8000;
+		int small = 18000;
 		 for(int l=0;l<numpnt;l++){
 			 if(bbPNts[l]==null){
 				 break;
 			 }
 			if(small>e[l]){
 				small=e[l];
-				clickpoint=new Point(bbPNts[l].x+5,bbPNts[l].y+5);
-				
+				hipotinose =e[l];
+				clickpoint=new Point(p1.x+bbPNts[l].x,p1.y+bbPNts[l].y);
 			}
 		}
 		 return clickpoint;
@@ -191,89 +202,38 @@ public class boxes3  {
 			y=y*(-1);
 		}
 		
-		return pyththeore(x,y);
+		return (int) tryangle.findhipotinose(x, y);
 	}
-	private int pyththeore(int hp,int nownleg){
-		return (int) Math.sqrt((Math.pow(hp, 2)+Math.pow(nownleg, 2)));
-	}
-	private boolean bonesBox( int x, int y, int x2, int y2) {
-			if (cargoC(img,x,y)
-					&&cargoC(img,x, y+5)
-					&&cargoC(img,x+5, y+6)) {
-						//dFind(palliePoint);
-				if(thisPaliePic(x-20,y-20,img.getSubimage(x-20, y-20, 61, 61))){
-						// System.out.println(new Point(x,y));
-					
-					for(int y1=y2-15;y1<y+41;y1+=15){
-						for(int x1=x2-15;x1<x+41;x1+=15){
-							
-						if(cargoC(img,x1,y1)){
-							imgCchange2(x1, y1,0,0,0);
-						if(x1==x2&&y1==y2){
-							imgCchange(x1, y1-1,0,0,0);
-							imgCchange(x1+1, y1,0,0,0);
-							
-						}
-						}
-					}
-					}
-					return true;
-				}
-			}
-			return false;
-		}
-	private void imgCchange2(int x, int y, int r, int g, int b) {
-		// TODO Auto-generated method stub
-		if(!imgmath.inBounds(img, x, y)){
-			img.setRGB(x, y,new Color(r,g,b).getRGB());
-		}
-	}
-		private void imgCchange(int x, int y, int r, int g, int b) {
-		// TODO Auto-generated method stub
-			
-			img2.setRGB(x, y,new Color(r,g,b).getRGB());
-			
-	}
-		private boolean thisPaliePic(int x1,int y1,BufferedImage imPalie) {
-			
-			for (int y = 0; y < imPalie.getHeight(); y++) {
-				for (int x = 0; x < imPalie.getWidth(); x++) {
-					if (y == 1 || y == 58 ) {
-						if(backGround(imPalie,x,y)||
-								backGround(imPalie,x,y+1)){
-							//System.out.println(clgc.pointColor(imPalie, x, y));
-							//imgCchange(x+x1,y+y1,200,200,200);
+	
+		
+		private boolean thisPaliePic(int x1,int y1) {
+			int fp=46;
+			for (int y = 2; y < fp; y+=3) {
+						if(backGround( y+x1,y1)
+								&&backGround( y+x1,y1+fp)
+								&&backGround(x1+fp,y+y1)
+								&&backGround( x1,y+y1)){
+						
 						}else{
-							//System.out.println("not in pallie");
-							//System.out.println(clgc.pointColor(imPalie, x, y));
 							return false;
 						}
-					}else{
-						if(x==2){
-							x+=54;
-						}
-						if(x==56){
-							x+=60;
-						}
-					}
-					
-					if (x == 0 ||x == 55) {
-						//System.out.println(new Color(imPalie.getRGB(x, y)));
-						if(backGround(imPalie,x,y)||
-								backGround(imPalie,x+1,y)){
-							//imgCchange(x+x1,y+y1,200,200,200);
-						}else{
-							////imgCchange(x+x1,y+y1,0,0,0);
-							return false;
-						}
-					}
-					
-					
-				}
 			}
 			
 			return true;
 
+		}
+		private boolean backGround( int x, int y) {
+			// TODO Auto-generated method stub
+			return (clgc.colMoreLess(new Color(130,130,130), clgc.pointColor(img, x, y)));
+		}
+		public Rectangle[] getSkipZone() {
+			return skipZone;
+		}
+		public void setSkipZone(Rectangle[] skipZone) {
+			this.skipZone = skipZone;
+			for(Rectangle rect:this.skipZone){
+				System.out.println(rect);
+			}
 		}
 	
 

@@ -7,12 +7,16 @@ import java.awt.image.BufferedImage;
 public class searchMath {
 	
 	public int skipPnts(Point p,Rectangle[] rect){
+		if(rect!=null){
 		for(Rectangle r: rect){
+			if(r!=null){
 			if(p.x>r.x&&p.x<r.x+r.width){
 				if(p.y>r.y&&p.y<r.y+r.height){
 				return r.width+r.x;
 			}
 			}
+			}
+		}
 		}
 		return p.x;
 	}
@@ -26,8 +30,8 @@ public class searchMath {
 		return false;
 	}
  	public boolean searchBoundries(BufferedImage img,Point p){
- 		
-		return (p.x<img.getWidth()&&p.y<img.getHeight()&&p.x>0&&p.y>0);
+ 		//System.out.println(img.getWidth());
+		return (p.x<img.getWidth()&&p.y<img.getHeight()&&p.x>1&&p.y>1);
 	}
 	
 	public int findHipotinus(Point p, Point p1){

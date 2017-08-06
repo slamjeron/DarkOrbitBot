@@ -16,7 +16,7 @@ public ImgRobot(){
 		e.printStackTrace();
 	}
 	image=new GetImage(rob);
-	clogic=new Colorlogic();
 	smath= new searchMath();
+	clogic=new Colorlogic(smath);
 }
 }

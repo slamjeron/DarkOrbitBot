@@ -89,26 +89,7 @@ public class Timers {
 						if(redytoColect()){
 							lblCt.setText("ct ="+bonesBox.getCt()+
 									"cargoNotClose ="+bonesBox.getCargoNotClose()+"losit ="+longsit);
-						boolean[] petnship = stc.map.petnearShip1(psw,psh);
-						//pr.println(psw);
-						if(petnship[3]){
-							
-							if(mov){
-								colect.hmove();
-							mov=false;
-							}
-						}else{
-							mov=true;
-						if(petnship[1]){
-							//colect.flytoRight
-							Point ptpnt=stc.map.petpnt;
-							robUI.rightclick(ptpnt.x
-									,ptpnt.y+5);
-						}else{
-						bonesBox.cargo(!petnship[0],moving,colect);
-						bonesBox.Cargoonship(1, 1);
-						}
-						}
+						
 						bclick=bonesBox.click;
 						shipPoint=stc.map.keapshipLock();
 						robUI.keepToolActive(0);

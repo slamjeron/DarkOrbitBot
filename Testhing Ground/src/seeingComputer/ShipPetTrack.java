@@ -3,20 +3,19 @@ package seeingComputer;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-
-import imglogic.GetImage;
+import imglogic.ImgRobot;
+import triangle.Rtriangle;
 
 public class ShipPetTrack {
-	private Point mappnt=new Point(200,200);
-	private GetImage imgcon;
+	private ImgRobot imgcon;
+	Rtriangle tryangle=new Rtriangle();
 	public Point petpnt=new Point(0,0);
-	private Point shipPoint= new Point(getMappnt().x+120,getMappnt().y+80);
-	private Rectangle mapsize;
-	
-	private int n;
+	private Point shipPoint= new Point(120,80);
+	private Rectangle maprect;
 	private boolean xfound;
-	public ShipPetTrack( GetImage i) {
-		imgcon=i;
+	public Point mapPoint;
+	public ShipPetTrack( ImgRobot imgcon2) {
+		imgcon=imgcon2;
 		
 	}
 	
@@ -26,24 +25,24 @@ public class ShipPetTrack {
 				shipPoint.y-(searchsize));
 		Point mspnt = new Point(shpnt.x+searchsize*2,shpnt.y+searchsize*2);
 	int mx = 0;
-	if(mspnt.x>imgcon.scwidth){
-		mx=mspnt.x-imgcon.scwidth;
+	if(mspnt.x>imgcon.image.scwidth){
+		mx=mspnt.x-imgcon.image.scwidth;
 	}
-		BufferedImage shimg = imgcon.screanImage(shpnt.x,
+		BufferedImage shimg = imgcon.image.screanImage(shpnt.x,
 				shpnt.y, searchsize-mx, searchsize-mx);
 		boolean[] petlogic={false,false,false};
 		for (int y =0;y<shimg.getHeight(); y++){
 			for (int x =0;x<shimg.getWidth(); x++){
-				if(imgcon.pointEcolor(shimg, x, y, 204, 129, 0)){
+				if(imgcon.clogic.pointEcolor(shimg, x, y, 204, 129, 0)){
 					petlogic[2]=true;
 					petpnt=new Point(shpnt.x+x,shpnt.y+y);
-					int spnt = imgcon.findHipotinus(petpnt,shipPoint);
+					int spnt = tryangle.findhipotinose(petpnt,shipPoint);
 					if(spnt<smradius){
-						petpnt=new Point((shpnt.x+x)-mappnt.x,(shpnt.y+y)-mappnt.y);
+						petpnt=new Point((shpnt.x+x)-maprect.x,(shpnt.y+y)-maprect.y);
 						petlogic[0]=true;
 					}
 					if(spnt>bgradius){
-						petpnt=new Point((shpnt.x+x)-mappnt.x,(shpnt.y+y)-mappnt.y);
+						petpnt=new Point((shpnt.x+x)-maprect.x,(shpnt.y+y)-maprect.y);
 						petlogic[1]=true;
 					}
 				}
@@ -53,20 +52,21 @@ public class ShipPetTrack {
 		return petlogic;
 	}
 	public boolean moving(){
-		Point mpnt1 = new Point(mappnt.x+96,mappnt.y-10);
-		return imgcon.pointEcolor(mpnt1, 255,255,255);
+		Point mpnt1 = new Point(maprect.x+119,maprect.y+41);
+		//imgcon.clogic.printPColer(mpnt1);
+		return imgcon.clogic.pointEcolor(mpnt1, 255,255,255);
 	}
 	public Point findShip() {
-		int yLocation = getMappnt().y+4;
+		int yLocation = maprect.y+4;
 		int xLocation = shipPoint.x;
 		BufferedImage mapImage;
-		Point searchPoint = new Point(getMappnt().x+10,getMappnt().y+10);
-			mapImage=imgcon.screanImage(searchPoint, 360, 221);
+		Point searchPoint = new Point(maprect.x+10,maprect.y+10);
+			mapImage=imgcon.image.screanImage(searchPoint, 360, 221);
 			for (int i =0;i<mapImage.getWidth(); i++){
-				if(imgcon.pointsevinty(mapImage,i,0)&&
-						imgcon.pointsevinty(mapImage,i,100)||
-						imgcon.pointsevinty(mapImage,i,40)&&
-						imgcon.pointsevinty(mapImage,i,110)){
+				if(imgcon.clogic.pointsevinty(mapImage,i,0)&&
+						imgcon.clogic.pointsevinty(mapImage,i,100)||
+						imgcon.clogic.pointsevinty(mapImage,i,40)&&
+						imgcon.clogic.pointsevinty(mapImage,i,110)){
 				xLocation=searchPoint.x+i;
 				xfound=true;
 				break;
@@ -74,7 +74,7 @@ public class ShipPetTrack {
 			}
 			boolean yfound=false;
 			for(int i =0;i<mapImage.getHeight();i++){
-				if(imgcon.pointsevinty(mapImage,200,i)&&imgcon.pointsevinty(mapImage,40,i)){
+				if(imgcon.clogic.pointsevinty(mapImage,200,i)&&imgcon.clogic.pointsevinty(mapImage,40,i)){
 					yLocation=searchPoint.y+i;
 					//System.out.println(i+10);
 					yfound=true;
@@ -87,7 +87,7 @@ public class ShipPetTrack {
 			if(yfound){
 			shipPoint=new Point(xLocation,yLocation);
 			}else{
-				shipPoint=new Point(xLocation,getMappnt().y+18);
+				shipPoint=new Point(xLocation,maprect.y+18);
 			}
 			
 			return shipPoint;
@@ -100,15 +100,15 @@ public class ShipPetTrack {
 		 int yLocation=0;
 		BufferedImage shipimg;
 		Point lastLocation = new Point(shipPoint.x-35,shipPoint.y-35);
-		shipimg=imgcon.screanImage(lastLocation, 70, 70);
+		shipimg=imgcon.image.screanImage(lastLocation, 70, 70);
 		
 					for (int k = 0; k < shipimg.getWidth(); k++) {
-						if(imgcon.pointsevinty(shipimg,k,68)){
+						if(imgcon.clogic.pointsevinty(shipimg,k,68)){
 							xLocation=lastLocation.x+k;
 							xlocat=true;
 							break;
 						}
-					if(imgcon.pointsevinty(shipimg,k,1)){
+					if(imgcon.clogic.pointsevinty(shipimg,k,1)){
 						xLocation=lastLocation.x+k;
 						xlocat=true;
 						break;
@@ -117,7 +117,7 @@ public class ShipPetTrack {
 					}
 				
 					for (int k = 0; k < shipimg.getHeight(); k++) {	
-					if(imgcon.pointsevinty(shipimg,1,k)){
+					if(imgcon.clogic.pointsevinty(shipimg,1,k)){
 						yLocation=lastLocation.y+k;
 						ylocat=true;
 						break;
@@ -131,18 +131,16 @@ public class ShipPetTrack {
 		return shipPoint;
 		}
 	}
-	public Point getMappnt() {
-		return mappnt;
+	public Rectangle getMaprect() {
+		return maprect;
 	}
-	public void setMappnt(Point mappnt) {
-		this.mappnt = mappnt;
-		setMapsize(new Rectangle(mappnt.x,mappnt.y,350,210));
+
+	public void setMaprect(Rectangle maprect) {
+		shipPoint= new Point(maprect.x+120,maprect.y+80);
+		mapPoint=new Point(maprect.x,maprect.y);
+		this.maprect = maprect;
 	}
-	public Rectangle getMapsize() {
-		return mapsize;
-	}
-	public void setMapsize(Rectangle mapsize) {
-		this.mapsize = mapsize;
-	}
+
+	
 
 }

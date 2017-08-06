@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JRootPane;
 
 import cargoSight.boxes3;
-import cargoSight.colectingTimers;
 import imglogic.GetImage;
 
 import javax.swing.JButton;

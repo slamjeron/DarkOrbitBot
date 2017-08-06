@@ -1,16 +1,15 @@
 package seeingComputer;
 
 import java.awt.Point;
-
-import imglogic.GetImage;
+import imglogic.ImgRobot;
 
 public class ToolBarinfo {
 	
-	private GetImage imgcon;
+	private ImgRobot imgcon;
 	private Point[] tools = new Point[11];
 	
-	public ToolBarinfo(GetImage img) {
-		imgcon=img;
+	public ToolBarinfo(ImgRobot imgcon2) {
+		imgcon=imgcon2;
 	}
 	public boolean toolredy(int toolnum){
 		if(toolnum>9){
@@ -21,7 +20,7 @@ public class ToolBarinfo {
 		}
 		
 		//imgcon.moveCursor(tools[toolnum]);
-		return imgcon.pointEcolor(tools[toolnum],44,114,140);
+		return imgcon.clogic.pointEcolor(tools[toolnum],44,114,140);
 		
 	}
 	public void setToolbarPnt(Point toolbarPnt) {
