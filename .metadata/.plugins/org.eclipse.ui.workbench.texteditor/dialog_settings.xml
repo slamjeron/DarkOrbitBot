@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="pArl3=new ArrayList" key="selection"/>
+		<item value="nim.setRGB(" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="nim.setRGB("/>
 			<item value="pArl3=new ArrayList"/>
 			<item value="textcl(im,x+-1,3)"/>
 			<item value="7textcl(im,x+0,3)"/>
@@ -15,9 +16,9 @@
 			<item value="new Color(156,158,160)"/>
 			<item value="(156,158,160)"/>
 			<item value="map"/>
-			<item value="!cargoC(img,"/>
 		</list>
 		<list key="replacehistory">
+			<item value="setnimcl("/>
 			<item value="mapPoint"/>
 			<item value="backGround("/>
 			<item value="imgcon.clogic."/>
@@ -25,14 +26,13 @@
 			<item value="imgcon.clogic.pointEcolor"/>
 			<item value=""/>
 			<item value="//imgCchange"/>
-			<item value="img"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="389" key="DIALOG_HEIGHT"/>
-		<item value="1107" key="DIALOG_X_ORIGIN"/>
-		<item value="42" key="DIALOG_Y_ORIGIN"/>
+		<item value="1110" key="DIALOG_X_ORIGIN"/>
+		<item value="288" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

@@ -33,16 +33,60 @@ public class GetImage {
    }
 	public GetImage() {
 		readnum rn = new readnum();
-		rn.numtest();
-		
 		readtxt rt = new readtxt();
-				rt.readtest();
-				Object health = rt.nim1.getSubimage(x, y, w, h);
-		rn.readnum1(health);
+		rt.readtest();
+				if(rt.shipPnt.x>2){
+			BufferedImage health = subimg(rt.nim1,rt.hpRect);
+			BufferedImage shield = subimg(rt.nim1,rt.shieldRect);
+			BufferedImage speed = subimg(rt.nim1,rt.speedRect);
+			BufferedImage cargo = subimg(rt.nim1,rt.cargoRect);
+			int hp=rn.readnum1(health);
+		int sh=rn.readnum1(shield);
+		int sp=rn.readnum1(speed);
+		int cg=rn.readnum1(cargo);
+		System.out.println("hit points="+hp);
+		System.out.println("shield points="+sh);
+		System.out.println("ship speed="+cg);
+		System.out.println("ship cargo="+sp);
+				}
+		if(rt.userPnt.x>2){
+			BufferedImage uridum = subimg(rt.nim1,rt.uridumRect);
+			BufferedImage credits = subimg(rt.nim1,rt.creditsRect);
+			BufferedImage keys = subimg(rt.nim1,rt.btkeyRect);
+			int ur=rn.readnum1(uridum);
+			int cr=rn.readnum1(credits);
+			int ky=rn.readnum1(keys);
+			System.out.println("credits="+cr);
+			System.out.println("uridum="+ur);
+			System.out.println("keys="+ky);
+			File outputfile = new File("key image.png");
+			try {
+				ImageIO.write(keys, "png", outputfile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(rt.petPnt.x>2){
+		BufferedImage petfuel = subimg(rt.nim1,rt.petfuelRect);
+		int ptf = rn.readnum1(petfuel);
+		System.out.println("pet fuel="+ptf);
+		
+		}
+	}
+	private BufferedImage subimg
+	(BufferedImage nim, Rectangle r){
+		int k=r.x+r.width;
+		if(nim.getWidth()>k){
+		return nim.getSubimage(r.x, r.y, r.width, r.height);
+		}else{
+			System.out.println("too big");
+		return nim;
+		}
 	}
 	class readnum{
 		private int num;
-		private String nstr="";
+		private String nstr=new String();
 		private BufferedImage nim;
 		
 		private ArrayList<ArrayList<Point>> pArl3;
@@ -64,8 +108,8 @@ public class GetImage {
 			nim.setRGB(x-1, y, cl.getRGB());
 		}
 	}
-	public void readnum1(BufferedImage im){
-		
+	public int readnum1(BufferedImage im){
+		nstr="";
 		pArl3=new ArrayList<ArrayList<Point>>();
          for(int l=2;l<im.getWidth();l++){
          		//numcl(im,l);
@@ -73,17 +117,25 @@ public class GetImage {
  				if(this.textcl(im, l, 0)){
  					//numcnt++;
          		testnum(im,l);
-         		nstr+=""+num;
+         		nstr+=num;
  				}}
+        	 /*
         	 if(!this.maptextcl(im, l-1, 0)){
   				if(this.maptextcl(im, l, 0)){
   					
-  				}}
+  				}}*/
          }
         
          //System.out.println(numcnt);
-        System.out.println(nstr);
-        printUnekPointsAlist();
+        //System.out.println(nstr);
+        //printUnekPointsAlist();
+         //System.out.println(nstr);
+         if(nstr!=null&&nstr!=""){
+        	 nstr.replaceAll("\\D+","");
+        return Integer.parseInt(nstr);
+         }else{
+        	 return 0;
+         }
        
          
 	}
@@ -222,38 +274,35 @@ public class GetImage {
 	}
 	
 	class readtxt{
-		private BufferedImage nim;
+		public Rectangle petfuelRect;
+		public Rectangle btkeyRect;
+		public Rectangle creditsRect;
+		public Rectangle uridumRect;
 		public ArrayList<ArrayList<Point>> pArl3;
-		public Point mapPnt=new Point();
-		public Point shipPnt=new Point();
+		public Point mapPnt=new Point(0,0);
+		public Point shipPnt=new Point(0,0);
 		public Point petPnt=new Point(0,0);
 		public Point userPnt=new Point(0,0);
 		public BufferedImage nim1;
+		public BufferedImage nim;
+		public Rectangle hpRect;
+		public Rectangle shieldRect;
+		public Rectangle cargoRect;
+		public Rectangle speedRect;
 		public void readtest() {
 			pArl3=new  ArrayList<ArrayList<Point>>() ;
 			BufferedImage im;
 			try {
 				im = (BufferedImage)
 						(ImageIO.read(new File("wordsearch.png")));
-			
-			
 			imsearch(im);
-			File outputfile = new File("imageword.png");
-			ImageIO.write(nim, "png", outputfile);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		private void imsearch(BufferedImage im) {
-			try {
-				nim= (BufferedImage)
-						(ImageIO.read(new File("wordsearch.png")));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			imgfilter();
+			nim1=im;
 			for(int y =0; y<im.getHeight();y+=100){
 				for(int x=2;x<im.getWidth();x++){
 					if((mapPnt.x-1<x&&mapPnt.x+3>x&&mapPnt.y+279>y))
@@ -277,13 +326,18 @@ public class GetImage {
 					}
 				}
 				}
-			try{
-			File outputfile = new File("imageword.png");
-			ImageIO.write(nim, "png", outputfile);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+			hpRect=new Rectangle(shipPnt.x+34,shipPnt.y+38,50,8);
+			shieldRect=new Rectangle(shipPnt.x+34,shipPnt.y+55,50,8);
+			cargoRect=new Rectangle(shipPnt.x+131,shipPnt.y+38,50,8);
+			speedRect=new Rectangle(shipPnt.x+131,shipPnt.y+55,24,8);
+			
+			btkeyRect=new Rectangle(userPnt.x+138,userPnt.y+84,30,8);
+			creditsRect=new Rectangle(userPnt.x+138,userPnt.y+33,75,8);
+			uridumRect=new Rectangle(userPnt.x+138,userPnt.y+50,75,8);
+			
+			petfuelRect=new Rectangle(petPnt.x+180,petPnt.y+49,75,8);
+			
 			//printUnekPointsAlist();
 		}
 		private boolean cltest(BufferedImage im, int x, int y, Color clr) {
@@ -334,17 +388,17 @@ public class GetImage {
 				}
 		}
 		private void findCorner(BufferedImage im, int x, int y) {
-			setnimcl(x, y, Color.yellow);
+			//setnimcl(x, y, Color.yellow);
 			int nint=-47;
 			for(int in=50;in>1;in/=2){
 				//System.out.println(nint);
 				//System.out.println(in);
 				if(borderCLR(im, x, y+nint)){
-					setnimcl(x, y+nint, Color.GREEN);
+					//setnimcl(x, y+nint, Color.GREEN);
 					nint-=in;
 				}else{
 					nint+=in;
-					setnimcl(x, y+nint, Color.RED);
+					//setnimcl(x, y+nint, Color.RED);
 				}
 				if(in<4){
 				fcorner(im,x,y+nint);
@@ -382,11 +436,11 @@ public class GetImage {
 						
 					}
 						System.out.println("foundCorner");
-						setnimcl(x, y+n, Color.BLUE);
+						//setnimcl(x, y+n, Color.BLUE);
 						checktype(im ,x, y+n);
 						break;
 					}else{
-						setnimcl(x, y+n, Color.WHITE);
+						//setnimcl(x, y+n, Color.WHITE);
 					}
 					}
 			
@@ -405,9 +459,6 @@ public class GetImage {
 					if(textclr(im,tx,ty)){
 						//printPoint(new Point(tx-x,ty-y));
 						pArl.add(new Point(tx-nx,ty-ny));
-						setnimcl( tx+1, ty-1, Color.RED);
-					}else{
-						setnimcl( tx+1, ty-1, Color.white);
 					}
 				}
 			}
@@ -425,17 +476,7 @@ public class GetImage {
 				System.out.println(cl);*/
 			return borderCLR(im, x, y)&&borderCLR(im, x+1, y-1);
 		}
-		private void imgfilter(){
-			for(int y =0; y<nim.getHeight();y++){
-				for(int x=0;x<nim.getWidth();x++){
-					if(this.textclr(nim, x, y)||borderCLR(nim, x, y)){
-						
-					}else{
-						setnimcl(x, y, Color.BLACK);
-					}
-				}
-				}
-		}
+		
 		private boolean borderCLR(BufferedImage im, int x, int y) {
 			if(im.getWidth()>x&&x>0&&im.getHeight()>y&&y>0){
 				Color cl = new Color(im.getRGB(x, y));
