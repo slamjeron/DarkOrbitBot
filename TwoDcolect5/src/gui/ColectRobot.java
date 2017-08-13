@@ -82,7 +82,7 @@ public class ColectRobot {
 				index =comboBox.getSelectedIndex();
 				box1.setIndex(index);
 				if(start){
-				box1.mObjects.cargo.travel.sethight(index);
+				box1.shair.cargo.travel.sethight(index);
 				}
 			}
 		});
@@ -97,7 +97,7 @@ public class ColectRobot {
 			public void actionPerformed(ActionEvent arg0) {
 				start=true;
 					box1.colect();
-					box1.mObjects.cargo.travel.sethight(index);
+					box1.shair.cargo.travel.sethight(index);
 			}
 		});
 		btnStart.setBounds(37, 42, 89, 23);
@@ -137,7 +137,7 @@ public class ColectRobot {
 		
 		JMenu mnFile = new JMenu("file");
 		menuBar.add(mnFile);
-		developertest test=new developertest(box1,box1.mObjects.cargo); 
+		developertest test=new developertest(box1,box1.shair.cargo); 
 		JMenuItem mntmTestPage = new JMenuItem("test page");
 		mntmTestPage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

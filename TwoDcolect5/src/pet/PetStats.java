@@ -9,8 +9,8 @@ public class PetStats {
 
 	
 	public Point[] petControlPoints=new Point[6];
-	private Point[] petStatsP=new Point[7];
-	public boolean petdown;
+	private Point[] petStatsP=new Point[9];
+	public boolean petdown=false;
 	public boolean petup;
 	public boolean petLesHP;
 	public boolean petLesSH;
@@ -18,6 +18,7 @@ public class PetStats {
 	private int tl;
 	public Point BTN3,selectBTN,startBTN
 	,BTN4,BTN5,BTN6;
+	private boolean petstart=false;
 
 	public PetStats(ImgRobot imgcon2) {
 		// TODO Auto-generated constructor stub
@@ -25,6 +26,7 @@ public class PetStats {
 	}
 	
 	public void setPetstatp(Point p) {
+		petstart=true;
 		petControlPoints[0] = new Point(p.x, p.y + 110);
 		petControlPoints[1] = new Point(p.x + 150, p.y + 110);
 		for(int i = 2;i<4;i++){
@@ -49,6 +51,7 @@ public class PetStats {
 		petStatsP[6] = new Point(p.x + 93, p.y +102);
 	}
 	public boolean petmoniter(){
+		if(petstart){
 		petdown = imgcon.clogic.pointEcolor(petStatsP[5], Color.BLACK);
 		petup = imgcon.clogic.pointEcolor(petStatsP[5], Color.RED);
 		if(petdown){
@@ -62,6 +65,7 @@ public class PetStats {
 			petLesSH=false;
 		}
 		tl++;
+		}
 		return false;
 	}
 	public boolean dropdownShown() {

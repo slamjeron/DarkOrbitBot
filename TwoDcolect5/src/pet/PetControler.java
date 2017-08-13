@@ -1,23 +1,26 @@
 package pet;
 
+import java.awt.Point;
+
 import userControls.Mouse;
 import workingFinder.bonesBox;
 
 public class PetControler {
 
-	private PetStats petSt;
+	public PetStats petSt;
 	private bonesBox mouse;
-	private int n;
+	private int n=0;
 
 	public PetControler(PetStats p,bonesBox cbox) {
+		p=petSt;
 		mouse=cbox;
-		petSt=p;
 	}
 	public void moniter(){
-		petSt.petmoniter();
+		//petSt.petmoniter();
 	}
 public void start(){
 	if(petSt.petdown){
+		
 		if(n==1){
 			mouse.rightclick(petSt.startBTN);
 			}
@@ -26,7 +29,7 @@ public void start(){
 			}
 			n++;
 	}
-}
+	}
 public void stop(){
 	
 	if(petSt.petup){

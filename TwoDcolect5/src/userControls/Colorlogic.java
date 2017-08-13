@@ -3,7 +3,9 @@ package userControls;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 public class Colorlogic {
@@ -12,14 +14,21 @@ public class Colorlogic {
 		// TODO Auto-generated constructor stub
 		this.smath=smath;
 	}
+private Rectangle screen=new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+	
+	public boolean screenBounds(int x,int y){
+		return (x < screen.width && y < screen.height && x > 0 && y > 0);
+		
+	}
 	public Colorlogic() {
 		// TODO Auto-generated constructor stub
 	}
 	public Color pointColor(BufferedImage img,Point p){
+		
 		return pointColor(img,p.x, p.y);
 	}
 	public Color pointColor(BufferedImage img,int x,int y){
-		if(smath.searchBoundries(img, new Point(x,y))){
+		if(smath.inBoundries(img, new Point(x,y))){
 		return new Color(img.getRGB(x, y));
 		}else{
 			return Color.black;
@@ -32,6 +41,7 @@ public class Colorlogic {
 	public Color pointColor(int x,int y){
 		Robot rob;
 		Color c = new Color(0,0,0);
+		if(screenBounds(x,y)){
 		try {
 			rob = new Robot();
 			c= rob.getPixelColor(x, y);
@@ -39,6 +49,7 @@ public class Colorlogic {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
 		return c;
 	}
 	public boolean pointEcolor(BufferedImage image
@@ -57,8 +68,9 @@ public class Colorlogic {
 		
 	}
 	public boolean pointEcolor(Point point,Color c) {
+		if(screenBounds(point.x,point.y))
 		return pointColor(point).equals(c);
-		
+		return false;
 	}
 	public boolean colMoreLess(Color more,Color less){
 		return(more.getRed()>less.getRed()&&more.getGreen()>less.getGreen()&&more.getBlue()>less.getBlue());

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
+		<item value="false" key="renameSubpackages"/>
+		<item value="false" key="updateQualifiedNames"/>
+		<item value="*" key="patterns"/>
+		<item value="false" key="updateTextualMatches"/>
 	</section>
 	<section name="SelfEncapsulateFieldWizard">
 		<item value="false" key="GenerateJavadoc"/>
@@ -49,11 +53,14 @@
 	</section>
 	<section name="FatJarPackageWizard">
 		<item value="C:\Users\slamj\Documents\GitHub\DarkOrbitBot\DarkOrbitBot" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
-		<item value="ColectRobot - TwoDcolect5" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="C:\Users\slamj\OneDrive\just Colect.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="ColectingGui (2) - usethis" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\Users\slamj\OneDrive\use this.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\slamj\OneDrive\use this.jar"/>
+			<item value="C:\Users\slamj\OneDrive\user stats saving.jar"/>
+			<item value="C:\Users\slamj\OneDrive\user stats.jar"/>
 			<item value="C:\Users\slamj\OneDrive\just Colect.jar"/>
 			<item value="C:\Users\slamj\OneDrive\colecting bot3.jar"/>
 			<item value="C:\Users\slamj\OneDrive\colecting bot2.jar"/>

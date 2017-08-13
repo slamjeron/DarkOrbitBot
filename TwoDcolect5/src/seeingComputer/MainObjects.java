@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import mapControls.ShipPetTrack;
+import mapControls.ShipTrack;
 import pet.PetStats;
 import userControls.ImgRobot;
 import workingFinder.FindCargo;
@@ -22,14 +22,11 @@ public class MainObjects {
 	public boolean petstf=false;
 	private Point toolbarPnt=new Point(0,0);
 	private Point shipStatspnt=new Point(0,0);
-	public Point mappnt=new Point(0,0);
+	private Point mappnt=new Point(0,0);
 	private Point petstat=new Point(0,0);
-public ImgRobot imgcon = new ImgRobot();
-
-public ToolBarinfo toolbar = new ToolBarinfo(imgcon);
-public PetStats petSt = new PetStats(imgcon);
-public ShipPetTrack shipPet = new ShipPetTrack(imgcon);
-public FindCargo cargo=new FindCargo(imgcon,shipPet,petSt);
+	public ImgRobot imgcon;
+	private Rectangle[]  skipZone;
+	private boolean objectsfound;
 public void search(){
 	mapf=false;
 	shipstf=false;
@@ -55,15 +52,14 @@ public void search(){
 		}
 	}
 	if(mapf&&shipstf&&petstf&&toolBarF){
-		Rectangle[] skipZone={new Rectangle
+		skipZone=(new Rectangle[]{new Rectangle
 				(toolbarPnt.x-2,toolbarPnt.y-4,405,38)
 				,new Rectangle(shipStatspnt.x-30,shipStatspnt.y-6,220,110)
 				,new Rectangle(mappnt.x-42,mappnt.y-70,407,298)
-				,new Rectangle(petstat.x-34,petstat.y-7,266,193)};
-		shipPet.setMappnt(mappnt);
-		cargo.setSkipZone(skipZone,mappnt);
-		screenimg=colorRect(screenimg,skipZone);
-		petSt.setPetstatp(petstat);
+				,new Rectangle(petstat.x-34,petstat.y-7,266,193)});
+		objectsfound=(true);
+	}else{
+		objectsfound=(true);
 	}
 
 		
@@ -97,7 +93,7 @@ private void petStats(BufferedImage img, int x, int y) {
 			imgcon.clogic.pointEcolor(img,x+11,y,51,49,46)
 			) {
 		petstf=true;
-		petstat=new Point(x,y);
+		petstat=(new Point(x,y));
 		//petSt.setPetstatp(petstat);
 	}
 }
@@ -106,7 +102,7 @@ private void toolbar(BufferedImage img, int x, int y) {
 	// TODO Auto-generated method stub
 	if(imgcon.clogic.pointEcolor(img,x,y,54 ,63 , 77)){
 		toolBarF=true;
-		toolbarPnt=new Point(x,y);
+		toolbarPnt=(new Point(x,y));
 		//toolbar.setToolbarPnt(toolbarPnt);
 	}
 }
@@ -117,7 +113,7 @@ private void shipStats(BufferedImage img, int x, int y) {
 			&&imgcon.clogic.pointEcolor(img,x+1, y,232,225,191)
 			&&imgcon.clogic.pointEcolor(img,x+7, y,67,58,47)
 			&&imgcon.clogic.pointEcolor(img,x+11, y,33,42,45)){
-		shipStatspnt=new Point(x,y);
+		shipStatspnt=(new Point(x,y));
 		shipstf=true;
 	}
 		
@@ -125,11 +121,29 @@ private void shipStats(BufferedImage img, int x, int y) {
 private void MapPoint(BufferedImage img, int x, int y) {
 	if( imgcon.clogic.pointEcolor(img, x, y,153 ,204 , 255)){
 		mapf=true;
-		mappnt=new Point(x,y);
+		mappnt=(new Point(x,y));
 		//shipPet.setMappnt(mappnt);
 	}
 	// TODO Auto-generated method stub
 	
+}
+public Point getToolbarPnt() {
+	return toolbarPnt;
+}
+public Point getShipStatspnt() {
+	return shipStatspnt;
+}
+public Point getMappnt() {
+	return mappnt;
+}
+public Point getPetstat() {
+	return petstat;
+}
+public Rectangle[] getSkipZone() {
+	return skipZone;
+}
+public boolean isObjectsfound() {
+	return objectsfound;
 }
 
 }

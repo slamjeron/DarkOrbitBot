@@ -14,7 +14,7 @@ import userControls.Rtriangle;
 import userControls.searchMath;
 public class bonesBox  {
 	public ImgRobot imgrob=new ImgRobot();
-	public Mouse mouse = new Mouse();
+	private Mouse mouse;
 	private Rtriangle tryangle=new Rtriangle();
 	private Rectangle[] skipZone;
 	 private GetImage getimage=imgrob.image;
@@ -25,14 +25,12 @@ public class bonesBox  {
 	private BufferedImage img;
 	private Point clickpoint;
 	public void rightclick(Point p){
-		
-		
-		mouse.rightclick(p);
+		getMouse().rightclick(p);
 		
 	}
 	private boolean backGround( int x, int y) {
 		// TODO Auto-generated method stub
-		if(imgmath.searchBoundries(img,new Point(x,y))){
+		if(imgmath.inBoundries(img,new Point(x,y))){
 		return (clgc.colMoreLess(new Color(130,130,130), clgc.pointColor(img, x, y)));
 		}else{
 			return false;
@@ -40,7 +38,7 @@ public class bonesBox  {
 		}
 	private boolean darkBackGround( int x, int y) {
 		// TODO Auto-generated method stub
-		if(imgmath.searchBoundries(img,new Point(x,y))){
+		if(imgmath.inBoundries(img,new Point(x,y))){
 		return (clgc.colMoreLess(new Color(30,30,30), clgc.pointColor(img, x, y)));
 		}else{
 			return false;
@@ -52,7 +50,7 @@ public class bonesBox  {
 	}
 	private boolean cargoC(BufferedImage img, int x, int y){
 		
-		if(imgmath.searchBoundries(img,new Point(x,y))){
+		if(imgmath.inBoundries(img,new Point(x,y))){
 			
 		return cargoC(clgc.pointColor(img, x, y));
 		}else{
@@ -177,7 +175,6 @@ public class bonesBox  {
 	
 	 pntcnt=0;
 	 bbPNts=new Point[20];
-	
 	 //thisPaliePic(400,400);
 	 for(int y= 4;y<img.getHeight()-4;y+=60){
 			for(int x=10;x<img.getWidth()-10;x+=60){
@@ -205,4 +202,10 @@ public class bonesBox  {
 	}
 	return false;
 }
+	public Mouse getMouse() {
+		return mouse;
+	}
+	public void setMouse(Mouse mouse) {
+		this.mouse = mouse;
+	}
 }

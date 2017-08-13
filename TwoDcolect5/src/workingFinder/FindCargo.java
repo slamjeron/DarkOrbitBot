@@ -5,12 +5,13 @@ import java.awt.Rectangle;
 
 import javax.swing.JLabel;
 
-import mapControls.ShipPetTrack;
+import mapControls.ShipTrack;
 import mapControls.Travel;
 import mapControls.Travel.Direction;
 import pet.PetControler;
 import pet.PetStats;
 import userControls.ImgRobot;
+import userControls.Mouse;
 public class FindCargo  {
 	private int traveltime;
 	
@@ -19,10 +20,10 @@ public class FindCargo  {
 	private boolean wmove;
 	private int sampt;
 	public bonesBox cbox=new bonesBox();
-	private ShipPetTrack shipPet;
+	private ShipTrack shipPet;
 	private int looktime;
 
-	public Travel travel;
+	public Travel travel=new Travel();
 
 	public int stagnintTimer;
 
@@ -38,20 +39,22 @@ public class FindCargo  {
 
 	
 	//private MainObjects mObjects=new MainObjects();
-	public FindCargo(ImgRobot imgcon, ShipPetTrack shipPet, PetStats petSt) {
+	public FindCargo(ImgRobot imgcon, ShipTrack shipPet, PetStats petSt, Mouse mouse) {
 		pet=new PetControler(petSt,cbox);
 		cbox.imgrob=imgcon;
 		this.shipPet=shipPet;
+		travel.mouse= mouse;
+		cbox.setMouse(mouse);
 		//travel.mouse=cbox.mouse;
 		// TODO Auto-generated constructor stub
 	}
 	public void findCargo1(){
-		travel.mouse=cbox.mouse;
+		
 	}
 	public void findCargo(){
-		
-		pet.start();
-		pet.colect();
+		//pet.moniter();
+		//pet.start();
+		//pet.colect();
 		boolean moving = shipPet.moving();
 		Point shipPoint = shipPet.findShip();
 		int shx = shipPoint.x;
@@ -96,7 +99,7 @@ public class FindCargo  {
 			}
 			}else{
 				if(moving){
-					if(traveltime>20){
+					if(traveltime>100){
 						sampt=0;
 						traveltime=0;
 						bonesboxfound=false;
@@ -131,15 +134,12 @@ public class FindCargo  {
 		wmove=false;
 		setLooktime(0);
 	}
-	public Rectangle[] getSkipZone() {
-		return skipZone;
-	}
-	public void setSkipZone(Rectangle[] skipZone,Point p) {
-		this.skipZone = skipZone;
+	
+	public void setSkipZone(Rectangle[] skipZone) {
+		//this.skipZone = skipZone;
 		cbox.setSkipZone(skipZone);
-		travel=new Travel();
-		travel.setMapPoint(p);
 	}
+	
 	public int getLooktime() {
 		return looktime;
 	}

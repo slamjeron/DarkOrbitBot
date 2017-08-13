@@ -1,5 +1,7 @@
 package workingFinder;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.io.PrintStream;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,6 +11,7 @@ import javax.swing.JLabel;
 import mapControls.GateJumper;
 import seeingComputer.MainObjects;
 import seeingComputer.ShipStatus;
+import shairing.ShairInfo;
 import userControls.Colorlogic;
 import userControls.Keyboard;
 import userControls.Mouse;
@@ -16,7 +19,7 @@ import userControls.Mouse;
 public class colectingTimers {
 	private Timer timer= new Timer(), timer1= new Timer()
 			,timer2= new Timer(),timer3= new Timer();
-	public MainObjects mObjects=new MainObjects();
+	public ShairInfo shair=new ShairInfo();
 	private boolean st=false;
 	private boolean fst=true;
 	private boolean moving;
@@ -38,55 +41,25 @@ public class colectingTimers {
 public void colect(){
 	st=!st;
 	if(st){
-	mObjects.search();
+	shair.setObjectLocations();
 	//mObjects.cargo.cbox.mouse.moveCursor(mObjects.shipPet.mapPoint);
-	mObjects.cargo.findCargo1();
-	Mouse mouse = mObjects.cargo.cbox.mouse;
-	ShipStatus shipstat = new ShipStatus(mObjects.imgcon,mouse);
-	Colorlogic clogic = mObjects.imgcon.clogic;
-	mObjects.cargo.reset();
-	GateJumper gj=new 
-			GateJumper(mObjects.mappnt,mouse,clogic);
-	 //gj.reset();
-	 moving = mObjects.shipPet.moving();
+	shair.cargo.findCargo1();
+	shair.cargo.reset();
+	
+
+	//shair.petSt.petmoniter();
+	 //shair.cargo.pet.start();
+	 //shair.cargo.pet.colect();
+	 shair.cargo.findCargo();
 	
 	if(fst){
 		timer.scheduleAtFixedRate (
 			    new TimerTask() {
-			    	private void reset(int mapnum){
-			    		//controls what happens when we die and arrive at 1-1
-			    		
-			    		redy=(to1_4&&mapnum==1&&min<maxtime);
-			    		
-			    		if(mapnum!=0&&!moving){
-			    			boolean on1_1 = mObjects.shipPet.on1_1();
-			    			if(on1_1){
-			    				
-			    				
-			    				to1_4=true;
-			    				gj.reset();
-			    				mapnum=0;
-			    			}
-			    			shipDed=shipstat.shipDead();
-			    			lblDeathCount.setText("Death Count = "+shipstat.getDeathCount());
-			    		}
-			    		if (to1_4){
-			    			int max = gj.from1_1To4_1.length;
-			    			if(mapnum>max-1)to1_4=false;
-			    			if(!redy){
-			    				mObjects.cargo.pet.stop();
-			    				gj.setMoving(moving);
-			    				gj.travel(gj.from1_1To4_1);
-			    			}
-			    		}
-			    	}
+			    	
 					@Override
 					public void run() {
 						if(st){
-							moving = mObjects.shipPet.moving();
-							int mapnum = gj.getMapNumber();
-							mObjects.cargo.pet.moniter();
-							reset(mapnum);
+							shair.cargo.pet.moniter();
 							
 						}
 					}
@@ -97,32 +70,20 @@ public void colect(){
 				private PrintStream out=System.out;
 				private int cnt=0;
 		    	private void colect(){
-					if(redy){
-						mObjects.cargo.findCargo();
-						mObjects.cargo.travel.onMap2=true;
-						
-					}else{
 						if(!to1_4){
-			    			mObjects.cargo.findCargo();
+							
+			    			shair.cargo.findCargo();
+			    			
 						min=0;
 						}
-						mObjects.cargo.travel.onMap2=false;
-					}
-					lblStallTime.setText("Stall time ="+min);
+					
 		    	}
 				@Override
 				public void run() {
 					
+						
 					if(st){
-						if(cnt==9){
-							if(to1_4){
-							out.println("we should be colecting ="+redy);
-							out.println("we are traveling ="+to1_4);
-							out.println("stall timer ="+min);
-							
-							}
-							kb.type("7");
-						}
+						
 						if(cnt>500){
 							cnt=0;
 						}
@@ -130,6 +91,7 @@ public void colect(){
 						cnt++;
 						colect();
 					}
+					
 				}
 		    }, 0, 1);
 	timer2.scheduleAtFixedRate (
@@ -161,11 +123,9 @@ public void colect(){
 								sec=0;
 							}
 							mili++;
-						out.println("we should be colecting ="+redy);
-						out.println("we are traveling ="+to1_4);
-						out.println("stall timer ="+min);
+						
 						}
-						mObjects.cargo.findBonesBoxes();
+						shair.cargo.findBonesBoxes();
 					}
 				}
 		    }, 0, 1);

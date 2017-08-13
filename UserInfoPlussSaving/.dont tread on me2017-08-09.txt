@@ -1,0 +1,8 @@
+2017/08/09 18:49:47 
+User Stats
+total uridum =576475
+uridum gain =0
+fuel loss =0
+fuel cost =0.0
+time colecting =0min
+uridum per min =0
