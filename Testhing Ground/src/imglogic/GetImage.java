@@ -26,6 +26,11 @@ public class GetImage {
 	public BufferedImage screanImage(Point p,int width,int hight){
 		return rob.createScreenCapture(new Rectangle(p.x,p.y,width,hight));
 	}
+
+	public boolean pointEcolor(BufferedImage img, int x, int y, int i, int j, int k) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 	

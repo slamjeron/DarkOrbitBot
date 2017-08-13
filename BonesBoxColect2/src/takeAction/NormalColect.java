@@ -169,6 +169,7 @@ public class NormalColect {
 				boundtimekeap++;
 			}
 		}
+	
 		private void moveRight(boolean b, int y) {
 			// TODO Auto-generated method stub
 			if(boundtimekeap==2){
@@ -186,7 +187,6 @@ public class NormalColect {
 			}
 		}
 		public void moveside(){
-			
 			if(flytoRight){
 				robUI.rightclick(maxPnt.x, minPnt.y+yi);
 			}else{

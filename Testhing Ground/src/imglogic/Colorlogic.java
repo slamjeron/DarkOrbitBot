@@ -7,6 +7,10 @@ import java.awt.Robot;
 import java.awt.image.BufferedImage;
 
 public class Colorlogic {
+	public Colorlogic(searchMath smath) {
+		// TODO Auto-generated constructor stub
+		//this.smath=smath;
+	}
 	public Color pointColor(BufferedImage img,Point p){
 		return pointColor(img,p.x, p.y);
 	}
@@ -28,7 +32,7 @@ public class Colorlogic {
 		}
 		return c;
 	}
-	protected boolean pointEcolor(BufferedImage image
+	public boolean pointEcolor(BufferedImage image
 			, int x, int y, int r, int g, int b) {
 		return pointEcolor(image, x, y,new Color(r, g, b));
 	}
@@ -71,6 +75,10 @@ public class Colorlogic {
 	public boolean pointEcolor(int x, int y, int r, int g, int b) {
 		// TODO Auto-generated method stub
 		return pointEcolor(x,y,new Color(r,g,b));
+	}
+	public boolean pointColor(BufferedImage img, int x, int y, int r, int g, int b) {
+		
+		return pointColor(img,x,y).equals(new Color(r,g,b));
 	}
 	
 }

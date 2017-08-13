@@ -2,25 +2,23 @@ package seeingComputer;
 
 import java.awt.Color;
 import java.awt.Point;
-
-import imglogic.GetImage;
+import imglogic.ImgRobot;
 
 public class PetStats {
 
 	
 	public Point[] petControlPoints=new Point[6];
 	private Point[] petStatsP=new Point[7];
-	private Point cargoColect;
 	public boolean petdown;
 	public boolean petup;
 	public boolean petLesHP;
 	public boolean petLesSH;
-	private GetImage imgcon;
+	private ImgRobot imgcon;
 	private int tl;
 
-	public PetStats(GetImage i) {
+	public PetStats(ImgRobot imgcon2) {
 		// TODO Auto-generated constructor stub
-		imgcon=i;
+		imgcon=imgcon2;
 	}
 	
 	public void setPetstatp(Point p) {
@@ -35,7 +33,6 @@ public class PetStats {
 			
 		}
 		//comcon.moveCursor(petControlPoints[3]);
-		cargoColect=petControlPoints[2];
 		// pet hp start
 		petStatsP[0] = new Point(p.x + 52, p.y + 55);
 		// pet is down
@@ -52,14 +49,14 @@ public class PetStats {
 		petStatsP[6] = new Point(p.x + 93, p.y +102);
 	}
 	public boolean petmoniter(){
-		petdown = imgcon.pointEcolor(petStatsP[5], Color.BLACK);
-		petup = imgcon.pointEcolor(petStatsP[5], Color.RED);
+		petdown = imgcon.clogic.pointEcolor(petStatsP[5], Color.BLACK);
+		petup = imgcon.clogic.pointEcolor(petStatsP[5], Color.RED);
 		if(petdown){
 			tl=0;
 		}
 		if(tl>6){
-			petLesHP = imgcon.pointEcolor(petStatsP[1], Color.BLACK);
-			petLesSH = imgcon.pointEcolor(petStatsP[2], Color.BLACK);
+			petLesHP = imgcon.clogic.pointEcolor(petStatsP[1], Color.BLACK);
+			petLesSH = imgcon.clogic.pointEcolor(petStatsP[2], Color.BLACK);
 		}else{
 			petLesHP=false;
 			petLesSH=false;
@@ -68,10 +65,10 @@ public class PetStats {
 		return false;
 	}
 	public boolean dropdownShown() {
-		return imgcon.pointEcolor(petControlPoints[2],34,34,34);
+		return imgcon.clogic.pointEcolor(petControlPoints[2],34,34,34);
 	}
 	public boolean petColecting(){
 		
-		return imgcon.pointEcolor(petStatsP[6],255,179,0);
+		return imgcon.clogic.pointEcolor(petStatsP[6],255,179,0);
 	}
 }

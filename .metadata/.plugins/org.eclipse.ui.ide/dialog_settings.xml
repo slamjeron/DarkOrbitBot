@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\slamj\Desktop\usethis"/>
 		<item value="C:\Users\Jeron\Desktop\github\DarkOrbitBot"/>
 		<item value="C:\Users\slamj\OneDrive\game create\BonesBoxColecting"/>
 		<item value="C:\Users\slamj\Documents\GitHub\DarkOrbitBot\DarkOrbitBot"/>
@@ -17,6 +18,8 @@
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="org.eclipse.jdt.ui.java"/>
 		</list>
+	</section>
+	<section name="BasicNewProjectResourceWizard">
 	</section>
 	<section name="org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog">
 		<item value="false" key="FilterByLocation"/>

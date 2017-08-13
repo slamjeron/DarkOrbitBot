@@ -3,8 +3,7 @@ package seeingComputer;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-
-import imglogic.GetImage;
+import imglogic.ImgRobot;
 
 
 public class FlytoLocation {
@@ -21,12 +20,12 @@ public int gateNumber=0;
 private Point mapcPoint;
 public int gateJumpCount=1;
 private int mTimer=45;
-private GetImage imgcon;
+private ImgRobot imgcon;
 private Point clickpnt;
 private boolean click;
 private boolean typj;
-public FlytoLocation( GetImage i) {
-	imgcon=i;
+public FlytoLocation( ImgRobot imgcon2) {
+	imgcon=imgcon2;
 	
 }
 public void setPoints(Point mapPoint){
@@ -37,7 +36,7 @@ public void setPoints(Point mapPoint){
 	mapcPoint=mapPoint;
 }
 public boolean base11color(int x,int y){
-	return imgcon.pointEcolor(
+	return imgcon.clogic.pointEcolor(
 			new Point(mapcPoint.x+x, mapcPoint.y+y), new Color(204,0,0));
 }
 public Point[] mapnum={
@@ -92,8 +91,8 @@ public boolean moving;
 public boolean on1_1(){
 	//System.out.println(moving);
 	Point pnt=new Point(mapcPoint.x,mapcPoint.y-18);
-	ims=imgcon.screanImage(pnt, 27, 18);
-	if(imgcon.colMoreLess(imgcon.pointColor(ims,11,7),
+	ims=imgcon.image.screanImage(pnt, 27, 18);
+	if(imgcon.clogic.colMoreLess(imgcon.clogic.pointColor(ims,11,7),
 			new Color(204,204,204))){
 		
 		return false;
@@ -104,7 +103,7 @@ for(int y=0;y<ims.getHeight();y++){
 		if(mapnum.length>k){
 		if(mapnum[k].equals(new Point(x,y))){
 			
-			if(imgcon.colMoreLess(imgcon.pointColor(ims, mapnum[k]),
+			if(imgcon.clogic.colMoreLess(imgcon.clogic.pointColor(ims, mapnum[k]),
 					new Color(204,204,204))){
 			k+=2;
 			}else{
@@ -188,7 +187,7 @@ return false;
 public boolean plocate(Point p){
 	
 	return !moving&&
-			imgcon.pointEcolor(new Point(p.x, p.y-10)
+			imgcon.clogic.pointEcolor(new Point(p.x, p.y-10)
 					, new Color(70,70,70));
 }
 public boolean isTypj() {
