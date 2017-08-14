@@ -8,7 +8,7 @@ public class NumberReader {
 	
 		private int num;
 		private String nstr=new String();
-		private int digits;
+		private int digits=0;
 		private GetImage imgC;
 	
 	public NumberReader(GetImage image) {
@@ -17,11 +17,12 @@ public class NumberReader {
 	public int readnum1(BufferedImage im,Rectangle rect){
 		BufferedImage img = imgC.subimg(im, rect);
 		nstr="";
+		digits=0;
          for(int l=2;l<img.getWidth();l++){
         	 if(!this.textcl(img, l-1, 0)){
  				if(this.textcl(img, l, 0)){
          		testnum(img,l);
-         		setDigits(getDigits() + 1);
+         		digits++;
          		nstr+=num;
  				}}
          }
@@ -99,14 +100,14 @@ public class NumberReader {
 			return false;
 		}
 	}
-	private boolean maptextcl(BufferedImage im,int x,int y){
+	/*private boolean maptextcl(BufferedImage im,int x,int y){
 		if(im.getWidth()>x&&x>0){
 			Color cl = new Color(im.getRGB(x, y));
 		return cl.equals(new Color(255,255,255));
 		}else{
 			return false;
 		}
-	}
+	}*/
 	public int getDigits() {
 		return digits;
 	}
