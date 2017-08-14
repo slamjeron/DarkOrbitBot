@@ -3,10 +3,9 @@ package time;
 import java.awt.image.BufferedImage;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import checkStats.DefenceManuvers;
 import checkStats.PetActions;
-import checkStats.StatsMoniter;
+import checkStats.ShipMonitor;
 import keyMouse.Keyboard;
 import keyMouse.Mouse;
 import objectFinder.GamePanels.panelPoints;
@@ -21,26 +20,41 @@ public class ColectTimers {
 	public Mouse mouse=new Mouse();
 	private Keyboard keyB=new Keyboard();
 	private PetActions pet=new PetActions();
-	public void start() {
+	private ShipMonitor ship;
+	private BufferedImage screenImg;
+	private int shipSpeed;
+	public void setPetTools(){
 		pet=new PetActions();
 		pet.setPanelPnt(panels.pet);
 		pet.imgR=imgR;
 		pet.mouse=mouse;
 		pet.keyB=keyB;
+	}
+	public void setShipTools(){
+		ship= new ShipMonitor();
+		ship.setPanelPnt((panels.ship));
+		ship.imgR=imgR;
+		ship.mouse=mouse;
+	}
+	public void start() {
+		setPetTools();
+		setShipTools();
+		screenImg =imgR.image.getScreenImage();
+		//ship.setSetImage(screenImg);
+		//shipSpeed=ship.getSpeed();
+		//System.out.println(shipSpeed);
 		timer.scheduleAtFixedRate (
 				new TimerTask() {
-				private StatsMoniter monitor;
-				private boolean petHit;
-				private boolean shipHit;
-				private DefenceManuvers defence;
+				
 				
 				public void run() {
-					BufferedImage screenImg =
-							imgR.image.getScreenImage();
+					
+					screenImg=imgR.image.getScreenImage();
 					pet.setImage(screenImg);
-					pet.readPetInfo();
-					/*monitor.screenImg=(screenImg);
-					if(petHit||shipHit){
+					pet.readInfo();
+					ship.setSetImage(screenImg);
+					ship.readInfo();
+					/*if(petHit||shipHit){
 						defence.runtoCorner();
 						defence.speedDroneConfig();
 						pet.stopPet();
@@ -51,12 +65,13 @@ public class ColectTimers {
 						}
 					}else{
 						
-						petHit=monitor.pet();
-						shipHit=monitor.ship();
+						
+						//pet.isPetAtaked();
+						//shipHit=ship.isShipAtaked();
 					}*/
 					
 				}
-		    }, 0, 1);
+		    }, 0, 3);
 		
 	}
 

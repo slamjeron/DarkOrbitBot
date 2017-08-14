@@ -1,47 +1,19 @@
 package gui;
 
 import java.awt.EventQueue;
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
-
 import javax.swing.JFrame;
-
+import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
-import javax.swing.JComboBox;
-import javax.imageio.ImageIO;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import java.beans.PropertyChangeListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.beans.PropertyChangeEvent;
-import javax.swing.JSpinner;
-import javax.swing.JLabel;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.event.ChangeListener;
-
 import userControls.GetImage;
 import userControls.Timers;
 import userControls.textReader;
-
 import javax.swing.event.ChangeEvent;
 
 public class ColectRobot {

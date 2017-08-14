@@ -11,7 +11,7 @@ import objectFinder.ImgRobot;
 public class PetActions {
 
 	private Point panelPnt;
-	private Rectangle petfuelRect;
+	private Rectangle petFuelRect;
 	private Rectangle petHPRect;
 	private Rectangle petSHRect;
 	private Rectangle petEXPRect;
@@ -28,6 +28,9 @@ public class PetActions {
 	private boolean numLocated=false;
 	private int oldHP;
 	private int oldSD;
+	private Point comboBXpnt;
+	private Rectangle comboBXrect;
+	private Rectangle cmBXSelectRct;
 
 	public void stopPet() {
 		if(stime==1)
@@ -48,10 +51,14 @@ public class PetActions {
 		
 	}
 	public void gardMode() {
-		// TODO Auto-generated method stub
+		
+		mouse.rightclick(comboBXpnt);
 		
 	}
-
+	public void findCBItems(){
+		mouse.rightclick(comboBXpnt);
+		this.imgR.image.subimg(image, comboBXrect);
+	}
 	public Point getPanelPnt() {
 		return panelPnt;
 	}
@@ -66,47 +73,57 @@ public class PetActions {
 		return(oldHP!=0&&newHP!=0&&oldSD!=0&&newSD!=0&&
 				oldHP>newHP&&oldSD>newSD);
 	}
-	public void readPetInfo(){
-		 setPetFuel(imgR.number.readnum1(image, petfuelRect));
-		 
-		 setPetHP(imgR.number.readnum1(image, petHPRect));
-		 
-		 setPetSD(imgR.number.readnum1(image, petSHRect));
-		 
-		 setPetEXP(imgR.number.readnum1(image, petEXPRect));
-		//System.out.println(petFuel);
-		if(wClick==1)
-		if(imgR.number.getDigits()==0)
-			mouse.rightclick(petfuelRect.x+30, petfuelRect.y+7);
-		
-		 
-		if(wClick==4){
-			if(imgR.number.getDigits()==0)
-				mouse.rightclick(petHPRect.x+20, petHPRect.y+6);
+	public void readInfo(){
+		 setPetFuel(imgR.number.readnum1(image, petFuelRect));
+		int fuelDig = imgR.number.getDigits();
+	if(wClick==1){
+		if(fuelDig==0){
+			mouse.rightclick(petFuelRect.x+30, petFuelRect.y+7);
 		}
+	}
+		setPetHP(imgR.number.readnum1(image, petHPRect));
+		int hpDig = imgR.number.getDigits();
+		if(wClick==4){
+			if(hpDig==0){
+				mouse.rightclick(petHPRect.x+20, petHPRect.y+6);
+			}
+		}
+		setPetSD(imgR.number.readnum1(image, petSHRect));
+		int sdDig = imgR.number.getDigits();
 		
 			if(wClick==8){
-				if(imgR.number.getDigits()==0)
+				if(sdDig==0){
 					mouse.rightclick(petSHRect.x+20, petSHRect.y+6);
+				}
 			}
-			
+			 setPetEXP(imgR.number.readnum1(image, petEXPRect));
+			 int expDig = imgR.number.getDigits();
 			if(wClick==9){
-				if(imgR.number.getDigits()==0)
+				if(expDig==0){
 					mouse.rightclick(petEXPRect.x+20, petEXPRect.y+6);
+				}
 			}
-		if(wClick>20){
-			numLocated=true;
+		if(wClick>15){
+			//numLocated=true;
+			System.out.println(wClick);
 			wClick=0;
 		}
 		wClick++;
+		
 	}
 	public void setPanelPnt(Point pnt) {
 		numLocated=false;
 		this.panelPnt = pnt;
-		petfuelRect=new Rectangle(pnt.x+180,pnt.y+49,75,8);
+		comboBXpnt=addXYtoPnt(pnt,178,113);
+		cmBXSelectRct=new Rectangle(pnt.x+119,pnt.y+100,21,23);
+		comboBXrect=new Rectangle(pnt.x+130,pnt.y+186,30,100);
+		petFuelRect=new Rectangle(pnt.x+180,pnt.y+49,75,8);
 		petHPRect=new Rectangle(pnt.x+82,pnt.y+49,60,8);
 		petSHRect=new Rectangle(pnt.x+82,pnt.y+69,60,8);
 		petEXPRect=new Rectangle(pnt.x+188,pnt.y+69,60,8);
+	}
+	public Point addXYtoPnt(Point pnt,int x, int y){
+		return new Point(pnt.x+x,pnt.y+y);
 	}
 
 	public BufferedImage getImage() {

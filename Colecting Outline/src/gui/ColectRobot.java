@@ -48,7 +48,7 @@ public class ColectRobot {
 		//frame.setUndecorated( true );
 		frame.setBackground(Color.BLUE);
 		frame.getContentPane().setBackground(Color.BLACK);
-		frame.setBounds(100, 100, 260, 188);
+		frame.setBounds(100, 100, 174, 173);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setAlwaysOnTop(true);
@@ -63,7 +63,6 @@ public class ColectRobot {
 			public void actionPerformed(ActionEvent arg0) {
 				if(start){
 				colectingBot.start();
-				System.out.println("started");
 				if(colectingBot.started){
 				btnStart.setBackground(Color.GREEN);
 				btnStart.setForeground(Color.GREEN);
