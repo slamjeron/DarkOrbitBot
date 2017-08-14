@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.concurrent.ScheduledFuture"/>
 <fullyQualifiedTypeName name="workingFinder.Gate"/>
 <fullyQualifiedTypeName name="workingFinder.Travel"/>
 <fullyQualifiedTypeName name="workingFinder.Travel.Direction"/>
@@ -57,7 +56,8 @@
 <fullyQualifiedTypeName name="javax.swing.Timer"/>
 <fullyQualifiedTypeName name="java.util.Timer"/>
 <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="keyMouse.Mouse"/>
 <fullyQualifiedTypeName name="keyMouse.Keyboard"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="javax.swing.JLabel"/>
 </qualifiedTypeNameHistroy>
