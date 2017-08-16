@@ -2,7 +2,6 @@ package objectFinder;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class GamePanels {
@@ -11,7 +10,6 @@ public class GamePanels {
 	public panelBool booleans;
 	public Colorlogic colLogic;
 	private GetImage screenCapture;
-	private Point toolBarPnt;
 	
 	public class panelPoints{
 		public Point map=new Point();
@@ -75,8 +73,7 @@ public class GamePanels {
 	private boolean findLeftEndPnt(BufferedImage im, int x, int y) {
 		for(int x1=x;x1>x-120;x1--){
 			if(toolborderClr(im,x1,y)){
-				if(colLogic.pointEcolor(im,x1-1,y+4,new Color(200,184,104))||
-						colLogic.pointEcolor(im,x1-1,y+4,new Color(41,107,132)))
+				if(isLeftCorner(im,x,y))
 					points.toolBar=new Point(x1,y);
 				System.out.println("tool Bar Pnt="+x+","+y);
 					return true;
@@ -89,7 +86,8 @@ public class GamePanels {
 	}
 	private boolean isLeftCorner(BufferedImage im, int x1, int y) {
 		// TODO Auto-generated method stub
-		return toolborderClr(im,x1,y)&&toolborderClr(im,x1-2,y+4)&&toolborderClr(im,x1-4,y+1);
+		return (colLogic.pointEcolor(im,x1-1,y+4,new Color(200,184,104))||
+				colLogic.pointEcolor(im,x1-1,y+4,new Color(41,107,132)));
 	}
 	private boolean toolborderClr(BufferedImage im, int x, int y){
 		return(colLogic.pointEcolor(im,x,y,new Color(44,114,140))||

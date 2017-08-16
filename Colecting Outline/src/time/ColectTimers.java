@@ -8,6 +8,7 @@ import checkStats.PetActions;
 import checkStats.ShipMonitor;
 import keyMouse.Keyboard;
 import keyMouse.Mouse;
+import keyMouse.ToolBar;
 import objectFinder.GamePanels.panelPoints;
 import objectFinder.ImgRobot;
 
@@ -17,6 +18,7 @@ public class ColectTimers {
 	public panelPoints panels;
 	private Timer timer=new Timer();
 	public ImgRobot imgR;
+	ToolBar tool = new ToolBar();
 	public Mouse mouse=new Mouse();
 	private Keyboard keyB=new Keyboard();
 	private PetActions pet=new PetActions();
@@ -32,8 +34,17 @@ public class ColectTimers {
 		pet.imgR=imgR;
 		pet.mouse=mouse;
 		pet.keyB=keyB;
+		
+		
+		
 		//mouse.rightclick(mouse.centerpt);
 		
+	}
+	public void setToolbar(){
+		tool.keyB=keyB;
+		tool.imgRead=this.imgR.clogic;
+		tool.pnt=panels.toolBar;
+		tool.findItems(screenImg);
 	}
 	public void setShipTools(){
 		ship= new ShipMonitor();
