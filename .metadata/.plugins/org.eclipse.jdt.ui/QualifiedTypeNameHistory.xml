@@ -14,12 +14,10 @@
 <fullyQualifiedTypeName name="java.awt.Image"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="userControls.textReader"/>
 <fullyQualifiedTypeName name="userControls.GetImage"/>
 <fullyQualifiedTypeName name="java.awt.Rectangle"/>
 <fullyQualifiedTypeName name="java.awt.Robot"/>
-<fullyQualifiedTypeName name="java.awt.Toolkit"/>
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 <fullyQualifiedTypeName name="userControls.Timers"/>
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
@@ -57,7 +55,13 @@
 <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
 <fullyQualifiedTypeName name="keyMouse.Mouse"/>
 <fullyQualifiedTypeName name="keyMouse.Keyboard"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<<<<<<< HEAD
 <fullyQualifiedTypeName name="javafx.scene.control.ToolBar"/>
+=======
+<fullyQualifiedTypeName name="java.awt.Toolkit"/>
+<fullyQualifiedTypeName name="java.awt.event.InputEvent"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+>>>>>>> daa44ff969fb69bdc4261bb6d009c0a644a91767
 </qualifiedTypeNameHistroy>

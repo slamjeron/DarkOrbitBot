@@ -38,8 +38,8 @@ public class ColectRobot {
 	 * Initialize the contents of the frame.
 	 */
 	public int index =0;
-	private boolean begin=true;
-	
+	private boolean start=true;
+	private ColectingBot colectingBot=new ColectingBot();
 	private void initialize() {
 		//colectingTimers cbox= new colectingTimers();
 		
@@ -48,32 +48,31 @@ public class ColectRobot {
 		//frame.setUndecorated( true );
 		frame.setBackground(Color.BLUE);
 		frame.getContentPane().setBackground(Color.BLACK);
-		frame.setBounds(100, 100, 174, 173);
+		frame.setBounds(100, 100, 202, 173);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setAlwaysOnTop(true);
 		
-		JButton btnStart = new JButton("Start");
-		btnStart.setBackground(Color.red);
-		btnStart.setForeground(Color.red);
+		JButton btnStart = new JButton("START");
+		btnStart.setBackground(Color.GREEN);
+		btnStart.setForeground(Color.BLACK);
 		btnStart.addActionListener(new ActionListener() {
-			private ColectingBot colectingBot=new ColectingBot();
-			private boolean start=true;
+			
+			
 
 			public void actionPerformed(ActionEvent arg0) {
 				if(start){
 				colectingBot.start();
 				if(colectingBot.started){
-				btnStart.setBackground(Color.GREEN);
-				btnStart.setForeground(Color.GREEN);
-				btnStart.setText("Start");
+				btnStart.setBackground(Color.RED);
+				btnStart.setText("STOP");
 				start=false;
 				}
 				}else{
 				colectingBot.stop();
-				btnStart.setBackground(Color.red);
-				btnStart.setForeground(Color.red);
-				btnStart.setText("Stop");
+				
+				btnStart.setBackground(Color.GREEN);
+				btnStart.setText("START");
 				start=true;
 				}
 				
@@ -93,11 +92,19 @@ public class ColectRobot {
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ColectingBot.reset();
+				colectingBot.stop();
+				colectingBot=new ColectingBot();
+				btnStart.setBackground(Color.GREEN);
+				btnStart.setText("START");
+				start=true;
 			}
 		});
 		btnReset.setBounds(20, 74, 89, 23);
 		frame.getContentPane().add(btnReset);
+		
+		JButton btnSetings = new JButton("Setings");
+		btnSetings.setBounds(122, 10, 51, 23);
+		frame.getContentPane().add(btnSetings);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);

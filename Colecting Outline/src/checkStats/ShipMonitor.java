@@ -36,7 +36,7 @@ public class ShipMonitor {
 	public int getSpeed(){
 		return (imgR.number.readnum1(image, speedRect));
 	}
-	public boolean isShipAtaked() {
+	public boolean isAtaked() {
 		boolean hit = (hitCheck(oldHP,shipHP,oldSD,shipSD));
 		oldHP=shipHP;
 		oldSD=shipSD;
@@ -50,29 +50,34 @@ public class ShipMonitor {
 		return image;
 	}
 	public void setSetImage(BufferedImage image) {
+		//System.out.println(image);
 		this.image = image;
 	}
 	public void readInfo() {
 		// TODO Auto-generated method stub
-		shipHP=(imgR.number.readnum1(image, shipHPRect));
-		 
-		shipSD=(imgR.number.readnum1(image, shipSDRect));
 		
+		shipSD=(imgR.number.readnum1(image, shipSDRect));
+		int digSD=imgR.number.getDigits();
 		if(wClick==1)
-			if(imgR.number.getDigits()==0)
+			if(digSD==0)
 				mouse.rightclick(shipSDRect.x+30, shipSDRect.y+7);
 			
-			 
-			if(wClick==4)
-				if(imgR.number.getDigits()==0)
+		shipHP=(imgR.number.readnum1(image, shipHPRect));
+		int digHP=imgR.number.getDigits();
+			if(wClick==1)
+				if(digHP==0)
 					mouse.rightclick(shipHPRect.x+20, shipHPRect.y+6);
 			
 			
 				
-			if(wClick>20){
+			if(wClick>40){
 				//numLocated=true;
 				wClick=0;
 			}
+			if(digSD==0||digHP==0){
 			wClick++;
+			}else{
+				wClick=3;
+			}
 		}
 }

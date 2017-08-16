@@ -6,27 +6,25 @@ import objectFinder.ImgRobot;
 import time.ColectTimers;
 
 public class ColectingBot {
-
+public ColectingBot(){
+	colectTime=new ColectTimers();
+	imgR=new ImgRobot();
+}
 	private boolean firstClick=true;
-	private boolean enableTimer;
 	private ColectTimers colectTime=new ColectTimers();
 	private ImgRobot imgR=new ImgRobot();
 	private GamePanels panels= imgR.gamePanels;
-	private boolean fleeing;
-	protected boolean started;
+	protected boolean started=false;
 	public void start() {
-		fleeing=colectTime.isFleeing();
 		findGamePanels();
-		if(fleeing)reset();
-		enableTimer=true;
 		started=panels.booleans.finishedSearch;
 		colectTime.imgR=imgR;
+		colectTime.setUp();
+		colectTime.timerEnable=true;
 		if(started)
-		if(firstClick){
-			firstClick=false;
-			System.out.println("starting Timer");
 		activateTimers();
-		}
+		
+		
 	}
 
 	private void findGamePanels() {
@@ -43,12 +41,10 @@ public class ColectingBot {
 
 	public void stop() {
 		// TODO Auto-generated method stub
-		enableTimer=false;
-	}
-
-	public static void reset() {
-		// TODO Auto-generated method stub
+		colectTime.timerEnable=false;
 		
 	}
+
+	
 
 }

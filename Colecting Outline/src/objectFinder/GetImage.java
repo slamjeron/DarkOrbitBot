@@ -40,7 +40,10 @@ public class GetImage {
 	}
 	public BufferedImage subimg(BufferedImage nim, Rectangle r){
 		int k=r.x+r.width;
-		if(nim.getWidth()>k){
+		int y=r.y+r.height;
+		//System.out.println(y);
+		//System.out.println(k);
+		if(smath.inBounds(nim, k, y)){
 		return nim.getSubimage(r.x, r.y, r.width, r.height);
 		}else{
 			System.out.println("too big");

@@ -136,15 +136,17 @@ public class ImageReader {
 		}
 		
 		public void checkship(BufferedImage im, int x, int y){
-			if(textclr(im,x+50,y+4)&&textclr(im,x+57,y+13)){
-				System.out.println("Ship");
-				shipFound=true;
-				panelsearch.shipFound=(shipFound);
+			if(colLogic.pointEcolor(im,x+112,y+57,235,217,177)&&
+					colLogic.pointEcolor(im,x+10,y+16,52,82,96)){
 				shipPnt=new Point(x, y);
+				System.out.println("Ship Point ="+shipPnt);
+				shipFound=true;
+				//panelsearch.shipFound=(shipFound);
+				
 			}
 		}
 		public void checkpet(BufferedImage im, int x, int y){
-			if(textclr(im,x+65,y+12)&&textclr(im,x+43,y+13)){
+			if(textclr(im,x+112,y+57)&&textclr(im,x+43,y+13)){
 				System.out.println("pet");
 				petFound=true;
 				panelsearch.petFound=true;

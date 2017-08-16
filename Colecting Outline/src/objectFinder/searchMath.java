@@ -34,12 +34,13 @@ public class searchMath {
 		return false;
 	}
  	public boolean searchBoundries(BufferedImage img,Point p){
- 		//System.out.println(img.getWidth());
-		return (p.x<img.getWidth()&&p.y<img.getHeight()&&p.x>10&&p.y>10);
+ 		//System.out.println(img.getWidth()+">"+p.x);
+ 		//System.out.println(img.getHeight()+">"+p.y);
+		return (p.x<img.getWidth()&&p.y<img.getHeight()&&p.x>5&&p.y>5);
 	}
 	public boolean inBounds(BufferedImage img, int x, int y) {
-		searchBoundries(img,new Point(x,y));
-		return false;
+		return searchBoundries(img,new Point(x,y));
+		
 	}
 	
 }

@@ -90,5 +90,15 @@ public class Colorlogic {
 		
 		return pointColor(img,x,y).equals(new Color(r,g,b));
 	}
+
+	public void printPColer(BufferedImage img, int x, int y) {
+		if(smath.searchBoundries(img, new Point(x,y))){
+			this.printColor(pointColor(img,x,y));
+			}
+		
+		
+	}
+
+	
 	
 }
