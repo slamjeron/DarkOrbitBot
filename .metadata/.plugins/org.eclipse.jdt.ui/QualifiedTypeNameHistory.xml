@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="workingFinder.Gate"/>
 <fullyQualifiedTypeName name="workingFinder.Travel"/>
 <fullyQualifiedTypeName name="workingFinder.Travel.Direction"/>
 <fullyQualifiedTypeName name="mapControls.Travel"/>
@@ -15,12 +14,10 @@
 <fullyQualifiedTypeName name="java.awt.Image"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="userControls.textReader"/>
 <fullyQualifiedTypeName name="userControls.GetImage"/>
 <fullyQualifiedTypeName name="java.awt.Rectangle"/>
 <fullyQualifiedTypeName name="java.awt.Robot"/>
-<fullyQualifiedTypeName name="java.awt.Toolkit"/>
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 <fullyQualifiedTypeName name="userControls.Timers"/>
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
@@ -58,6 +55,9 @@
 <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
 <fullyQualifiedTypeName name="keyMouse.Mouse"/>
 <fullyQualifiedTypeName name="keyMouse.Keyboard"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="java.awt.Toolkit"/>
+<fullyQualifiedTypeName name="java.awt.event.InputEvent"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

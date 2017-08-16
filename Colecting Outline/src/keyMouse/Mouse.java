@@ -10,6 +10,8 @@ import java.awt.event.InputEvent;
 
 public class Mouse {
 	private Robot rob;
+	private Rectangle screen=new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+	public final Point centerpt = new Point(screen.width/2,screen.height/2);
 	
 	public Mouse() {
 		
@@ -27,7 +29,6 @@ public class Mouse {
 	public void moveCursor(Point p){
 		moveCursor(p.x, p.y);
 	}
-	private Rectangle screen=new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
 	
 	public void rightclick(Point p){
 		Point mp =MouseInfo.getPointerInfo().getLocation();

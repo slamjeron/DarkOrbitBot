@@ -21,6 +21,7 @@ public ImgRobot(){
 	smath= new searchMath();
 	image=new GetImage(rob);
 	number=new NumberReader(image);
+	smath=new searchMath();
 	image.smath=smath;
 	clogic=new Colorlogic(smath);
 	gamePanels=new GamePanels(clogic,image);
