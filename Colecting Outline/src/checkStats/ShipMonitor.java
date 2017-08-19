@@ -1,11 +1,13 @@
 package checkStats;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import keyMouse.Mouse;
 import objectFinder.ImgRobot;
+import time.Increment;
 
 public class ShipMonitor {
 
@@ -22,6 +24,7 @@ public class ShipMonitor {
 	private int oldSD;
 	private int shipHP;
 	private int shipSD;
+	private int deathCount;
 	
 	public Point getPanelPnt() {
 		return panelPnt;
@@ -53,8 +56,31 @@ public class ShipMonitor {
 		//System.out.println(image);
 		this.image = image;
 	}
+	private Point addCenterPt(int x,int y){
+		return new Point(mouse.centerpt.x+x,mouse.centerpt.y+y);
+	}
+	private Increment inc=new Increment();
+	public boolean shipDead(){
+		Point repbtn = addCenterPt(-87,201);
+		if((imgR.clogic.pointEcolor
+				(addCenterPt(-90,120),new Color(28,35,41))
+				&&imgR.clogic.pointEcolor
+				(addCenterPt(-100,120)
+						,new Color(28,35,41)))){
+			if(inc.increment(10)){
+				mouse.rightclick(repbtn);
+				deathCount++;
+			}
+			
+			return true;
+			
+		}else{
+			return false;
+		}
+	}
 	public void readInfo() {
 		// TODO Auto-generated method stub
+		//if()
 		
 		shipSD=(imgR.number.readnum1(image, shipSDRect));
 		int digSD=imgR.number.getDigits();
