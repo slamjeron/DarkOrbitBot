@@ -6,11 +6,11 @@ import objectFinder.ImgRobot;
 import time.ColectTimers;
 
 public class ColectingBot {
-public ColectingBot(){
-	colectTime=new ColectTimers();
-	imgR=new ImgRobot();
-}
-	private boolean firstClick=true;
+	public ColectingBot(){
+		colectTime=new ColectTimers();
+		imgR=new ImgRobot();
+	}
+	
 	private ColectTimers colectTime=new ColectTimers();
 	private ImgRobot imgR=new ImgRobot();
 	private GamePanels panels= imgR.gamePanels;

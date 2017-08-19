@@ -16,7 +16,14 @@ public class GamePanels {
 		public Point pet=new Point();
 		public Point ship=new Point();
 		public Point user=new Point();
-		public Point toolBar=new Point();
+		private Point toolBar=new Point();
+		public Point getToolBar(){
+			return toolBar;
+		}
+		public void setToolBar(Point p){
+			//System.out.println("toolB="+p.x+","+p.y);
+			toolBar=p;
+		}
 	}
 	public class panelBool{
 		public boolean map=false;
@@ -33,7 +40,10 @@ public class GamePanels {
 	public void find() {
 		points= new panelPoints();
 		booleans=new panelBool();
-		imsearch(screenCapture.getScreenImage());
+		BufferedImage im = screenCapture.getScreenImage();
+		imsearch(im);
+		toolBar(im);
+		System.out.println(points.getToolBar());
 	}
 	public void imsearch(BufferedImage im) {
 	
@@ -49,8 +59,7 @@ public class GamePanels {
 				}
 			}
 		}
-	toolBar(im);
-	System.out.println(points.toolBar);
+	
 	}
 	
 	private boolean toolBar(BufferedImage im) {
@@ -73,15 +82,17 @@ public class GamePanels {
 	private boolean findLeftEndPnt(BufferedImage im, int x, int y) {
 		for(int x1=x;x1>x-120;x1--){
 			if(toolborderClr(im,x1,y)){
-				if(isLeftCorner(im,x,y))
-					points.toolBar=new Point(x1,y);
-				System.out.println("tool Bar Pnt="+x+","+y);
+				if(isLeftCorner(im,x1,y)){
+					points.setToolBar(new Point(x1,y));
+				//System.out.println("tool Bar Pnt="+x1+","+y);
 					return true;
+				}
 				
 			}
 			//if(isLeftCorner(im,x1,y))
 			
 		}
+		
 		return false;
 	}
 	private boolean isLeftCorner(BufferedImage im, int x1, int y) {
@@ -89,7 +100,7 @@ public class GamePanels {
 		return (colLogic.pointEcolor(im,x1-1,y+4,new Color(200,184,104))||
 				colLogic.pointEcolor(im,x1-1,y+4,new Color(41,107,132)));
 	}
-	private boolean toolborderClr(BufferedImage im, int x, int y){
+	public boolean toolborderClr(BufferedImage im, int x, int y){
 		return(colLogic.pointEcolor(im,x,y,new Color(44,114,140))||
 				colLogic.pointEcolor(im,x,y,new Color(212,195,110)));
 	}

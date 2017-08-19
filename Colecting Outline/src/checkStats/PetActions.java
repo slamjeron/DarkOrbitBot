@@ -53,8 +53,10 @@ public class PetActions {
 	private int maxHp=50000;
 	private boolean islowHP=false;
 	private int incRep;
+	public boolean screenChanged;
 
 	public void stopPet() {
+		screenChanged=petBXMissing();
 		if(stime==1)
 		if(petEXP!=0)
 			keyB.type("e");
@@ -76,25 +78,27 @@ public class PetActions {
 		stime++;
 		}
 		
-		if(petEXP!=0){
-			stime=0;
-		keepCBDown();
-		}
+		
 	}
 	public boolean gardMode(BufferedImage cbx, int x, int y) {
 		return pointEcolor(cbx, x+3, y+3,162,117,13);
 		
 	}
 	public void stAutoCargo(){
+		boolean autoCG = isAutoCargo();
+		if(!autoCG)
+		if(petEXP!=0){
+			stime=0;
+		keepCBDown();
+		}
 		if(!islowHP)
-		if(!isAutoCargo())
+		if(!autoCG)
 			if(cBXDown)
 				if(this.autolootF)
 			mouse.rightclick(lootPnt);
 	}
 	public void stGardMode(){
 		if(!isGardMode()){
-			if(cBXDown)
 			keyB.type("g");
 		}
 	}
@@ -108,6 +112,10 @@ public class PetActions {
 	}
 	public void findCBItems(){
 	if(cbtF){
+		if(petEXP!=0){
+			stime=0;
+		keepCBDown();
+		}
 		if(rct)
 		if(cBXDown){
 			if(wtime==7){
@@ -209,9 +217,9 @@ private void keepCBDown(){
 	if(cBXDown){
 		wtm=0;
 	}else{
-	if(wtm==4)
+	if(wtm==7)
 		mouse.rightclick(comboBXpnt);
-			if(wtm>20)
+			if(wtm>30)
 				wtm=0;
 			wtm++;
 	}
@@ -359,25 +367,42 @@ private void keepCBDown(){
 		this.petFuel = petFuel;
 	}
 	public void rep() {
+		
 		if(this.repairF){
 			//System.out.println(maxHp);
 		if(cBXDown)
 		if(islowHP){
+			if(incRep<3)
+			
+				stime=0;
+			keepCBDown();
 			if(incRep==4){
 				System.out.println(islowHP+"="+petHP+"<="+maxHp);
 			mouse.rightclick(repairPnt);
 			}
-			if(incRep>100){
+			if(incRep>200){
 				incRep=0;
-				islowHP=(maxHp>=petHP&&0!=petHP);
+			
 			}
 			incRep++;
 		}else{
-			islowHP=(maxHp>petHP&&0!=petHP);
 			if(islowHP)
 			maxHp=petHP;
 		}
 		}
+		if(incRep<200)
+		islowHP=(maxHp>petHP&&0!=petHP&&petEXP!=0);
 	}
-
+	public void colect() {
+		if(!petBXMissing()){
+		startPet();
+		findCBItems();
+		stAutoCargo();
+		rep();
+		}
+	}
+public boolean petBXMissing(){
+	return !pointEcolor(image, panelPnt.x+79, panelPnt.y+10,22,38,47);
+	
+}
 }

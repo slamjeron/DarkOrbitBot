@@ -18,6 +18,7 @@ public class Colorlogic {
 	}
 	public Color pointColor(BufferedImage img,int x,int y){
 		if(smath.searchBoundries(img, new Point(x,y))){
+			
 		return new Color(img.getRGB(x, y));
 		}else{
 			return Color.black;

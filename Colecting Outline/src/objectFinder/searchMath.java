@@ -9,20 +9,25 @@ public class searchMath {
 	public int skipPnts(BufferedImage img,Point p,Rectangle[] rect){
 		if(rect!=null){
 		for(Rectangle r: rect){
-			if(r!=null){
-			if(p.x>r.x&&p.x<r.x+r.width){
-				if(p.y>r.y&&p.y<r.y+r.height){
+			if(r.contains(p)){
 					int nx = r.width+r.x;
 					if(nx>img.getWidth()-50){
 						nx=img.getWidth()-50;
 					}
 				return nx;
-			}
-			}
+			
 			}
 		}
 		}
 		return p.x;
+	}
+	public boolean contains(Point p, Rectangle[] rect) {
+		for(Rectangle r: rect){
+			if(r.contains(p)){
+				return true;
+			}
+		}
+		return false;
 	}
 	public boolean skipPnts( int x, int y,Rectangle[] rect){
 		for(Rectangle r: rect){
