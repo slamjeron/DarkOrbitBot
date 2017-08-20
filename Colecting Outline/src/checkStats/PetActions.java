@@ -1,6 +1,5 @@
 package checkStats;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -19,19 +18,16 @@ public class PetActions {
 	public ImgRobot imgR;
 	private BufferedImage image;
 	public Mouse mouse;
-	private int wClick;
 	private int petFuel;
 	private int petHP;
 	private int petSD;
 	private int petEXP;
 	public Keyboard keyB;
 	private int stime;
-	private boolean numLocated=false;
 	private int oldHP;
 	private int oldSD;
 	private Point comboBXpnt=new Point();
 	private Rectangle comboBXrect;
-	private Rectangle cmBXSelectRct;
 	private boolean rct=false;
 	private boolean cbtF=true;
 	private int wtm;
@@ -312,10 +308,8 @@ private void keepCBDown(){
 		}
 	}
 	public void setPanelPnt(Point pnt) {
-		numLocated=false;
 		this.panelPnt = pnt;
 		comboBXpnt=addXYtoPnt(pnt,178,113);
-		cmBXSelectRct=new Rectangle(pnt.x+119,pnt.y+100,21,23);
 		comboBXrect=new Rectangle(pnt.x+130,pnt.y+180,30,150);
 		petFuelRect=new Rectangle(pnt.x+180,pnt.y+49,75,8);
 		petHPRect=new Rectangle(pnt.x+82,pnt.y+49,60,8);

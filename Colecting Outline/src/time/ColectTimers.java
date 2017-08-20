@@ -174,22 +174,24 @@ public class ColectTimers {
 						fleeing=false;
 						shipHit=ship.isAtaked();
 						petHit=pet.isAtaked();
+						pet.stopPet();
 					}else{
 						fleeing=true;
 					}
 					if(fleeing)
-						if(inc.increment1(500,2)){
+						if(inc.increment1(300,2)){
 					navigate.findShip(screenImg);
 					navigate.furthistPnt();
 					System.out.println("runing");
 						}
-					if(inc.increment1(30,1)){
+					if(inc.increment1(23,4)){
 					tool.actSpeedBst();
 					tool.actSpeedDC();
 					tool.actUlCloak();
-					pet.stopPet();
+					
 					tool.acthomejump();
 					}
+					pet.stopPet();
 					if(petHit){
 						pet.stGardMode();
 					}
