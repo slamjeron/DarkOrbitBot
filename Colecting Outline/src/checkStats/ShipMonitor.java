@@ -19,7 +19,6 @@ public class ShipMonitor {
 	private Rectangle shipSDRect;
 	private Rectangle speedRect;
 	private int wClick;
-	private boolean numLocated;
 	private int oldHP;
 	private int oldSD;
 	private int shipHP;
@@ -30,7 +29,7 @@ public class ShipMonitor {
 		return panelPnt;
 	}
 	public void setPanelPnt(Point panelPnt) {
-		numLocated=false;
+		
 		this.panelPnt = panelPnt;
 		shipHPRect=new Rectangle(panelPnt.x+34,panelPnt.y+38,50,8);
 		shipSDRect=new Rectangle(panelPnt.x+34,panelPnt.y+55,50,8);
@@ -69,7 +68,7 @@ public class ShipMonitor {
 						,new Color(28,35,41)))){
 			if(inc.increment(10)){
 				mouse.rightclick(repbtn);
-				deathCount++;
+				setDeathCount(getDeathCount() + 1);
 			}
 			
 			return true;
@@ -106,4 +105,10 @@ public class ShipMonitor {
 				wClick=3;
 			}
 		}
+	public int getDeathCount() {
+		return deathCount;
+	}
+	public void setDeathCount(int deathCount) {
+		this.deathCount = deathCount;
+	}
 }

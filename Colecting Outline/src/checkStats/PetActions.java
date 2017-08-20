@@ -1,6 +1,5 @@
 package checkStats;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -8,6 +7,7 @@ import java.awt.image.BufferedImage;
 import keyMouse.Keyboard;
 import keyMouse.Mouse;
 import objectFinder.ImgRobot;
+import time.Increment;
 
 public class PetActions {
 
@@ -19,19 +19,16 @@ public class PetActions {
 	public ImgRobot imgR;
 	private BufferedImage image;
 	public Mouse mouse;
-	private int wClick;
 	private int petFuel;
 	private int petHP;
 	private int petSD;
 	private int petEXP;
 	public Keyboard keyB;
 	private int stime;
-	private boolean numLocated=false;
 	private int oldHP;
 	private int oldSD;
 	private Point comboBXpnt=new Point();
 	private Rectangle comboBXrect;
-	private Rectangle cmBXSelectRct;
 	private boolean rct=false;
 	private boolean cbtF=true;
 	private int wtm;
@@ -42,10 +39,10 @@ public class PetActions {
 	private boolean repairF;
 	private boolean kamiF;
 	private boolean gardF;
-	private Point kamiPnt;
+	//private Point kamiPnt;
 	private Point repairPnt;
 	private Point lootPnt;
-	private Point tradePnt;
+	//private Point tradePnt;
 	private int inkSD;
 	private int inkHP;
 	private int inkFD;
@@ -57,25 +54,23 @@ public class PetActions {
 
 	public void stopPet() {
 		screenChanged=petBXMissing();
-		if(stime==1)
+		if(!screenChanged){
+			
 		if(petEXP!=0)
+			if(inc.increment1(25, 2))
 			keyB.type("e");
-		if(stime>30)
-			stime=0;
-		stime++;
+		}
 		
 	}
+	private Increment inc=new Increment();
+	private Increment inc2=new Increment();
 	public void startPet() {
 		if(petEXP==0){
-		if(stime==2){
+		if(inc.increment1(30, 5)){
 		
 			keyB.type("e");
 		System.out.println("exp="+stime);
 		}
-		if(stime>50){
-			stime=0;
-		}
-		stime++;
 		}
 		
 		
@@ -133,7 +128,7 @@ public class PetActions {
 					// System.out.println((x+16)+","+(y+10));
 					// mouse.moveCursor(x1+x+16,y1+y+10);
 					 y+=10;
-					tradePnt=new Point(x1+x+16,y1+y+3);
+					//tradePnt=new Point(x1+x+16,y1+y+3);
 					 tradeF=true;
 				}
 				
@@ -155,7 +150,7 @@ public class PetActions {
 				}
 				 if(!kamiF)
 				if(kamikaze(cbx, x, y)){
-					kamiPnt=new Point(x1+x+16,y1+y+3);
+					//kamiPnt=new Point(x1+x+16,y1+y+3);
 					
 					kamiF=true;
 					 y+=10;
@@ -312,10 +307,10 @@ private void keepCBDown(){
 		}
 	}
 	public void setPanelPnt(Point pnt) {
-		numLocated=false;
+		//numLocated=false;
 		this.panelPnt = pnt;
 		comboBXpnt=addXYtoPnt(pnt,178,113);
-		cmBXSelectRct=new Rectangle(pnt.x+119,pnt.y+100,21,23);
+		//cmBXSelectRct=new Rectangle(pnt.x+119,pnt.y+100,21,23);
 		comboBXrect=new Rectangle(pnt.x+130,pnt.y+180,30,150);
 		petFuelRect=new Rectangle(pnt.x+180,pnt.y+49,75,8);
 		petHPRect=new Rectangle(pnt.x+82,pnt.y+49,60,8);

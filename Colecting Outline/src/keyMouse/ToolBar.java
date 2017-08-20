@@ -5,7 +5,6 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 import objectFinder.Colorlogic;
-import objectFinder.ImgRobot;
 
 public class ToolBar {
 
@@ -122,7 +121,7 @@ public void activate(intPoint p){
 		keyB.type(p.i);
 		System.out.println("typed"+p.i);
 	}
-	if(sleepTm>20)
+	if(sleepTm>25)
 		sleepTm=0;
 	sleepTm++;
 }

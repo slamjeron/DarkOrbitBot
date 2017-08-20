@@ -1,8 +1,6 @@
 package gui;
 
 import java.awt.EventQueue;
-import java.awt.Point;
-import java.awt.Rectangle;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -122,9 +120,5 @@ public class ColectRobot {
 		mnFile.add(mntmTestPage);
 		
 		
-	}
-	private Point getRightCorner(Rectangle mapRect){
-		return new Point(mapRect.x+mapRect.width,
-				mapRect.y+mapRect.height);
 	}
 }

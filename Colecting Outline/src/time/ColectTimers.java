@@ -117,6 +117,7 @@ public class ColectTimers {
 						if(canreset)
 						navigate.gatejump.reset();
 						canreset=false;
+						pet.stopPet();
 					}else{
 						canreset=true;
 					}
@@ -183,13 +184,13 @@ public class ColectTimers {
 					navigate.furthistPnt();
 					System.out.println("runing");
 						}
-					if(inc.increment1(30,1)){
+					
 					tool.actSpeedBst();
 					tool.actSpeedDC();
 					tool.actUlCloak();
 					pet.stopPet();
 					tool.acthomejump();
-					}
+					
 					if(petHit){
 						pet.stGardMode();
 					}
