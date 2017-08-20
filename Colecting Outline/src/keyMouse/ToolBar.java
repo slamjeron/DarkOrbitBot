@@ -42,7 +42,7 @@ public void findItems(BufferedImage screenImg){
 	for(int x=pnt.x+19;x<pnt.x+390;x+=39){
 		i++;
 		if(i==10)i=0;
-		System.out.println("toolnum ="+i);
+		//System.out.println("toolnum ="+i);
 		if(toolClr(screenImg, x, 20, 125,115,119)){
 			System.out.println("hartDC found on tool "+i);
 		toolpnt.hartDC.p=new Point(x,pnt.y);

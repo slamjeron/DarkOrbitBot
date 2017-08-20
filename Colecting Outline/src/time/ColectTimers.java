@@ -185,13 +185,11 @@ public class ColectTimers {
 					navigate.furthistPnt();
 					System.out.println("runing");
 						}
-					if(inc.increment1(23,4)){
 					tool.actSpeedBst();
 					tool.actSpeedDC();
 					tool.actUlCloak();
 					
 					tool.acthomejump();
-					}
 					pet.stopPet();
 					if(petHit){
 						pet.stGardMode();

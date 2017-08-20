@@ -39,7 +39,7 @@ public class ShipMonitor {
 		return (imgR.number.readnum1(image, speedRect));
 	}
 	public boolean isAtaked() {
-		boolean hit = (hitCheck(oldHP,shipHP,oldSD,shipSD));
+		boolean hit = (hitCheck(oldHP,shipHP,oldSD,shipSD)&&enimyonscreen());
 		oldHP=shipHP;
 		oldSD=shipSD;
 		return hit;
@@ -77,10 +77,28 @@ public class ShipMonitor {
 			return false;
 		}
 	}
+	public boolean enimyonscreen(){
+		
+		for (int y =100;y<image.getHeight(); y++){
+		for (int x =0;x<image.getWidth(); x++){
+			
+				if(imgR.clogic.pointEcolor(image,x,y,33,100,134)||
+						imgR.clogic.pointEcolor(image,x,y,119,205,33)){
+					//System.out.println("enimy on screen");
+					//comcon.moveCursor(x,y);
+					return true;
+					
+				}
+			
+			
+		}
+		}
+		return false;
+	}
 	public void readInfo() {
 		// TODO Auto-generated method stub
 		//if()
-		
+		if(imgR.clogic.pointEcolor(image,panelPnt.x+73,panelPnt.y+11,22,38,47)){
 		shipSD=(imgR.number.readnum1(image, shipSDRect));
 		int digSD=imgR.number.getDigits();
 		if(wClick==1)
@@ -104,6 +122,7 @@ public class ShipMonitor {
 			}else{
 				wClick=3;
 			}
+		}
 		}
 	public int getDeathCount() {
 		return deathCount;

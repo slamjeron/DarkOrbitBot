@@ -55,7 +55,8 @@ public class Navigator {
 
 	public boolean moving() {
 		// TODO Auto-generated method stub
-		boolean moving = imgreed.pointEcolor(mapPNT.x+117,mapPNT.y+35,255,255,255);
+		boolean moving = imgreed.pointEcolor(mapPNT.x+117,mapPNT.y+35,255,255,255)
+				&&!imgreed.pointEcolor(mapPNT.x+117,mapPNT.y+35,22,38,47);
 				if(moving)
 					wtTime=60;
 		return moving;
@@ -69,8 +70,8 @@ public class Navigator {
 	    RIGHT,LEFT,UP,DOWN 
 	}
 	public void withinBounds() {
-		 maxX =255;
-		 minX=74;
+		 maxX =258;
+		 minX=73;
 		 //System.out.println(wtTime);
 		if(wtTime==1){
 		if(shipPnt.x>maxX-3){
@@ -102,6 +103,7 @@ public class Navigator {
 			vDir=DIR.DOWN;
 		}
 		if(hight>200){
+			hight=198;
 			vDir=DIR.UP;
 		}
 	}

@@ -66,7 +66,7 @@ public class PetActions {
 	private Increment inc2=new Increment();
 	public void startPet() {
 		if(petEXP==0){
-		if(inc.increment1(30, 5)){
+		if(inc.increment1(25, 5)){
 		
 			keyB.type("e");
 		System.out.println("exp="+stime);
