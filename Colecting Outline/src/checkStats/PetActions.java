@@ -307,10 +307,15 @@ private void keepCBDown(){
 		}
 	}
 	public void setPanelPnt(Point pnt) {
+<<<<<<< HEAD
 		//numLocated=false;
 		this.panelPnt = pnt;
 		comboBXpnt=addXYtoPnt(pnt,178,113);
 		//cmBXSelectRct=new Rectangle(pnt.x+119,pnt.y+100,21,23);
+=======
+		this.panelPnt = pnt;
+		comboBXpnt=addXYtoPnt(pnt,178,113);
+>>>>>>> 4086646353cd7caf7d12c06e1d5e6daabd304c6e
 		comboBXrect=new Rectangle(pnt.x+130,pnt.y+180,30,150);
 		petFuelRect=new Rectangle(pnt.x+180,pnt.y+49,75,8);
 		petHPRect=new Rectangle(pnt.x+82,pnt.y+49,60,8);

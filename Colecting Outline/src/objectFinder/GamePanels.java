@@ -82,15 +82,12 @@ public class GamePanels {
 	private boolean findLeftEndPnt(BufferedImage im, int x, int y) {
 		for(int x1=x;x1>x-120;x1--){
 			if(toolborderClr(im,x1,y)){
-				if(isLeftCorner(im,x1,y)){
+				if(isLeftCorner(im,x1,y)&&!toolborderClr(im,x1-5,y)){
 					points.setToolBar(new Point(x1,y));
 				//System.out.println("tool Bar Pnt="+x1+","+y);
 					return true;
 				}
-				
 			}
-			//if(isLeftCorner(im,x1,y))
-			
 		}
 		
 		return false;
