@@ -65,7 +65,7 @@ public class PetActions {
 	private Increment inc=new Increment();
 	private Increment inc2=new Increment();
 	public void startPet() {
-		if(petEXP==0){
+		if(petEXP<1){
 		if(inc.increment1(25, 5)){
 		
 			keyB.type("e");
@@ -110,7 +110,6 @@ public class PetActions {
 		if(petEXP!=0){
 			stime=0;
 		keepCBDown();
-		}
 		if(rct)
 		if(cBXDown){
 			if(wtime==7){
@@ -178,7 +177,7 @@ public class PetActions {
 			}
 			wtime++;
 		}
-		
+		}
 	}
 	}
 	private boolean trade(BufferedImage cbx, int x, int y) {
