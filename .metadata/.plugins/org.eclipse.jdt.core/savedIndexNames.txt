@@ -1,9 +1,9 @@
-<<<<<<< HEAD
 INDEX VERSION 1.130+C:\Users\slamj\Documents\GitHub\DarkOrbitBot\DarkOrbitBot\.metadata\.plugins\org.eclipse.jdt.core
 1484906476.index
 4265864773.index
 194259052.index
 1477788888.index
+4246137320.index
 148409970.index
 848469205.index
 3620471903.index
@@ -19,25 +19,3 @@ INDEX VERSION 1.130+C:\Users\slamj\Documents\GitHub\DarkOrbitBot\DarkOrbitBot\.m
 3698447926.index
 3666609613.index
 648612256.index
-=======
-INDEX VERSION 1.129+C:\Users\Jeron\Desktop\github\DarkOrbitBot\.metadata\.plugins\org.eclipse.jdt.core
-3256285438.index
-1583927216.index
-3878457715.index
-2312443017.index
-3172068124.index
-2927524569.index
-486699731.index
-188619105.index
-4166838873.index
-2017505986.index
-1004716384.index
-2831536327.index
-375126478.index
-3681335767.index
-1847969816.index
-3119455041.index
-2167310551.index
-4246137320.index
-1904741536.index
->>>>>>> 162efec6f1333f8e6162e0a12e46ae7586b24aad

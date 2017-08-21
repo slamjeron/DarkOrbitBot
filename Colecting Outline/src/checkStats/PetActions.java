@@ -160,12 +160,7 @@ public class PetActions {
 			}
 			
 		}
-<<<<<<< HEAD
 		}
-	}
-=======
->>>>>>> 162efec6f1333f8e6162e0a12e46ae7586b24aad
-	}
 	private boolean trade(BufferedImage cbx, int x, int y) {
 		// TODO Auto-generated method stub
 		return pointEcolor(cbx, x-2, y+1,156,113,14);
