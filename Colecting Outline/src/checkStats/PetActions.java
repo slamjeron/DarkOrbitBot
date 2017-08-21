@@ -31,7 +31,6 @@ public class PetActions {
 	private Rectangle comboBXrect;
 	private boolean rct=false;
 	private boolean cbtF=true;
-	private int wtm;
 	private boolean cBXDown;
 	private int wtime=0;
 	private boolean tradeF;
@@ -85,12 +84,12 @@ public class PetActions {
 		if(petEXP!=0){
 			stime=0;
 		keepCBDown();
-		}
 		if(!islowHP)
 		if(!autoCG)
 			if(cBXDown)
 				if(this.autolootF)
 			mouse.rightclick(lootPnt);
+		}
 	}
 	public void stGardMode(){
 		if(!isGardMode()){
@@ -106,28 +105,23 @@ public class PetActions {
 		return pointEcolor(image, panelPnt.x+122, panelPnt.y+107,101,73,6);
 	}
 	public void findCBItems(){
-	if(cbtF){
+	if(cbtF)
 		if(petEXP!=0){
 			stime=0;
 		keepCBDown();
 		if(rct)
 		if(cBXDown){
-			if(wtime==7){
 		BufferedImage cbx = this.imgR.image.subimg(image, comboBXrect);
 		int x1=comboBXrect.x;
 		int y1=comboBXrect.y;
 		
 		int x=8;
-		//mouse.moveCursor(x1+x,y1+5);
 		for(int y=5;y<cbx.getHeight();y++){
+			
 			if(goldCLR2(cbx, x, y)){
 				if(!tradeF)
 				if(trade(cbx, x, y)){
-					//imgR.clogic.printPColer(cbx, x+16, y+10);
-					// System.out.println((x+16)+","+(y+10));
-					// mouse.moveCursor(x1+x+16,y1+y+10);
 					 y+=10;
-					//tradePnt=new Point(x1+x+16,y1+y+3);
 					 tradeF=true;
 				}
 				
@@ -135,7 +129,7 @@ public class PetActions {
 			 if(goldCLR(cbx, x, y)){
 				 if(!autolootF)
 				if(autoLoot(cbx, x, y)){
-					
+					System.out.println("auto loot Found");
 					lootPnt=new Point(x1+x+16,y1+y+3);
 					 y+=20;
 					 autolootF=true;
@@ -149,36 +143,28 @@ public class PetActions {
 				}
 				 if(!kamiF)
 				if(kamikaze(cbx, x, y)){
-					//kamiPnt=new Point(x1+x+16,y1+y+3);
-					
+					System.out.println("kamikazy Found");
 					kamiF=true;
 					 y+=10;
 				}
 				 if(!gardF)
 				if(gardMode(cbx, x, y)){
-					//imgR.clogic.printPColer(cbx, x+16, y+10);
-					// System.out.println((x+16)+","+(y+10));
-					 //mouse.moveCursor(x1+x+16,y1+y+10);
+					System.out.println("gard Found");
 					gardF=true;
 					 y+=10;
 				}
-				//mouse.rightclick(x1+x,y1+y);
 			 }
-				//imgR.clogic.printPColer(cbx, x, y);
-				 //System.out.println((x)+","+(y));
-			//mouse.moveCursor(x1+x,y1+y);
-			
 			
 		}
-		if(this.gardF&&this.repairF&&this.autolootF&&this.autolootF&&this.kamiF)
-			System.out.println("all is well");
 		cbtF=false;
-		wtime=0;
 			}
-			wtime++;
+			
 		}
+<<<<<<< HEAD
 		}
 	}
+=======
+>>>>>>> 162efec6f1333f8e6162e0a12e46ae7586b24aad
 	}
 	private boolean trade(BufferedImage cbx, int x, int y) {
 		// TODO Auto-generated method stub
@@ -209,13 +195,10 @@ private void keepCBDown(){
 	cBXDown=cBXDown();
 	
 	if(cBXDown){
-		wtm=0;
+		
 	}else{
-	if(wtm==7)
+	if(inc2.increment1(25, 6))
 		mouse.rightclick(comboBXpnt);
-			if(wtm>30)
-				wtm=0;
-			wtm++;
 	}
 }
 	private boolean cBXDown() {
@@ -305,7 +288,7 @@ private void keepCBDown(){
 			inkEXP=2;
 		}
 	}
-	public void setPanelPnt(Point pnt) {;
+	public void setPanelPnt(Point pnt) {
 		this.panelPnt = pnt;
 		comboBXpnt=addXYtoPnt(pnt,178,113);
 		this.panelPnt = pnt;
