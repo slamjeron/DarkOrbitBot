@@ -18,7 +18,7 @@ public class ShipMonitor {
 	private Rectangle shipHPRect;
 	private Rectangle shipSDRect;
 	private Rectangle speedRect;
-	private int wClick;
+	
 	private int oldHP;
 	private int oldSD;
 	private int shipHP;
@@ -59,71 +59,83 @@ public class ShipMonitor {
 		return new Point(mouse.centerpt.x+x,mouse.centerpt.y+y);
 	}
 	private Increment inc=new Increment();
-	public boolean shipDead(){
-		Point repbtn = addCenterPt(-87,201);
-		if((imgR.clogic.pointEcolor
-				(addCenterPt(-90,120),new Color(28,35,41))
-				&&imgR.clogic.pointEcolor
-				(addCenterPt(-100,120)
-						,new Color(28,35,41)))){
-			if(inc.increment(10)){
-				mouse.rightclick(repbtn);
-				setDeathCount(getDeathCount() + 1);
-			}
-			
-			return true;
-			
-		}else{
-			return false;
+	public void shipDead(){
+		if(isShipDed()){
+			repairShip();
 		}
 	}
-	public boolean enimyonscreen(){
-		
-		for (int y =100;y<image.getHeight(); y++){
-		for (int x =0;x<image.getWidth(); x++){
-			
-				if(imgR.clogic.pointEcolor(image,x,y,33,100,134)||
-						imgR.clogic.pointEcolor(image,x,y,119,205,33)){
-					//System.out.println("enimy on screen");
-					//comcon.moveCursor(x,y);
-					return true;
-					
-				}
-			
-			
+	private void repairShip() {
+		Point repbtn = addCenterPt(-87,201);
+		if(inc.increment(20)){
+			mouse.rightclick(repbtn);
+			setDeathCount(getDeathCount() + 1);
 		}
+	}
+	private boolean isShipDed() {
+		return pointEcolor(addCenterPt(-90,120),28,35,41)
+				&&pointEcolor(addCenterPt(-100,120),28,35,41);
+	}
+	private boolean pointEcolor(Point pt, int r, int g, int b) {
+		return imgR.clogic.pointEcolor
+				(image,pt.x,pt.y,new Color(r,g,b));
+	}
+	private boolean pointEcolor(int x, int y, int r, int g, int b) {
+		return pointEcolor(new Point(x,y),r,g,b);
+	}
+	public boolean enimyonscreen(){
+		for (int y =100;y<image.getHeight(); y++){
+			for (int x =0;x<image.getWidth(); x++){
+				if(enimyFound(x,y)){
+					return true;
+				}
+			}
 		}
 		return false;
 	}
+	private boolean enimyFound(int x, int y) {
+		return pointEcolor(x,y,33,100,134)||
+				pointEcolor(x,y,119,205,33);
+	}
+	private int slowDownFix=0;
 	public void readInfo() {
-		// TODO Auto-generated method stub
-		//if()
-		if(imgR.clogic.pointEcolor(image,panelPnt.x+73,panelPnt.y+11,22,38,47)){
-		shipSD=(imgR.number.readnum1(image, shipSDRect));
-		int digSD=imgR.number.getDigits();
-		if(wClick==1)
-			if(digSD==0)
-				mouse.rightclick(shipSDRect.x+30, shipSDRect.y+7);
-			
-		shipHP=(imgR.number.readnum1(image, shipHPRect));
-		int digHP=imgR.number.getDigits();
-			if(wClick==1)
-				if(digHP==0)
-					mouse.rightclick(shipHPRect.x+20, shipHPRect.y+6);
-			
-			
+		if(shipPanelVisible()){
+		int digSD=getSDSize();
+		int digHP=getHPSize();
+		if(slowDownFix==1)
+			setStatsToNumaric(digSD,shipSDRect);
+		if(slowDownFix==1)
+			setStatsToNumaric(digHP,shipHPRect);
 				
-			if(wClick>40){
-				//numLocated=true;
-				wClick=0;
-			}
-			if(digSD==0||digHP==0){
-			wClick++;
-			}else{
-				wClick=3;
-			}
+		if(slowDownFix>40)
+			slowDownFix=0;
+			
+		if(numbersNotVisible(digHP,digSD)){
+			slowDownFix++;
+		}else{
+			slowDownFix=3;
 		}
 		}
+		}
+	private int getHPSize() {
+		shipHP=(imgR.number.readnum1(image, shipHPRect));
+		return imgR.number.getDigits();
+	}
+	private void setStatsToNumaric(int digSD, Rectangle rect) {
+		if(digSD==0)
+			mouse.rightclick(rect.x+30, rect.y+7);
+		
+	}
+	private int getSDSize() {
+		shipSD=(imgR.number.readnum1(image, shipSDRect));
+		return imgR.number.getDigits();
+	}
+	private boolean shipPanelVisible() {
+		return pointEcolor(panelPnt.x+73,panelPnt.y+11,22,38,47);
+	}
+	
+	private boolean numbersNotVisible(int digHP, int digSD) {
+		return digSD==0||digHP==0;
+	}
 	public int getDeathCount() {
 		return deathCount;
 	}

@@ -82,7 +82,7 @@ public class ColectRobot {
 		
 		
 		
-		JLabel lblShipName = new JLabel("ship name=");
+		JLabel lblShipName = new JLabel("ship nm");
 		lblShipName.setForeground(Color.GREEN);
 		lblShipName.setBounds(10, 14, 63, 14);
 		frame.getContentPane().add(lblShipName);

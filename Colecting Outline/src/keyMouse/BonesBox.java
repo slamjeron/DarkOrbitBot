@@ -127,7 +127,7 @@ public class BonesBox {
 		for(Point p:bbPNts){
 			
 			if(p!=null){
-				if(!imgmath.contains(new Point(p.x,p.y-115),skipZone)){
+				if(!imgmath.contains(new Point(p.x,p.y),skipZone)){
 				e[i]=(int) tryangle.findhipotinose(mouse.centerpt,new Point(p.x,p.y-115));
 				numpnt++;
 				i++;

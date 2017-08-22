@@ -46,12 +46,9 @@ public class ColectTimers {
 	private Navigator navigate =new Navigator();
 	public void setToolbar(){
 		tool.keyB=keyB;
-		
 		tool.imgRead=this.imgR.clogic;
 		tool.pnt=panels.getToolBar();
 		tool.findItems(screenImg);
-	
-		
 	}
 	public void setShipTools(){
 		ship= new ShipMonitor();
@@ -98,12 +95,14 @@ public class ColectTimers {
 				private boolean shipHit;
 				private boolean on1_1;
 				private boolean canreset;
+				private boolean traveling;
 				
 				
 
 				public void run() {
 					if(timerEnable){
 					screenImg=imgR.image.getScreenImage();
+					navigate.image=screenImg;
 					pet.setImage(screenImg);
 					pet.readInfo();
 					ship.setSetImage(screenImg);
@@ -127,7 +126,8 @@ public class ColectTimers {
 						boolean moving = navigate.moving();
 						if(shipCanColect()){
 						if(!bNSBX.found&&!moving){
-							navigate.findShip(screenImg);
+							navigate.image=screenImg;
+							navigate.findShip();
 							navigate.withinBounds();
 						}
 						if(bNSBX.found){
@@ -165,7 +165,9 @@ public class ColectTimers {
 
 
 				private boolean shipCanColect() {
-					return (!navigate.gatejump.travleing&&!on1_1);
+					traveling=navigate.gatejump.travleing;
+					
+					return (!traveling&&!on1_1);
 				}
 
 
@@ -181,7 +183,7 @@ public class ColectTimers {
 					}
 					if(fleeing)
 						if(inc.increment1(300,2)){
-					navigate.findShip(screenImg);
+					navigate.findShip();
 					navigate.furthistPnt();
 					System.out.println("runing");
 						}

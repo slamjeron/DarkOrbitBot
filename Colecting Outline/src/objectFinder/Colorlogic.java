@@ -44,7 +44,7 @@ public class Colorlogic {
 			, int x, int y, int r, int g, int b) {
 		return pointEcolor(image, x, y,new Color(r, g, b));
 	}
-	protected boolean pointEcolor(BufferedImage image
+	public boolean pointEcolor(BufferedImage image
 			, int x, int y, Color c) {
 		if(smath.searchBoundries(image, new Point(x,y))){
 		return pointColor(image, x, y).equals(c);

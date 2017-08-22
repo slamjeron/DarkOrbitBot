@@ -24,7 +24,6 @@ public class PetActions {
 	private int petSD;
 	private int petEXP;
 	public Keyboard keyB;
-	private int stime;
 	private int oldHP;
 	private int oldSD;
 	private Point comboBXpnt=new Point();
@@ -32,7 +31,6 @@ public class PetActions {
 	private boolean rct=false;
 	private boolean cbtF=true;
 	private boolean cBXDown;
-	private int wtime=0;
 	private boolean tradeF;
 	private boolean autolootF;
 	private boolean repairF;
@@ -63,12 +61,19 @@ public class PetActions {
 	}
 	private Increment inc=new Increment();
 	private Increment inc2=new Increment();
+	private Point stBtnPnt=new Point();
 	public void startPet() {
 		if(petEXP<1){
 		if(inc.increment1(25, 5)){
-		
-			keyB.type("e");
-		System.out.println("exp="+stime);
+			if(stBtnPnt.x>1){
+			mouse.rightclick(this.stBtnPnt);
+			
+			}else{
+				int x1=panelPnt.x;
+				int y1=panelPnt.y;
+				stBtnPnt=new Point(x1+34,y1+115);
+			}
+			System.out.println(stBtnPnt);
 		}
 		}
 		
@@ -82,13 +87,13 @@ public class PetActions {
 		boolean autoCG = isAutoCargo();
 		if(!autoCG)
 		if(petEXP!=0){
-			stime=0;
 		keepCBDown();
 		if(!islowHP)
-		if(!autoCG)
 			if(cBXDown)
-				if(this.autolootF)
+				if(autolootF){
 			mouse.rightclick(lootPnt);
+		cBXDown=false;
+				}
 		}
 	}
 	public void stGardMode(){
@@ -107,13 +112,15 @@ public class PetActions {
 	public void findCBItems(){
 	if(cbtF)
 		if(petEXP!=0){
-			stime=0;
+			int x1=comboBXrect.x;
+			int y1=comboBXrect.y;
+			stBtnPnt=new Point(x1+34,y1+115);
 		keepCBDown();
+		
 		if(rct)
 		if(cBXDown){
 		BufferedImage cbx = this.imgR.image.subimg(image, comboBXrect);
-		int x1=comboBXrect.x;
-		int y1=comboBXrect.y;
+		
 		
 		int x=8;
 		for(int y=5;y<cbx.getHeight();y++){
@@ -153,9 +160,13 @@ public class PetActions {
 					gardF=true;
 					 y+=10;
 				}
+				
+				 this.stAutoCargo();
 			 }
 			
 		}
+		 mouse.rightclick(lootPnt);
+		 cBXDown=false;
 		cbtF=false;
 			}
 			
@@ -190,9 +201,9 @@ private void keepCBDown(){
 	cBXDown=cBXDown();
 	
 	if(cBXDown){
-		
+		inc2.inc1=0;
 	}else{
-	if(inc2.increment1(25, 6))
+	if(inc2.increment1(25, 1))
 		mouse.rightclick(comboBXpnt);
 	}
 }
@@ -342,33 +353,36 @@ private void keepCBDown(){
 		
 		if(this.repairF){
 			//System.out.println(maxHp);
-		if(cBXDown)
+		
 		if(islowHP){
-			if(incRep<3)
-			
-				stime=0;
-			keepCBDown();
-			if(incRep==4){
+			if(incRep<9){
+				keepCBDown();
+				System.out.println("incRep ="+incRep);
+			}
+			if(cBXDown)
+			if(incRep==10){
 				System.out.println(islowHP+"="+petHP+"<="+maxHp);
+				System.out.println(repairPnt);
 			mouse.rightclick(repairPnt);
 			}
-			if(incRep>200){
+			if(incRep>100){
 				incRep=0;
-			
+				islowHP=false;
 			}
 			incRep++;
 		}else{
-			if(islowHP)
+			islowHP=(maxHp>petHP&&0!=petHP&&petEXP!=0);
+			if(!islowHP)
 			maxHp=petHP;
 		}
 		}
-		if(incRep<200)
-		islowHP=(maxHp>petHP&&0!=petHP&&petEXP!=0);
+		
+		
 	}
 	public void colect() {
 		if(!petBXMissing()){
-		startPet();
 		findCBItems();
+		startPet();
 		stAutoCargo();
 		rep();
 		}
