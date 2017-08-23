@@ -11,7 +11,7 @@ public class ColectingBot {
 		imgR=new ImgRobot();
 	}
 	
-	private ColectTimers colectTime=new ColectTimers();
+	public ColectTimers colectTime=new ColectTimers();
 	private ImgRobot imgR=new ImgRobot();
 	private GamePanels panels= imgR.gamePanels;
 	protected boolean started=false;

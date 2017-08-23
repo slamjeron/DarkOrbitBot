@@ -3,6 +3,9 @@ package time;
 import java.awt.image.BufferedImage;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.swing.JLabel;
+
 import checkStats.PetActions;
 import checkStats.ShipMonitor;
 import keyMouse.BonesBox;
@@ -26,11 +29,13 @@ public class ColectTimers {
 	private PetActions pet=new PetActions();
 	private ShipMonitor ship=new ShipMonitor();
 	private BufferedImage screenImg;
+	public boolean top=true;
 	private int hun=0;
 	private int shipSpeed=0;
 	public boolean timerEnable=false;
 	private Timer timeKeeper;
 	protected BonesBox bNSBX=new BonesBox();
+	public JLabel lblBacedetect=new JLabel("enimy has bace =");
 	public void setPetTools(){
 		pet=new PetActions();
 		pet.setPanelPnt(panels.pet);
@@ -84,10 +89,9 @@ public class ColectTimers {
 	private Increment inc=new Increment();
 	private Increment inc2=new Increment();
 	public void start() {
-		
+		lblBacedetect.setText("ship speed ="+ship.getSpeed());
 		timer=new Timer();
 		timeKeeper=new Timer();
-		//System.out.println(shipSpeed);
 		timer.scheduleAtFixedRate (
 				new TimerTask() {
 
@@ -96,9 +100,6 @@ public class ColectTimers {
 				private boolean on1_1;
 				private boolean canreset;
 				private boolean traveling;
-				
-				
-
 				public void run() {
 					if(timerEnable){
 					screenImg=imgR.image.getScreenImage();
@@ -107,7 +108,8 @@ public class ColectTimers {
 					pet.readInfo();
 					ship.setSetImage(screenImg);
 					ship.readInfo();
-					
+					boolean moving = navigate.moving();
+					navigate.top=top;
 					on1_1=navigate.on1_1();
 					if(pet.screenChanged){
 						ship.shipDead();
@@ -123,7 +125,7 @@ public class ColectTimers {
 					if(petHit||shipHit){
 						escapeEnimy();
 					}else{
-						boolean moving = navigate.moving();
+						
 						if(shipCanColect()){
 						if(!bNSBX.found&&!moving){
 							navigate.image=screenImg;
@@ -149,8 +151,11 @@ public class ColectTimers {
 						petHit=pet.isAtaked();
 						shipHit=ship.isAtaked();
 						}else{
+							if(!moving){
 							navigate.gatejump.setMoving(moving);
 							navigate.gatejump.travel(navigate.gatejump.from1_1To4_1);
+							}
+							
 						}
 					}
 					
@@ -229,6 +234,7 @@ public class ColectTimers {
 		    }, 0, 3);
 
 	}
+	
 	public void travelTst(){
 		timer=new Timer();
 		//timeKeeper=new Timer();

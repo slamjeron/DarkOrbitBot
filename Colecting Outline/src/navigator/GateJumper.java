@@ -60,10 +60,10 @@ private void jumpgate(Point p,Point p2){
 		runStep++;
 		actionDelay=0;
 	}else{
-		if(actionDelay==1){
+		if(actionDelay==5){
 			mouse.rightclick(jpnt);
 		}
-		if(actionDelay>30){
+		if(actionDelay>40){
 			actionDelay=0;
 		}
 		}
@@ -80,7 +80,7 @@ private void jumpgate(Point p,Point p2){
 			if(actionDelay==10){
 				kB.type("j");
 			}
-			if(actionDelay>70){
+			if(actionDelay>170){
 				actionDelay=0;
 			}
 				actionDelay++;

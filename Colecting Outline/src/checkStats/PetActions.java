@@ -62,6 +62,7 @@ public class PetActions {
 	private Increment inc=new Increment();
 	private Increment inc2=new Increment();
 	private Point stBtnPnt=new Point();
+	private boolean panvis;
 	public void startPet() {
 		if(petEXP<1){
 		if(inc.increment1(25, 5)){
@@ -226,6 +227,8 @@ private void keepCBDown(){
 				oldHP>newHP&&oldSD>newSD);
 	}
 	public void readInfo(){
+		 panvis = petPanelVisibal(94,9,22,38,47);
+		if(panvis){
 		setPetFuel(imgR.number.readnum1(image, petFuelRect));
 		int fuelDig = imgR.number.getDigits();
 		showFuelAmnt(fuelDig);
@@ -241,29 +244,35 @@ private void keepCBDown(){
 		setPetEXP(imgR.number.readnum1(image, petEXPRect));
 		int expDig = imgR.number.getDigits();
 		showEXPAmnt(expDig);
-			
+		}
 		
 		
 	}
+	private boolean petPanelVisibal(int x,int y,int r,int g,int b) {
+		// TODO Auto-generated method stub
+		return pointEcolor(image,addXYtoPnt(panelPnt,x,y),r,g,b);
+	}
+	private boolean pointEcolor(BufferedImage image2, Point p, int r, int g, int b) {
+		return imgR.clogic.pointEcolor(image2, p.x, p.y, r, g, b);
+	}
 	private void showFuelAmnt(int fuelDig) {
 		if(fuelDig==0){
-		if(inkFD==1){
+		if(inkFD==7){
 				mouse.rightclick(petFuelRect.x+30, petFuelRect.y+7);
 		}
-		if(inkFD>30)
+		if(inkFD>60)
 			inkFD=0;
 		inkFD++;
-		System.out.println(inkFD);
 		}else{
 			inkFD=2;
 		}
 	}
 	private void showSDAmnt(int fuelDig) {
 		if(fuelDig==0){
-		if(inkSD==1){
+		if(inkSD==9){
 				mouse.rightclick(petSHRect.x+30, petSHRect.y+7);
 		}
-		if(inkSD>30)
+		if(inkSD>60)
 			inkSD=0;
 		inkSD++;
 		}else{
@@ -272,10 +281,10 @@ private void keepCBDown(){
 	}
 	private void showHPAmnt(int fuelDig) {
 		if(fuelDig==0){
-		if(inkHP==1){
+		if(inkHP==3){
 				mouse.rightclick(petHPRect.x+30, petHPRect.y+7);
 		}
-		if(inkHP>30)
+		if(inkHP>60)
 			inkHP=0;
 		inkHP++;
 		}else{
@@ -284,10 +293,10 @@ private void keepCBDown(){
 	}
 	private void showEXPAmnt(int fuelDig) {
 		if(fuelDig==0){
-		if(inkEXP==1){
+		if(inkEXP==2){
 				mouse.rightclick(petEXPRect.x+30, petEXPRect.y+7);
 		}
-		if(inkEXP>30)
+		if(inkEXP>60)
 			inkEXP=0;
 		inkEXP++;
 		}else{
@@ -380,7 +389,7 @@ private void keepCBDown(){
 		
 	}
 	public void colect() {
-		if(!petBXMissing()){
+		if(!petBXMissing()||panvis){
 		findCBItems();
 		startPet();
 		stAutoCargo();

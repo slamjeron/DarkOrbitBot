@@ -1,15 +1,21 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.Image;
+
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JLabel;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class ColectRobot {
 
@@ -38,6 +44,8 @@ public class ColectRobot {
 	public int index =0;
 	private boolean start=true;
 	private ColectingBot colectingBot=new ColectingBot();
+	private developertest test=new developertest(colectingBot.colectTime);
+	private Image img; 	
 	private void initialize() {
 		//colectingTimers cbox= new colectingTimers();
 		
@@ -46,7 +54,7 @@ public class ColectRobot {
 		//frame.setUndecorated( true );
 		frame.setBackground(Color.BLUE);
 		frame.getContentPane().setBackground(Color.BLACK);
-		frame.setBounds(100, 100, 202, 173);
+		frame.setBounds(100, 100, 222, 173);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setAlwaysOnTop(true);
@@ -68,7 +76,6 @@ public class ColectRobot {
 				}
 				}else{
 				colectingBot.stop();
-				
 				btnStart.setBackground(Color.GREEN);
 				btnStart.setText("START");
 				start=true;
@@ -100,9 +107,32 @@ public class ColectRobot {
 		btnReset.setBounds(20, 74, 89, 23);
 		frame.getContentPane().add(btnReset);
 		
-		JButton btnSetings = new JButton("Setings");
-		btnSetings.setBounds(122, 10, 51, 23);
-		frame.getContentPane().add(btnSetings);
+		JButton btnTopScreen = new JButton("");
+		
+		btnTopScreen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(!colectingBot.colectTime.top){
+						btnTopScreen.setIcon(new ImageIcon(getClass().getResource("/Arrow-Up-icon (1).png")));	
+						
+				}else{
+							btnTopScreen.setIcon(new ImageIcon(getClass().getResource("/Arrow-Down-icon.png")));	
+											
+				}
+				colectingBot.colectTime.top=!colectingBot.colectTime.top;
+			}
+		});
+		btnTopScreen.setBorder(null);
+		btnTopScreen.setBackground(Color.BLACK);
+		btnTopScreen.setOpaque(false);
+		
+		btnTopScreen.setIcon(new ImageIcon(getClass().getResource("/Arrow-Up-icon (1).png")));
+		btnTopScreen.setBounds(151, 34, 46, 42);
+		frame.getContentPane().add(btnTopScreen);
+		
+		JLabel lblColect = new JLabel("colect");
+		lblColect.setForeground(Color.GREEN);
+		lblColect.setBounds(114, 43, 46, 14);
+		frame.getContentPane().add(lblColect);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -112,7 +142,7 @@ public class ColectRobot {
 		JMenuItem mntmTestPage = new JMenuItem("test page");
 		mntmTestPage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+					test.setVisible(true);	
 			}
 		});
 		

@@ -22,6 +22,8 @@ public class Navigator {
 	private int minX;
 	public GateJumper gatejump;
 	public BufferedImage image;
+
+	public boolean top;
 	public void furthistPnt() {
 		int farY;
 		if(shipPnt.y<106){
@@ -55,8 +57,7 @@ public class Navigator {
 
 	public boolean moving() {
 		// TODO Auto-generated method stub
-		boolean moving = pointEColor(mBmapPlusPnt(117,35),255,255,255)
-				&&pointEColor(mBmapPlusPnt(117,35),22,38,47);
+		boolean moving = pointEColor(mBmapPlusPnt(117,35),255,255,255);
 				if(moving)
 					wtTime=60;
 		return moving;
@@ -70,30 +71,33 @@ public class Navigator {
 	    RIGHT,LEFT,UP,DOWN 
 	}
 	public void withinBounds() {
-		 maxX =258;
-		 minX=73;
+		 maxX =259;
+		 minX=66;
 		 //System.out.println(wtTime);
 		if(wtTime==1){
+		int stHight=0;
+		int mXHight;
+		if(enimyHasBace()){
+			if(top){
+				stHight=6;
+				mXHight=50;
+				}else{
+					stHight=150;
+					mXHight=210;
+				}
+		}else{
+			stHight=6;
+			mXHight=210;
+		}
 		if(shipPnt.x>maxX-3){
 			hDir=DIR.LEFT;
-			if(enimyHasBace()){
-				setNextPnt(130);
-			}else{
-				setNextPnt(6);
-			}
+				setNextPnt(stHight,mXHight);
 		}
 		if(minX+3>shipPnt.x){
 			hDir=DIR.RIGHT;
-			if(enimyHasBace()){
-				setNextPnt(140);
-			}else{
-				setNextPnt(6);
-			}
-		}else{
-			if(enimyHasBace())
-		if(hight<140)
-			hight=140+1;
+			setNextPnt(stHight,mXHight);
 		}
+		stayWithin(stHight,mXHight);
 		moveNextPnt();
 		}
 		if(wtTime>20)
@@ -113,23 +117,26 @@ public class Navigator {
 	public Point mBmapPlusPnt(int x,int y){
 		return new Point(mapPNT.x+x,mapPNT.y+y);
 	}
-	public void setNextPnt(int stHight){
-		
+	public void setNextPnt(int stHight,int mXHight){
+		if(mXHight>206)
+			mXHight=205;
 		if(vDir==DIR.DOWN){
 		hight+=25;
 		}else{
 			hight-=25;	
 		}
+		
+	}
+	public void stayWithin(int stHight,int mXHight){
 		if(hight<stHight){
 			hight=stHight+1;
 			vDir=DIR.DOWN;
 		}
-		if(hight>211){
-			hight=210;
+		if(hight>mXHight){
+			hight=mXHight-1;
 			vDir=DIR.UP;
 		}
 	}
-
 	public void moveNextPnt() {
 		if(hDir==DIR.RIGHT){
 				mouse.rightclick(mapPlusPnt(maxX,hight));
