@@ -61,17 +61,15 @@ public class PetActions {
 	}
 	private Increment inc=new Increment();
 	private Increment inc2=new Increment();
-	private Point stBtnPnt=new Point();
-	private boolean panvis;
+	private Increment incr=new Increment();
+	public boolean panvis;
 	private Point p;
+	public boolean ispetUp;
+	public boolean isPetColecting;
 	public void startPet() {
-		if(petEXP<1){
-		if(inc.increment1(25, 5)){
+		if(incr.increment1(25, 5)){
 			keyB.type("e");
 		}
-		}
-		
-		
 	}
 	public boolean gardMode(BufferedImage cbx, int x, int y) {
 		return pointEcolor(cbx, x+3, y+3,162,117,13);
@@ -79,8 +77,8 @@ public class PetActions {
 	}
 	public void stAutoCargo(){
 		boolean autoCG = isAutoCargo();
-		if(!autoCG)
-		if(petEXP!=0){
+		isPetColecting =autoCG;
+		if(!autoCG){
 		keepCBDown();
 		if(!islowHP)
 			if(cBXDown)
@@ -104,11 +102,11 @@ public class PetActions {
 		return pointEcolor(image, panelPnt.x+122, panelPnt.y+107,101,73,6);
 	}
 	public void findCBItems(){
+		
 	if(cbtF)
-		if(petEXP!=0){
+		if(ispetUp){
 			int x1=comboBXrect.x;
 			int y1=comboBXrect.y;
-			stBtnPnt=new Point(x1+34,y1+115);
 		keepCBDown();
 		
 		if(rct)
@@ -249,7 +247,6 @@ private void keepCBDown(){
 		
 	}
 	private boolean petPanelVisibal(int x,int y,int r,int g,int b) {
-		// TODO Auto-generated method stub
 		return pointEcolor(image,addXYtoPnt(panelPnt,x,y),r,g,b);
 	}
 	private boolean pointEcolor(BufferedImage image2, Point p, int r, int g, int b) {
@@ -304,6 +301,8 @@ private void keepCBDown(){
 		}
 	}
 	public void setPanelPnt(Point pnt) {
+		this.panelPnt = pnt;
+		comboBXpnt=addXYtoPnt(pnt,178,113);
 		this.panelPnt = pnt;
 		comboBXpnt=addXYtoPnt(pnt,178,113);
 		comboBXrect=new Rectangle(pnt.x+130,pnt.y+180,30,150);
@@ -369,7 +368,7 @@ private void keepCBDown(){
 			if(cBXDown)
 			if(incRep==10){
 				//System.out.println(islowHP+"="+petHP+"<="+maxHp);
-				///System.out.println(repairPnt);
+				//System.out.println(repairPnt);
 			mouse.rightclick(repairPnt);
 			}
 			if(incRep>100){
@@ -383,15 +382,26 @@ private void keepCBDown(){
 			maxHp=petHP;
 		}
 		}
+		
+		
 	}
-	
 	public void colect() {
-		if(!petBXMissing()||panvis){
+		ispetUp=petEXP>2;
+		//System.out.println(petEXP);
+		if(panvis){
+			if(ispetUp){
 		findCBItems();
-		startPet();
 		stAutoCargo();
 		rep();
+			}else{
+				//System.out.println("pet Down");
+				startPet();
+			}
 		}
+	}
+	public boolean pet(){
+		return !pointEcolor(image, panelPnt.x+79, panelPnt.y+10,22,38,47);
+		
 	}
 public boolean petBXMissing(){
 	return !pointEcolor(image, panelPnt.x+79, panelPnt.y+10,22,38,47);

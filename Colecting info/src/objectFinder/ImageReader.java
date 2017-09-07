@@ -55,7 +55,7 @@ public class ImageReader {
 			}
 			setTextLocations();
 			setPanelRects();
-			
+			System.out.println(panelR.mapRect);
 		}
 		
 		public boolean allItemsFound(){
@@ -129,7 +129,7 @@ public class ImageReader {
 		}
 		public void checkmap(BufferedImage im, int x, int y){
 			if(textclr(im,x+34,y+4)&&textclr(im,x+83,y+16)){
-				
+				System.out.println("map");
 				mapFound=true;
 			mapPnt=new Point(x, y);
 			}
@@ -139,6 +139,7 @@ public class ImageReader {
 			if(colLogic.pointEcolor(im,x+112,y+57,235,217,177)&&
 					colLogic.pointEcolor(im,x+10,y+16,52,82,96)){
 				shipPnt=new Point(x, y);
+				System.out.println("Ship Point ="+shipPnt);
 				shipFound=true;
 				//panelsearch.shipFound=(shipFound);
 				
@@ -146,6 +147,7 @@ public class ImageReader {
 		}
 		public void checkpet(BufferedImage im, int x, int y){
 			if(textclr(im,x+112,y+57)&&textclr(im,x+43,y+13)){
+				System.out.println("pet");
 				petFound=true;
 				panelsearch.petFound=true;
 				petPnt=new Point(x, y);
@@ -153,6 +155,7 @@ public class ImageReader {
 		}
 		public void checkUser(BufferedImage im, int x, int y){
 			if(colLogic.pointEcolor(im, x+16, y+32,new Color(233,226,191))){
+				System.out.println("user");
 				userFound=true;
 			userPnt=new Point(x, y);
 			}

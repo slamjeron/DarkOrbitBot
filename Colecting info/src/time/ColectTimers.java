@@ -35,18 +35,13 @@ public class ColectTimers {
 	public boolean timerEnable=false;
 	private Timer timeKeeper;
 	protected BonesBox bNSBX=new BonesBox();
-	public JLabel lblBacedetect=new JLabel("enimy has bace =");
+	public JLabel lblBacedetect=new JLabel("<html>Welcome to<br>Stackoverflow</html>");
 	public void setPetTools(){
 		pet=new PetActions();
 		pet.setPanelPnt(panels.pet);
 		pet.imgR=imgR;
 		pet.mouse=mouse;
 		pet.keyB=keyB;
-		
-		
-		
-		//mouse.rightclick(mouse.centerpt);
-		
 	}
 	private Navigator navigate =new Navigator();
 	public void setToolbar(){
@@ -62,7 +57,6 @@ public class ColectTimers {
 		ship.mouse=mouse;
 		ship.setSetImage(screenImg);
 		shipSpeed=ship.getSpeed();
-		System.out.println(shipSpeed);
 	}
 	public void setUp(){
 		screenImg =imgR.image.getScreenImage();
@@ -89,7 +83,7 @@ public class ColectTimers {
 	private Increment inc=new Increment();
 	private Increment inc2=new Increment();
 	public void start() {
-		lblBacedetect.setText("ship speed ="+ship.getSpeed());
+		//lblBacedetect.setText("ship speed ="+ship.getSpeed());
 		timer=new Timer();
 		timeKeeper=new Timer();
 		timer.scheduleAtFixedRate (
@@ -102,10 +96,24 @@ public class ColectTimers {
 				private boolean traveling;
 				public void run() {
 					if(timerEnable){
+						String infoStr = "<html>pet info<br>";
 					screenImg=imgR.image.getScreenImage();
 					navigate.image=screenImg;
 					pet.setImage(screenImg);
 					pet.readInfo();
+					infoStr+= "is panel visable ="+ pet.panvis+"<br> ";
+					infoStr+= "HP ="+ pet.getPetHP()+"<br> ";
+					infoStr+= "SD ="+ pet.getPetSD()+"<br>";
+					infoStr+= "up =" +pet.ispetUp+"<br>";
+					infoStr+= "colecting =" +pet.isPetColecting+"<br>";
+					infoStr+= "hit =" +petHit+" <br> <br>";
+					infoStr+= "ship info<br>";
+					infoStr+= "HP =" +ship.getHP+"<br>";
+					infoStr+= "SD =" +ship.getSD+"<br>";
+					//infoStr+= "HP =" +ship.+"<br>";
+					infoStr+= "speed =" +shipSpeed+" </html>";
+					lblBacedetect.setText(infoStr);
+					
 					ship.setSetImage(screenImg);
 					ship.readInfo();
 					boolean moving = navigate.moving();
@@ -134,7 +142,7 @@ public class ColectTimers {
 						}
 						if(bNSBX.found){
 							if(!moving){
-								if(inc.increment(3))
+								if(inc.increment(7))
 									bNSBX.found=false;
 							}else{
 								if(inc2.increment(20))
@@ -190,7 +198,7 @@ public class ColectTimers {
 						if(inc.increment1(300,2)){
 					navigate.findShip();
 					navigate.furthistPnt();
-					System.out.println("runing");
+					//System.out.println("runing");
 						}
 					tool.actSpeedBst();
 					tool.actSpeedDC();
@@ -198,8 +206,9 @@ public class ColectTimers {
 					
 					tool.acthomejump();
 					pet.stopPet();
-					if(petHit)
+					if(petHit){
 						pet.stGardMode();
+					}
 				}
 		    }, 0, 3);
 		timeKeeper.scheduleAtFixedRate (

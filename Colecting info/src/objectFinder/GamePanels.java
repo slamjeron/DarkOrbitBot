@@ -45,7 +45,7 @@ public class GamePanels {
 	
 	public boolean allItemsFound(){
 		
-		return(booleans.pet&& booleans.ship&&booleans.map);
+		return(booleans.user&&booleans.pet&& booleans.ship&&booleans.map);
 	}
 	
 	private int skipLocatedItem(int x,int y){
@@ -101,6 +101,7 @@ public class GamePanels {
 	}
 	private void checkmap(BufferedImage im, int x, int y){
 		if(!booleans.map&&textclr(im,x+34,y+4)&&textclr(im,x+83,y+16)){
+			//System.out.println("map");
 			booleans.map=true;
 		points.map=new Point(x, y);
 		}
@@ -108,19 +109,27 @@ public class GamePanels {
 	private void checkship(BufferedImage im, int x, int y){
 		if(!booleans.ship&&
 				borderCLR(im,x+212,y+104)){
+			//colLogic.pointEcolor(im,x+10,y+16,52,82,96);
+			
+			
+			//refPoint colLogic.pointEcolor(x+19, y+40,207,188,152);
+			//System.out.println("Ship");
+			//colLogic.printPColer(im,x+10, y+16);
+			//colLogic.printPColer(im,x+212, y+104);
 			booleans.ship=true;
 			points.ship=new Point(x, y);
 		}
 	}
 	private void checkpet(BufferedImage im, int x, int y){
 		if(!booleans.pet&&textclr(im,x+65,y+12)&&textclr(im,x+43,y+13)){
-			
+			//System.out.println("pet");
 			booleans.pet=true;
 			points.pet=new Point(x, y);
 		}
 	}
 	private void checkUser(BufferedImage im, int x, int y){
 		if(!booleans.user&&borderCLR(im, x+214, y+98)){
+			//System.out.println("user");
 			booleans.user=true;
 			points.user=new Point(x, y);
 		}

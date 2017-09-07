@@ -53,11 +53,12 @@
 	</section>
 	<section name="FatJarPackageWizard">
 		<item value="C:\Users\slamj\Documents\GitHub\DarkOrbitBot\DarkOrbitBot" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
-		<item value="ColectRobot (7) - Colecting Outline" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="C:\Users\slamj\OneDrive\try this.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="ColectRobot (8) - Colecting info" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\Users\slamj\OneDrive\try thist.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\slamj\OneDrive\try thist.jar"/>
 			<item value="C:\Users\slamj\OneDrive\try this.jar"/>
 			<item value="C:\Users\slamj\OneDrive\use this.jar"/>
 			<item value="C:\Users\slamj\OneDrive\user stats saving.jar"/>
