@@ -8,6 +8,7 @@ import keyMouse.Keyboard;
 import keyMouse.Mouse;
 import objectFinder.ImgRobot;
 import time.Increment;
+import time.Incrementors;
 
 public class PetActions {
 
@@ -53,21 +54,24 @@ public class PetActions {
 		screenChanged=petBXMissing();
 		if(!screenChanged){
 			
-		if(petEXP!=0)
-			if(inc.increment1(25, 2))
-			keyB.type("e");
+		
+			if(incr.inc.increment1(200, 2))
+				stpet();
 		}
 		
 	}
-	private Increment inc=new Increment();
-	private Increment inc2=new Increment();
+	public void stpet(){
+		if(petEXP!=0)
+			mouse.rightclick(addXYtoPnt(panelPnt,30,125));
+	}
+	private Incrementors incr=new Incrementors();
 	private Point stBtnPnt=new Point();
 	private boolean panvis;
 	private Point p;
 	public void startPet() {
 		if(petEXP<1){
-		if(inc.increment1(25, 5)){
-			keyB.type("e");
+		if(incr.inc.increment1(40, 7)){
+			mouse.rightclick(addXYtoPnt(panelPnt,30,125));;
 		}
 		}
 		
@@ -82,6 +86,7 @@ public class PetActions {
 		if(!autoCG)
 		if(petEXP!=0){
 		keepCBDown();
+		if(incr.inc3.increment1(100,2))
 		if(!islowHP)
 			if(cBXDown)
 				if(autolootF){
@@ -89,6 +94,8 @@ public class PetActions {
 		cBXDown=false;
 				}
 		}
+		if(!cBXDown)
+			incr.inc3.inc1=0;
 	}
 	public void stGardMode(){
 		if(!isGardMode()){
@@ -194,9 +201,9 @@ private void keepCBDown(){
 	cBXDown=cBXDown();
 	
 	if(cBXDown){
-		inc2.inc1=0;
+		incr.inc2.inc1=0;
 	}else{
-	if(inc2.increment1(25, 1))
+	if(incr.inc2.increment1(55, 1))
 		mouse.rightclick(comboBXpnt);
 	}
 }

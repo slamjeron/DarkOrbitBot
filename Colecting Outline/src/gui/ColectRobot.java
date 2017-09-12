@@ -73,6 +73,7 @@ public class ColectRobot {
 				btnStart.setBackground(Color.RED);
 				btnStart.setText("STOP");
 				start=false;
+				
 				}
 				}else{
 				colectingBot.stop();

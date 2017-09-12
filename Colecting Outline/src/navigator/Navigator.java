@@ -42,12 +42,12 @@ public class Navigator {
 
 	public Point findShip() {
 		int ny=0;
-		for(int y=nMapSTPNT.y;y<nMapSTPNT.y+212;y++)
+		for(int y=nMapSTPNT.y;y<nMapSTPNT.y+119;y++)
 			if(pointEColor(new Point(nMapSTPNT.x, y), 70, 70, 70)){
 				ny=y-nMapSTPNT.y;
 			}
 		int nx=165;
-		for(int x=nMapSTPNT.x;x<nMapSTPNT.x+335;x++)
+		for(int x=nMapSTPNT.x;x<nMapSTPNT.x+208;x++)
 			if(pointEColor(new Point(x, nMapSTPNT.y), 70, 70, 70)){
 				nx=x-nMapSTPNT.x;
 			}
@@ -71,8 +71,8 @@ public class Navigator {
 	    RIGHT,LEFT,UP,DOWN 
 	}
 	public void withinBounds() {
-		 maxX =259;
-		 minX=66;
+		 maxX =135;
+		 minX=35;
 		 //System.out.println(wtTime);
 		if(wtTime==1){
 		int stHight=0;
@@ -87,7 +87,7 @@ public class Navigator {
 				}
 		}else{
 			stHight=6;
-			mXHight=210;
+			mXHight=100;
 		}
 		if(shipPnt.x>maxX-3){
 			hDir=DIR.LEFT;
@@ -118,8 +118,8 @@ public class Navigator {
 		return new Point(mapPNT.x+x,mapPNT.y+y);
 	}
 	public void setNextPnt(int stHight,int mXHight){
-		if(mXHight>206)
-			mXHight=205;
+		if(mXHight>hight)
+			mXHight=mXHight-1;
 		if(vDir==DIR.DOWN){
 		hight+=25;
 		}else{
@@ -151,6 +151,7 @@ public class Navigator {
 	}
 
 	public void setMapPNT(Point mapPNT, Keyboard keyB) {
+		
 		this.mapPNT = mapPNT;
 		nMapSTPNT=new Point(mapPNT.x+34,mapPNT.y+46);
 		gatejump=new GateJumper(mapPNT,mouse,keyB, imgreed);

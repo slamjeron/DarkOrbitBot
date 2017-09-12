@@ -4,5 +4,6 @@
 <fullyQualifiedTypeName name="java.awt.Rectangle"/>
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 <fullyQualifiedTypeName name="java.awt.Image"/>
+<fullyQualifiedTypeName name="time.Incrementors"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

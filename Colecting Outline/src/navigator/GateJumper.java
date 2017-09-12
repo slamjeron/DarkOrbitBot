@@ -49,7 +49,10 @@ public void travel(Point[][] gate){
 	
 }
 public Point pntanMPnt(Point p){
-	return new Point(mapPnt.x+p.x,mapPnt.y+p.y);
+	int x=p.x;
+	int y=p.y;
+	//System.out.println(p);
+	return new Point(mapPnt.x+x,mapPnt.y+y);
 }
 private void jumpgate(Point p,Point p2){
 	Point jpnt=pntanMPnt(p);

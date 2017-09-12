@@ -41,6 +41,7 @@ public class ColectingBot {
 
 	public void stop() {
 		// TODO Auto-generated method stub
+		
 		colectTime.timerEnable=false;
 		
 	}

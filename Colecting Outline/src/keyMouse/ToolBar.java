@@ -122,7 +122,7 @@ public void activate(intPoint p){
 		keyB.type(p.i);
 		System.out.println("typed key"+p.i);
 	}
-	if(sleepTm>25)
+	if(sleepTm>60)
 		sleepTm=0;
 	sleepTm++;
 }
