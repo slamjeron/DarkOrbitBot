@@ -3,9 +3,9 @@ package navigator;
 import java.awt.Point;
 
 public class Gate {
-	private Point[][] cjumpgate2 =new Point[][]{{new Point(44,62),new Point(194,62),
-		new Point(194,148),new Point(44,148)},{new Point(172+20,25+44),
-			new Point(198,98),new Point(172+20,200+44),new Point(39,98)},{			
+	private Point[][] cjumpgate2 =new Point[][]{{new Point(39+20,33+44),new Point(334,33+44),
+		new Point(334,191+44),new Point(39+20,191+44)},{new Point(172+20,25+44),
+			new Point(322+20,100+44),new Point(172+20,200+44),new Point(31+20,100+44)},{			
 				new Point(181+20,112+44),new Point(64+20,112+44),new Point(239+20,11+44),
 				new Point(239+20,209+44),new Point(166+20,112+44),new Point(188+20,99+44),
 				new Point(188+20,121+44)},{new Point(239+20,213+44),new Point(107+20,110+44),

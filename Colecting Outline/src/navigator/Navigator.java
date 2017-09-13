@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import keyMouse.Keyboard;
 import keyMouse.Mouse;
+import navigator.Navigator.DIR;
 import objectFinder.Colorlogic;
 
 public class Navigator {
@@ -70,40 +71,42 @@ public class Navigator {
 	public enum DIR {
 	    RIGHT,LEFT,UP,DOWN 
 	}
-	public void withinBounds() {
-		 maxX =135;
-		 minX=35;
-		 //System.out.println(wtTime);
-		if(wtTime==1){
-		int stHight=0;
-		int mXHight;
-		if(enimyHasBace()){
-			if(top){
+	
+		public void withinBounds() {
+			 maxX =135;
+			 minX=35;
+			 //System.out.println(wtTime);
+			if(wtTime==1){
+			int stHight=0;
+			int mXHight;
+			if(enimyHasBace()){
+				if(top){
+					stHight=6;
+					mXHight=50;
+					}else{
+						stHight=150;
+						mXHight=210;
+					}
+			}else{
 				stHight=6;
-				mXHight=50;
-				}else{
-					stHight=150;
-					mXHight=210;
-				}
-		}else{
-			stHight=6;
-			mXHight=100;
-		}
-		if(shipPnt.x>maxX-3){
-			hDir=DIR.LEFT;
+				mXHight=100;
+			}
+			if(shipPnt.x>maxX-3){
+				hDir=DIR.LEFT;
+					setNextPnt(stHight,mXHight);
+			}
+			if(minX+3>shipPnt.x){
+				hDir=DIR.RIGHT;
 				setNextPnt(stHight,mXHight);
+			}
+			stayWithin(stHight,mXHight);
+			moveNextPnt();
+			}
+			if(wtTime>20)
+				wtTime=0;
+			wtTime++;
 		}
-		if(minX+3>shipPnt.x){
-			hDir=DIR.RIGHT;
-			setNextPnt(stHight,mXHight);
-		}
-		stayWithin(stHight,mXHight);
-		moveNextPnt();
-		}
-		if(wtTime>20)
-			wtTime=0;
-		wtTime++;
-	}
+		
 	private boolean enimyHasBace() {
 		return pointEColor(mBmapPlusPnt(193,138), 172, 36, 36);
 	}
@@ -118,7 +121,7 @@ public class Navigator {
 		return new Point(mapPNT.x+x,mapPNT.y+y);
 	}
 	public void setNextPnt(int stHight,int mXHight){
-		if(mXHight>hight)
+		if(mXHight>206)
 			mXHight=mXHight-1;
 		if(vDir==DIR.DOWN){
 		hight+=25;
@@ -151,7 +154,6 @@ public class Navigator {
 	}
 
 	public void setMapPNT(Point mapPNT, Keyboard keyB) {
-		
 		this.mapPNT = mapPNT;
 		nMapSTPNT=new Point(mapPNT.x+34,mapPNT.y+46);
 		gatejump=new GateJumper(mapPNT,mouse,keyB, imgreed);
