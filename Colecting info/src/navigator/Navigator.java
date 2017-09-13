@@ -73,8 +73,8 @@ public class Navigator {
 	}
 	
 		public void withinBounds() {
-			 maxX =135;
-			 minX=35;
+			 maxX =335;
+			 minX=100;
 			 //System.out.println(wtTime);
 			if(wtTime==1){
 			int stHight=0;

@@ -14,7 +14,7 @@ public Keyboard(){
 }
 	private Robot rob;
 	public void type(int i) {
-		 if (i > 0 && i < 9){
+		 if (i > 0 && i < 10){
 		int code=i+48;
 		rob.keyPress(code);
 	     rob.keyRelease(code);

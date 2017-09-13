@@ -72,7 +72,7 @@ public class ColectTimers {
 		navigate.mouse=mouse;
 		navigate.imgreed=imgR.clogic;
 		navigate.setMapPNT(panels.map,keyB);
-		navigate.gatejump.gate.mapSmall();
+		
 		bNSBX.mouse=mouse;
 		bNSBX.clgc=imgR.clogic;
 		bNSBX.panPnt=panels;
@@ -187,7 +187,7 @@ public class ColectTimers {
 						fleeing=true;
 					}
 					if(fleeing)
-						if(inc.increment1(300,2)){
+						if(inc.increment1(500,2)){
 					navigate.findShip();
 					navigate.furthistPnt();
 					System.out.println("runing");

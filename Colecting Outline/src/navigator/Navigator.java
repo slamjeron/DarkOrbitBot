@@ -48,7 +48,7 @@ public class Navigator {
 				ny=y-nMapSTPNT.y;
 			}
 		int nx=165;
-		for(int x=nMapSTPNT.x;x<nMapSTPNT.x+208;x++)
+		for(int x=nMapSTPNT.x;x<nMapSTPNT.x+288;x++)
 			if(pointEColor(new Point(x, nMapSTPNT.y), 70, 70, 70)){
 				nx=x-nMapSTPNT.x;
 			}
@@ -73,8 +73,8 @@ public class Navigator {
 	}
 	
 		public void withinBounds() {
-			 maxX =135;
-			 minX=35;
+			 maxX =250;
+			 minX=60;
 			 //System.out.println(wtTime);
 			if(wtTime==1){
 			int stHight=0;

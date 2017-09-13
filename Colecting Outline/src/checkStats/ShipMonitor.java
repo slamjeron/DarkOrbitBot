@@ -39,7 +39,8 @@ public class ShipMonitor {
 		return (imgR.number.readnum1(image, speedRect));
 	}
 	public boolean isAtaked() {
-		boolean hit = (hitCheck(oldHP,shipHP,oldSD,shipSD)&&enimyonscreen());
+		boolean hit = (hitCheck(oldHP,shipHP,oldSD,shipSD));
+		
 		oldHP=shipHP;
 		oldSD=shipSD;
 		return hit;
